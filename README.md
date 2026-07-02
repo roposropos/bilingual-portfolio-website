@@ -1,8 +1,6 @@
 <div align="center">
 
-# Robert Tworek Portfolio
-
-**Bilingual personal portfolio built as a polished project showcase for academic and technical work.**
+# Bilingual portfolio website
 
 <p>
   <a href="https://portfoliotworekrobert.vercel.app/pl">
