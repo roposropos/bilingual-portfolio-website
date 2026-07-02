@@ -11,8 +11,6 @@ A modern bilingual portfolio website created as a recruitment-oriented project a
 
 The website presents selected projects from areas such as desktop applications, web applications, relational databases, TCP communication, testing and technical documentation. It also includes a live GitHub project index, language switching, CV download and a simple email composer.
 
-> This is a personal portfolio and academic showcase project. It is not a commercial product or a production service.
-
 ## Author
 
 - Robert Tworek
