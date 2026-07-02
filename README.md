@@ -1,6 +1,3 @@
-<div align="center">
-  <img src="app/icon.svg" width="84" alt="RT logo">
-
 # Billingual Portfolio Website
 
 **Technical portfolio for projects, CV, GitHub repositories and contact materials - built with Next.js, React and TypeScript.**
