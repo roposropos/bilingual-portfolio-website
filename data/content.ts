@@ -40,7 +40,7 @@ export const content = {
       eyebrow: "Student Informatyki Technicznej / Junior C#/.NET Developer",
       title: "Robert Tworek",
       body:
-        "Tworzę aplikacje w C#/.NET - od REST API w ASP.NET Core i relacyjnych baz PostgreSQL po interfejsy React oraz desktop w Avalonia UI. Studiuję Informatykę Techniczną na Politechnice Wrocławskiej i szukam pierwszej roli jako Junior .NET Developer, w której będę mógł rozwijać backend, testy i pracę nad realnym produktem.",
+        "Tworzę aplikacje w C#/.NET - od REST API w ASP.NET Core i relacyjnych baz PostgreSQL po interfejsy React oraz desktop w Avalonia UI. Studiuję Informatykę Techniczną na Politechnice Wrocławskiej i szukam pierwszej roli jako Junior\u00a0.NET Developer, w której będę mógł rozwijać backend, testy i pracę nad realnym produktem.",
       primaryCta: "Zobacz projekty",
       secondaryCta: "Pobierz CV",
       tertiaryCta: "GitHub",
@@ -428,7 +428,7 @@ export const content = {
       eyebrow: "Technical Computer Science student / Junior C#/.NET Developer",
       title: "Robert Tworek",
       body:
-        "I build C#/.NET applications - from REST APIs in ASP.NET Core and relational PostgreSQL databases to React interfaces and Avalonia UI desktop software. I study Technical Computer Science at Wrocław University of Science and Technology and I am looking for my first Junior .NET Developer role where I can develop backend, testing and product-oriented engineering skills.",
+        "I build C#/.NET applications - from REST APIs in ASP.NET Core and relational PostgreSQL databases to React interfaces and Avalonia UI desktop software. I study Technical Computer Science at Wrocław University of Science and Technology and I am looking for my first Junior\u00a0.NET Developer role where I can develop backend, testing and product-oriented engineering skills.",
       primaryCta: "View projects",
       secondaryCta: "Download CV",
       tertiaryCta: "GitHub",

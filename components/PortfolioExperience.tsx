@@ -36,7 +36,6 @@ import {
   Send,
   Sparkles,
   Star,
-  Terminal,
   Workflow,
   X,
   Zap
@@ -97,7 +96,7 @@ type GithubUserApiResponse = {
 
 const iconClass = "h-4 w-4";
 
-const stackIcons = [Code2, Database, Network, Terminal];
+const stackIcons = [Code2, Database, Network, Workflow];
 
 function extractGithubProfileName(url: string) {
   try {
@@ -704,15 +703,18 @@ function Hero({
       <div className="hero-grid absolute inset-0" />
 
       <header className="relative z-10 pt-5">
-        <nav className="page-shell glass-nav site-nav flex min-h-14 items-center justify-between gap-4 rounded-lg px-3 py-2 text-white">
-          <a href="#top" className="brand-link focus-ring flex items-center gap-3 rounded-md px-2 py-1.5">
+        <nav className="page-shell glass-nav site-nav flex min-h-14 items-center justify-between gap-3 rounded-lg px-3 py-2 text-white">
+          <a
+            href="#top"
+            aria-label="Robert Tworek"
+            className="brand-link focus-ring flex items-center rounded-md p-1.5"
+          >
             <span className="brand-mark flex h-9 w-9 items-center justify-center rounded-lg bg-violet text-sm font-black text-white">
               RT
             </span>
-            <span className="hidden text-sm font-bold sm:inline">Robert Tworek</span>
           </a>
 
-          <div className="hidden items-center gap-1 md:flex">
+          <div className="nav-center-group hidden items-center gap-1 rounded-md px-1 py-1 md:flex">
             {content.nav.map((item) => (
               <a
                 key={item.href}
@@ -724,18 +726,18 @@ function Hero({
             ))}
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="nav-trailing-group flex items-center gap-2">
             <a
               href={content.links.cv}
               download
-              className="nav-action interactive-lift focus-ring hidden items-center gap-2 rounded-md border border-violet/60 bg-violet px-3 py-2 text-sm font-bold text-white shadow-lg shadow-violet-950/15 sm:inline-flex"
+              className="nav-action nav-action-primary interactive-lift focus-ring hidden items-center gap-2 rounded-md px-3 py-2 text-sm font-bold text-white sm:inline-flex"
             >
               <Download className={iconClass} />
               CV
             </a>
             <Link
               href={`/${otherLocale}`}
-              className="nav-action interactive-lift focus-ring inline-flex items-center gap-2 rounded-md border border-white/15 bg-white/10 px-3 py-2 text-sm font-bold text-white"
+              className="nav-action nav-action-secondary interactive-lift focus-ring inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-bold text-white"
               aria-label={locale === "pl" ? "Switch to English" : "Przełącz na polski"}
             >
               <Languages className={iconClass} />
@@ -747,7 +749,7 @@ function Hero({
               rel="noreferrer"
               title="GitHub"
               aria-label="GitHub"
-              className="nav-icon-action interactive-lift focus-ring hidden h-10 w-10 items-center justify-center rounded-md border border-white/15 bg-white/10 text-white sm:flex"
+              className="nav-icon-action interactive-lift focus-ring hidden h-10 w-10 items-center justify-center rounded-md text-white sm:flex"
             >
               <GithubLogo className="h-5 w-5" />
             </a>
@@ -757,7 +759,7 @@ function Hero({
               rel="noreferrer"
               title="LinkedIn"
               aria-label="LinkedIn"
-              className="nav-icon-action interactive-lift focus-ring hidden h-10 w-10 items-center justify-center rounded-md border border-white/15 bg-white/10 text-white sm:flex"
+              className="nav-icon-action interactive-lift focus-ring hidden h-10 w-10 items-center justify-center rounded-md text-white sm:flex"
             >
               <LinkedinLogo className="h-5 w-5" />
             </a>
@@ -861,13 +863,15 @@ function Hero({
             transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
             className="hero-scope-panel dark-card hidden p-0 lg:block"
           >
-            <div className="hero-scope-header flex items-center justify-between gap-4 border-b border-white/10 px-6 py-5">
-              <div>
-                <p className="text-sm font-bold text-white/80">{content.heroPanel.title}</p>
+            <div className="hero-scope-header flex items-center justify-between gap-4 border-b border-white/10 px-5 py-4">
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-sm font-bold text-white/86">
+                  {content.heroPanel.title}
+                </p>
               </div>
-              <Terminal className="h-5 w-5 text-violet-on-dark" />
             </div>
-            <div className="grid gap-0">
+
+            <div className="hero-scope-list">
               {content.heroPanel.items.map((item, index) => (
                 <div key={item.label} className="hero-scope-item">
                   <div className="flex items-start gap-4">
@@ -883,8 +887,12 @@ function Hero({
                         <p className="text-sm font-bold text-white">{item.label}</p>
                         <span className="hero-scope-dot" aria-hidden="true" />
                       </div>
-                      <p className="mt-1 text-sm font-semibold text-violet-faint">{item.value}</p>
-                      <p className="mt-2 text-sm leading-6 text-white/60">{item.detail}</p>
+                      <p className="mt-1 text-sm font-semibold text-violet-faint">
+                        {item.value}
+                      </p>
+                      <p className="mt-2 text-sm leading-6 text-white/60">
+                        {item.detail}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -913,7 +921,7 @@ function RecruiterStrip({ content }: { content: PortfolioContent }) {
                   <Icon className="h-4 w-4" />
                 </div>
                 <div className="profile-summary-copy min-w-0">
-                  <p className="profile-summary-value text-sm font-black uppercase tracking-[0.04em]">
+                  <p className="profile-summary-value text-sm font-black">
                     {item.value}
                   </p>
                   <p className="profile-summary-label mt-1 text-sm font-bold leading-5">
@@ -938,7 +946,7 @@ function MobileSectionNav({
   items: PortfolioContent["nav"];
 }) {
   return (
-    <div className="sticky top-0 z-30 border-b border-soft bg-[rgba(247,245,251,0.9)] py-2 backdrop-blur-xl md:hidden">
+    <div className="mobile-section-nav sticky top-0 z-30 border-b border-soft py-2 backdrop-blur-xl md:hidden">
       <nav
         className="page-shell -my-1 flex gap-2 overflow-x-auto py-1"
         aria-label="Mobile section navigation"
@@ -947,7 +955,7 @@ function MobileSectionNav({
           <a
             key={item.href}
             href={item.href}
-            className="interactive-lift focus-ring shrink-0 rounded-md border border-soft-strong bg-white/80 px-3 py-2 text-xs font-black text-ink shadow-sm"
+            className="mobile-section-chip interactive-lift focus-ring shrink-0 rounded-md border px-3 py-2 text-xs font-black text-ink"
           >
             {item.label}
           </a>
@@ -1595,10 +1603,6 @@ function LiveGithubRepositories({
                 transition={{ duration: 0.22, delay: Math.min(index * 0.025, 0.16) }}
                 className="github-repository-card interactive-lift card focus-ring group relative flex shrink-0 snap-start overflow-hidden p-0"
               >
-                <span
-                  aria-hidden="true"
-                  className="absolute inset-x-0 top-0 h-1 bg-violet"
-                />
                 <div className="flex w-full flex-col p-5">
                   <div className="flex items-start justify-between gap-4">
                     <div className="min-w-0">
