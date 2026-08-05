@@ -35,6 +35,10 @@
   --material-border: rgba(255, 255, 255, 0.62);
   --material-shadow: 0 22px 55px rgba(42, 31, 70, 0.1);
   --material-shadow-strong: 0 28px 76px rgba(15, 10, 30, 0.25);
+  --motion-fast: 160ms;
+  --motion-standard: 220ms;
+  --motion-section: 380ms;
+  --ease-out-smooth: cubic-bezier(0.22, 1, 0.36, 1);
   --font-display: "Avenir Next", "Avenir", "Mona Sans", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
   --font-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", "Mona Sans", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
   --font-code: "SF Mono", "Mona Sans Mono", "Cascadia Code", ui-monospace, monospace;
@@ -219,11 +223,11 @@ h4 {
 .nav-icon-action {
   font-family: var(--font-body);
   transition:
-    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 220ms ease,
-    background-color 220ms ease,
-    color 220ms ease,
-    box-shadow 220ms ease;
+    transform var(--motion-standard) var(--ease-out-smooth),
+    border-color var(--motion-standard) ease,
+    background-color var(--motion-standard) ease,
+    color var(--motion-standard) ease,
+    box-shadow var(--motion-standard) ease;
 }
 
 .nav-center-group,
@@ -366,10 +370,10 @@ h4 {
 
 .hero-action-icon {
   transition:
-    background-color 220ms ease,
-    color 220ms ease,
-    box-shadow 220ms ease,
-    transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+    background-color var(--motion-standard) ease,
+    color var(--motion-standard) ease,
+    box-shadow var(--motion-standard) ease,
+    transform var(--motion-standard) var(--ease-out-smooth);
 }
 
 .hero-action:hover .hero-action-icon {
@@ -507,11 +511,11 @@ h4 {
 
 .interactive-lift {
   transition:
-    transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 180ms ease,
-    background-color 180ms ease,
-    color 180ms ease,
-    box-shadow 180ms ease;
+    transform var(--motion-standard) var(--ease-out-smooth),
+    border-color var(--motion-standard) ease,
+    background-color var(--motion-standard) ease,
+    color var(--motion-standard) ease,
+    box-shadow var(--motion-standard) ease;
 }
 
 .interactive-lift:hover {
@@ -547,12 +551,13 @@ h4 {
   min-height: 19rem;
   transform-origin: center;
   background: rgba(252, 250, 255, 0.78);
+  backdrop-filter: none;
   transition:
-    transform 200ms cubic-bezier(0.22, 1, 0.36, 1),
-    background-color 240ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 220ms ease,
-    box-shadow 220ms ease,
-    color 180ms ease;
+    transform var(--motion-standard) var(--ease-out-smooth),
+    background-color var(--motion-standard) var(--ease-out-smooth),
+    border-color var(--motion-standard) ease,
+    box-shadow var(--motion-standard) ease,
+    color var(--motion-fast) ease;
 }
 
 .featured-project-card.is-active {
@@ -568,10 +573,10 @@ h4 {
 .featured-project-card span,
 .project-card-signals > div {
   transition:
-    color 180ms ease,
-    background-color 220ms ease,
-    border-color 220ms ease,
-    box-shadow 220ms ease;
+    color var(--motion-fast) ease,
+    background-color var(--motion-standard) ease,
+    border-color var(--motion-standard) ease,
+    box-shadow var(--motion-standard) ease;
 }
 
 .featured-project-card.is-active::before,
@@ -624,10 +629,10 @@ h4 {
 
 .gallery-control {
   transition:
-    transform 160ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 160ms ease,
-    background-color 160ms ease,
-    color 160ms ease;
+    transform var(--motion-fast) var(--ease-out-smooth),
+    border-color var(--motion-fast) ease,
+    background-color var(--motion-fast) ease,
+    color var(--motion-fast) ease;
 }
 
 .gallery-control:hover {
@@ -662,7 +667,7 @@ h4 {
 
 .skill-group-card,
 .education-card {
-  backdrop-filter: blur(18px) saturate(1.12);
+  backdrop-filter: none;
 }
 
 .work-style-card {
@@ -697,6 +702,10 @@ h4 {
 
 .dark-card::before {
   content: none;
+}
+
+.dark-card.work-style-card {
+  backdrop-filter: none;
 }
 
 .hero-scope-panel {
@@ -962,6 +971,8 @@ h4 {
 .github-repository-carousel {
   align-items: stretch;
   scroll-padding-inline: 0.25rem;
+  scroll-behavior: smooth;
+  overscroll-behavior-inline: contain;
   scrollbar-width: thin;
   scrollbar-color: rgba(123, 63, 242, 0.42) rgba(123, 63, 242, 0.08);
 }
@@ -983,6 +994,100 @@ h4 {
 .github-repository-card {
   flex-basis: min(86vw, 22.5rem);
   min-height: 18.5rem;
+  isolation: isolate;
+  transform-origin: center bottom;
+  backdrop-filter: none;
+}
+
+.card.github-repository-card::before,
+.card.github-repository-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--motion-standard) ease;
+}
+
+.card.github-repository-card::before {
+  z-index: 0;
+  background:
+    radial-gradient(circle at 86% 8%, rgba(123, 63, 242, 0.2), transparent 34%),
+    linear-gradient(135deg, rgba(123, 63, 242, 0.07), transparent 44%);
+}
+
+.card.github-repository-card::after {
+  z-index: 2;
+  border: 1px solid rgba(123, 63, 242, 0.38);
+  border-radius: inherit;
+  box-shadow:
+    inset 0 0 34px rgba(123, 63, 242, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+
+.github-repository-content {
+  position: relative;
+  z-index: 1;
+}
+
+.github-repository-icon,
+.github-repository-title,
+.github-repository-description,
+.github-repository-tag,
+.github-repository-footer,
+.github-repository-link,
+.github-repository-link svg {
+  transition:
+    transform var(--motion-standard) var(--ease-out-smooth),
+    border-color var(--motion-standard) ease,
+    background-color var(--motion-standard) ease,
+    color var(--motion-standard) ease,
+    box-shadow var(--motion-standard) ease;
+}
+
+.repository-filter[aria-pressed="true"] {
+  transform: translateY(-1px);
+  box-shadow:
+    0 10px 24px rgba(79, 43, 181, 0.2),
+    0 0 0 1px rgba(123, 63, 242, 0.12);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card.github-repository-card:is(:hover, :focus-visible)::before,
+  .card.github-repository-card:is(:hover, :focus-visible)::after {
+    opacity: 1;
+  }
+
+  .github-repository-card:is(:hover, :focus-visible) .github-repository-icon {
+    transform: translateY(-1px) scale(1.04);
+    background-color: var(--violet);
+    box-shadow: 0 10px 24px rgba(123, 63, 242, 0.24);
+  }
+
+  .github-repository-card:is(:hover, :focus-visible) .github-repository-title {
+    color: var(--violet-dark);
+  }
+
+  .github-repository-card:is(:hover, :focus-visible) .github-repository-description {
+    color: var(--foreground);
+  }
+
+  .github-repository-card:is(:hover, :focus-visible) .github-repository-tag {
+    border-color: rgba(123, 63, 242, 0.2);
+    background-color: rgba(240, 235, 255, 0.9);
+  }
+
+  .github-repository-card:is(:hover, :focus-visible) .github-repository-footer {
+    border-color: rgba(123, 63, 242, 0.18);
+  }
+
+  .github-repository-card:is(:hover, :focus-visible) .github-repository-link {
+    color: var(--violet);
+  }
+
+  .github-repository-card:is(:hover, :focus-visible) .github-repository-link svg {
+    transform: translate(2px, -2px);
+  }
 }
 
 @media (min-width: 768px) {

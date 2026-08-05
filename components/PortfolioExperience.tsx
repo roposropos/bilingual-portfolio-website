@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, MotionConfig, motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -110,6 +110,11 @@ type GithubUserApiResponse = {
 };
 
 const iconClass = "h-4 w-4";
+const revealViewport = { once: true, margin: "-64px" } as const;
+const revealTransition = {
+  duration: 0.38,
+  ease: [0.22, 1, 0.36, 1] as const
+};
 
 const skillGroupIcons = [Braces, PanelsTopLeft, BadgeCheck, SquareTerminal];
 
@@ -555,6 +560,7 @@ export function PortfolioExperience({
   }
 
   return (
+    <MotionConfig reducedMotion="user">
     <main>
       <Hero content={content} locale={locale} otherLocale={otherLocale} />
       <RecruiterStrip content={content} />
@@ -606,7 +612,17 @@ export function PortfolioExperience({
               const Icon = skillGroupIcons[index] ?? Braces;
 
               return (
-                <article key={group.title} className="skill-group-card card p-6">
+                <motion.article
+                  key={group.title}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={revealViewport}
+                  transition={{
+                    ...revealTransition,
+                    delay: Math.min(index * 0.045, 0.14)
+                  }}
+                  className="skill-group-card card p-6"
+                >
                   <div className="flex items-start gap-4">
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-violet-soft text-violet">
                       <Icon className="h-5 w-5" />
@@ -623,7 +639,7 @@ export function PortfolioExperience({
                       </span>
                     ))}
                   </div>
-                </article>
+                </motion.article>
               );
             })}
           </div>
@@ -640,8 +656,18 @@ export function PortfolioExperience({
 
           <div className="education-layout mt-8 grid gap-5 md:gap-6 lg:grid-cols-[1.2fr_0.8fr]">
             <div className="education-timeline grid gap-4">
-              {content.timeline.map((item) => (
-                <article key={item.title} className="education-card card p-6">
+              {content.timeline.map((item, index) => (
+                <motion.article
+                  key={item.title}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={revealViewport}
+                  transition={{
+                    ...revealTransition,
+                    delay: Math.min(index * 0.055, 0.12)
+                  }}
+                  className="education-card card p-6"
+                >
                   <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                     <div>
                       <div className="flex items-center gap-2 text-sm font-semibold text-violet-dark">
@@ -657,11 +683,17 @@ export function PortfolioExperience({
                     </div>
                   </div>
                   <p className="mt-4 text-sm leading-6 text-muted">{item.body}</p>
-                </article>
+                </motion.article>
               ))}
             </div>
 
-            <aside className="work-style-card dark-card p-6 text-white">
+            <motion.aside
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={revealViewport}
+              transition={{ ...revealTransition, delay: 0.08 }}
+              className="work-style-card dark-card p-6 text-white"
+            >
               <div className="flex items-center gap-3">
                 <ClipboardCheck className="h-5 w-5 text-violet-on-dark" />
                 <h3 className="text-xl font-bold">
@@ -682,13 +714,14 @@ export function PortfolioExperience({
                   {content.contact.location}
                 </div>
               </div>
-            </aside>
+            </motion.aside>
           </div>
         </div>
       </section>
 
       <Contact content={content} />
     </main>
+    </MotionConfig>
   );
 }
 
@@ -880,7 +913,17 @@ function RecruiterStrip({ content }: { content: PortfolioContent }) {
             const Icon = stripIcons[index] ?? BadgeCheck;
 
             return (
-              <article key={item.label} className="profile-summary-item min-w-[82%] snap-start md:min-w-0">
+              <motion.article
+                key={item.label}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-24px" }}
+                transition={{
+                  ...revealTransition,
+                  delay: Math.min(index * 0.05, 0.12)
+                }}
+                className="profile-summary-item min-w-[82%] snap-start md:min-w-0"
+              >
                 <div className="profile-summary-icon" aria-hidden="true">
                   <Icon className="h-4 w-4" />
                 </div>
@@ -895,7 +938,7 @@ function RecruiterStrip({ content }: { content: PortfolioContent }) {
                     {item.detail}
                   </p>
                 </div>
-              </article>
+              </motion.article>
             );
           })}
         </div>
@@ -941,7 +984,13 @@ function SectionHeading({
   tone?: "light" | "dark";
 }) {
   return (
-    <div className="section-heading-block max-w-3xl">
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={revealViewport}
+      transition={revealTransition}
+      className="section-heading-block max-w-3xl"
+    >
       <p
         className={cn(
           "section-kicker",
@@ -966,7 +1015,7 @@ function SectionHeading({
       >
         {intro}
       </p>
-    </div>
+    </motion.div>
   );
 }
 
@@ -988,10 +1037,15 @@ function ProjectCard({
   return (
     <motion.article
       initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={revealViewport}
       transition={{
-        opacity: { duration: 0.22, delay: index * 0.025 },
-        y: { duration: 0.24, delay: index * 0.025 }
+        opacity: { duration: 0.32, delay: index * 0.04 },
+        y: {
+          duration: 0.38,
+          delay: index * 0.04,
+          ease: [0.22, 1, 0.36, 1]
+        }
       }}
       className="h-full min-w-[86%] snap-start sm:min-w-[72%] xl:min-w-0"
     >
@@ -1573,7 +1627,13 @@ function LiveGithubRepositories({
 
   return (
     <section className="mt-9 border-t border-soft pt-7 md:mt-11 md:pt-8">
-      <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={revealViewport}
+        transition={revealTransition}
+        className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between"
+      >
         <div className="max-w-3xl">
           <p className="section-kicker text-violet-dark">
             {locale === "pl" ? "GitHub" : "GitHub"}
@@ -1595,10 +1655,16 @@ function LiveGithubRepositories({
           {locale === "pl" ? "Profil GitHub" : "GitHub profile"}
           <ExternalLink className={iconClass} />
         </a>
-      </div>
+      </motion.div>
 
       {hasRepositories ? (
-        <div className="mt-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={revealViewport}
+          transition={{ ...revealTransition, delay: 0.06 }}
+          className="mt-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between"
+        >
           <div className="flex min-w-0 flex-col gap-3 md:flex-row md:flex-wrap md:items-center md:gap-2">
             <span className="inline-flex items-center gap-2 text-sm font-semibold text-muted">
               <Filter className={iconClass} />
@@ -1621,7 +1687,7 @@ function LiveGithubRepositories({
                     onClick={() => setActiveRepositoryFilter(filter.id)}
                     aria-pressed={activeRepositoryFilter === filter.id}
                     className={cn(
-                      "interactive-lift focus-ring rounded-md border px-3 py-2 text-sm font-semibold",
+                      "repository-filter interactive-lift focus-ring rounded-md border px-3 py-2 text-sm font-semibold",
                       activeRepositoryFilter === filter.id
                         ? "border-violet bg-violet text-white shadow-lg shadow-violet-950/10"
                         : "border-soft-strong bg-white/70 text-ink hover-border-violet"
@@ -1659,7 +1725,7 @@ function LiveGithubRepositories({
               <ChevronRight className="h-5 w-5" />
             </button>
           </div>
-        </div>
+        </motion.div>
       ) : null}
 
       {hasRepositories && hasFilteredRepositories ? (
@@ -1688,11 +1754,25 @@ function LiveGithubRepositories({
                 rel="noreferrer"
                 initial={{ opacity: 0, y: 14 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.22, delay: Math.min(index * 0.025, 0.16) }}
+                whileHover={{
+                  y: -4,
+                  transition: {
+                    duration: 0.2,
+                    ease: [0.22, 1, 0.36, 1]
+                  }
+                }}
+                whileTap={{
+                  y: -1,
+                  transition: { duration: 0.12, ease: "easeOut" }
+                }}
+                viewport={revealViewport}
+                transition={{
+                  ...revealTransition,
+                  delay: Math.min(index * 0.045, 0.16)
+                }}
                 className="github-repository-card interactive-lift card focus-ring group relative flex shrink-0 snap-start overflow-hidden p-0"
               >
-                <div className="flex w-full flex-col p-5">
+                <div className="github-repository-content flex w-full flex-col p-5">
                   <div className="flex items-start justify-between gap-4">
                     <div className="min-w-0">
                       <div className="flex flex-wrap items-center gap-2">
@@ -1712,16 +1792,16 @@ function LiveGithubRepositories({
                           </span>
                         ) : null}
                       </div>
-                      <h4 className="mt-3 text-lg font-black leading-tight text-ink">
+                      <h4 className="github-repository-title mt-3 text-lg font-black leading-tight text-ink">
                         {formatRepositoryName(repository.name)}
                       </h4>
                     </div>
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-ink text-on-dark transition group-hover:bg-violet">
+                    <span className="github-repository-icon flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-ink text-on-dark">
                       <GithubLogo className="h-4 w-4" />
                     </span>
                   </div>
 
-                  <p className="mt-4 flex-1 text-sm leading-6 text-muted">
+                  <p className="github-repository-description mt-4 flex-1 text-sm leading-6 text-muted">
                     {repository.description ??
                       content.sections.projects.githubNoDescription}
                   </p>
@@ -1731,7 +1811,7 @@ function LiveGithubRepositories({
                       {repository.topics.slice(0, 3).map((topic) => (
                         <span
                           key={topic}
-                          className="tag px-2.5 py-1 text-xs font-semibold"
+                          className="github-repository-tag tag px-2.5 py-1 text-xs font-semibold"
                         >
                           {topic}
                         </span>
@@ -1739,7 +1819,7 @@ function LiveGithubRepositories({
                     </div>
                   ) : null}
 
-                  <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-black/10 pt-4 text-xs font-bold text-muted">
+                  <div className="github-repository-footer mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-black/10 pt-4 text-xs font-bold text-muted">
                     {updatedAt ? (
                       <span>
                         {content.sections.projects.githubUpdatedLabel}: {updatedAt}
@@ -1755,9 +1835,9 @@ function LiveGithubRepositories({
                     </span>
                   </div>
 
-                  <div className="mt-4 inline-flex items-center gap-2 text-sm font-black text-violet-dark">
+                  <div className="github-repository-link mt-4 inline-flex items-center gap-2 text-sm font-black text-violet-dark">
                     {openLabel}
-                    <ArrowUpRight className="h-4 w-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <ArrowUpRight className="h-4 w-4" />
                   </div>
                 </div>
               </motion.a>
@@ -1901,7 +1981,13 @@ function Contact({ content }: { content: PortfolioContent }) {
               tone="dark"
             />
 
-            <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={revealViewport}
+              transition={{ ...revealTransition, delay: 0.06 }}
+              className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-1"
+            >
               <button
                 type="button"
                 onClick={() => {
@@ -1964,10 +2050,14 @@ function Contact({ content }: { content: PortfolioContent }) {
                   </a>
                 );
               })}
-            </div>
+            </motion.div>
           </div>
 
-          <form
+          <motion.form
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={revealViewport}
+            transition={{ ...revealTransition, delay: 0.1 }}
             onSubmit={openEmailComposer}
             className="flex h-full min-h-full flex-col rounded-lg border border-white/15 bg-white p-5 text-ink shadow-2xl shadow-black/20 md:p-6"
           >
@@ -2018,7 +2108,7 @@ function Contact({ content }: { content: PortfolioContent }) {
               <Send className={iconClass} />
               {content.contact.sendEmailLabel}
             </button>
-          </form>
+          </motion.form>
         </div>
 
         <div className="mt-14 flex flex-col gap-3 border-t border-white/10 pt-6 text-sm text-white/50 md:flex-row md:items-center md:justify-between">
