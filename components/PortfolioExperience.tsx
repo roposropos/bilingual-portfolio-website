@@ -770,22 +770,22 @@ function Hero({
       </header>
 
       <div id="top" className="relative z-10">
-        <div className="hero-shell page-shell grid min-h-[calc(70svh-88px)] items-center py-12 md:min-h-[calc(74svh-88px)] md:py-16">
+        <div className="hero-shell page-shell grid min-h-[calc(70svh-88px)] place-items-center py-12 md:min-h-[calc(74svh-88px)] md:py-16">
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="max-w-4xl"
+            className="mx-auto w-full max-w-4xl text-left md:text-center"
           >
             <p className="section-kicker text-violet-on-dark">{content.hero.eyebrow}</p>
             <h1 className="mt-4 max-w-none whitespace-nowrap text-[clamp(2.45rem,10.4vw,4.25rem)] font-black leading-[0.96] text-white md:text-[clamp(3.75rem,5.35vw,5.65rem)]">
               {content.hero.title}
             </h1>
-            <p className="mt-5 max-w-2xl text-base leading-7 text-white/75 md:text-lg">
+            <p className="mx-auto mt-5 max-w-3xl text-base leading-7 text-white/75 md:text-lg">
               {content.hero.body}
             </p>
 
-            <div className="hero-action-grid mt-8 grid gap-3 sm:grid-cols-2">
+            <div className="hero-action-grid mx-auto mt-8 grid max-w-2xl gap-3 sm:grid-cols-2">
               <a
                 href="#projects"
                 className="hero-action hero-action-primary interactive-lift focus-ring group flex items-center justify-between gap-4 rounded-lg border border-white/15 bg-white/10 p-4 text-left hover:bg-white/15"
