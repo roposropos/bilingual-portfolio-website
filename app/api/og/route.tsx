@@ -129,7 +129,7 @@ export function GET() {
               color: "#d8ccff"
             }}
           >
-            Helpdesk Management System / Pharmacy / TSP Benchmark
+            Order Flow / Helpdesk / Pharmacy
           </div>
         </div>
       </div>

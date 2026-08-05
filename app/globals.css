@@ -35,7 +35,7 @@
   --material-border: rgba(255, 255, 255, 0.62);
   --material-shadow: 0 22px 55px rgba(42, 31, 70, 0.1);
   --material-shadow-strong: 0 28px 76px rgba(15, 10, 30, 0.25);
-  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", "Mona Sans", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Avenir Next", "Avenir", "Mona Sans", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
   --font-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", "Mona Sans", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
   --font-code: "SF Mono", "Mona Sans Mono", "Cascadia Code", ui-monospace, monospace;
 }
@@ -95,6 +95,10 @@ a {
 
 img {
   display: block;
+}
+
+.lucide {
+  stroke-width: 1.8;
 }
 
 h1,
@@ -251,6 +255,8 @@ h4 {
 }
 
 .brand-mark {
+  font-family: var(--font-display);
+  font-weight: 800;
   box-shadow:
     0 10px 22px rgba(123, 63, 242, 0.24),
     inset 0 1px 0 rgba(255, 255, 255, 0.34);
@@ -1090,13 +1096,6 @@ h4 {
   .featured-project-card {
     min-height: 22.5rem;
     padding: 0.95rem;
-  }
-
-  .project-card-teaser {
-    display: -webkit-box;
-    overflow: hidden;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
   }
 
   .project-card-signals {

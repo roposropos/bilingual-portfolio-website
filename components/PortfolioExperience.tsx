@@ -14,12 +14,16 @@ import {
 import {
   ArrowDown,
   ArrowUpRight,
-  Boxes,
+  AppWindowMac,
+  BadgeCheck,
+  Braces,
   Check,
   CheckCircle2,
   ChevronLeft,
   ChevronRight,
+  ClipboardCheck,
   Code2,
+  Container,
   Copy,
   Database,
   Download,
@@ -29,16 +33,23 @@ import {
   GraduationCap,
   Images,
   Languages,
+  LifeBuoy,
+  ListChecks,
   Mail,
   MapPin,
   Maximize2,
-  Network,
+  PackageCheck,
+  PanelsTopLeft,
   Send,
-  Sparkles,
+  ServerCog,
+  ShoppingCart,
+  SquareTerminal,
   Star,
+  Target,
+  Warehouse,
   Workflow,
+  Wrench,
   X,
-  Zap
 } from "lucide-react";
 import type { Locale, PortfolioContent, ProjectCategory } from "@/data/content";
 import type { GithubRepository } from "@/lib/github";
@@ -51,8 +62,11 @@ type PortfolioExperienceProps = {
 };
 
 type Project = PortfolioContent["projects"][number];
-const preferredFeaturedProjectOrder = ["helpdesk", "pharmacy", "tsp"] as const;
-const FEATURED_LAYOUT_MIN_HEIGHT_PX = 1500;
+const preferredFeaturedProjectOrder = [
+  "orderflow",
+  "helpdesk",
+  "pharmacy"
+] as const;
 
 function getOrderedFeaturedProjects(projects: readonly Project[]) {
   return [...projects].sort((firstProject, secondProject) => {
@@ -96,7 +110,13 @@ type GithubUserApiResponse = {
 
 const iconClass = "h-4 w-4";
 
-const stackIcons = [Code2, Database, Network, Workflow];
+const skillGroupIcons = [Braces, PanelsTopLeft, BadgeCheck, SquareTerminal];
+
+const projectFactIcons = {
+  pharmacy: [ClipboardCheck, Code2, Database, PackageCheck],
+  helpdesk: [LifeBuoy, Code2, Workflow, Container],
+  orderflow: [ShoppingCart, ServerCog, Warehouse, BadgeCheck]
+} as const;
 
 function extractGithubProfileName(url: string) {
   try {
@@ -119,12 +139,19 @@ function getGithubProjectRepositories(
   repositories: GithubRepository[]
 ) {
   const profileRepositoryName = extractGithubProfileName(content.links.github);
+  const featuredRepositoryUrls = new Set(
+    content.projects.map((project) => project.repo.toLowerCase())
+  );
 
   return repositories
     .filter(
       (repository) =>
-        repository.name.toLowerCase() !== profileRepositoryName
-    );
+        repository.name.toLowerCase() !== profileRepositoryName &&
+        !repository.isFork &&
+        !repository.isArchived &&
+        !featuredRepositoryUrls.has(repository.url.toLowerCase())
+    )
+    .slice(0, 6);
 }
 
 function normalizeGithubRepository(
@@ -301,6 +328,22 @@ function getFallbackGithubRepositories(locale: Locale): GithubRepository[] {
 
   return [
     {
+      id: -97,
+      name: "order-flow-management-system",
+      fullName: "roposropos/order-flow-management-system",
+      url: "https://github.com/roposropos/order-flow-management-system",
+      description: isPolish
+        ? "System realizacji zamówień e-commerce z transakcyjnym magazynem, płatnościami, Outbox Workerem, rolami i testami PostgreSQL."
+        : "E-commerce order fulfilment system with transactional inventory, payments, an Outbox Worker, roles and PostgreSQL tests.",
+      language: "C#",
+      stars: 0,
+      forks: 0,
+      isFork: false,
+      isArchived: false,
+      updatedAt: null,
+      topics: ["aspnetcore", "dotnet", "postgresql", "order-management"]
+    },
+    {
       id: -98,
       name: "pharmacy-management-system",
       fullName: "roposropos/pharmacy-management-system",
@@ -437,8 +480,6 @@ export function PortfolioExperience({
   const [activeProjectId, setActiveProjectId] = useState<Project["id"]>(
     featuredProjects[0]?.id ?? content.projects[0].id
   );
-  const featuredProjectsLayoutRef = useRef<HTMLDivElement>(null);
-  const featuredProjectsMinHeightRef = useRef(0);
   const fallbackGithubRepositories = useMemo(
     () => getFallbackGithubRepositories(locale),
     [locale]
@@ -504,43 +545,6 @@ export function PortfolioExperience({
     featuredProjects[0] ??
     content.projects[0];
 
-  useEffect(() => {
-    const node = featuredProjectsLayoutRef.current;
-
-    if (!node || typeof window === "undefined") {
-      return;
-    }
-
-    const layoutNode = node;
-
-    function syncStableFeaturedHeight() {
-      if (window.innerWidth < 1280) {
-        layoutNode.style.minHeight = "";
-        return;
-      }
-
-      const stableDesktopHeight = Math.min(
-        1600,
-        Math.max(FEATURED_LAYOUT_MIN_HEIGHT_PX, window.innerWidth * 1.05)
-      );
-      const nextHeight = Math.ceil(
-        Math.max(layoutNode.getBoundingClientRect().height, stableDesktopHeight)
-      );
-
-      if (nextHeight > featuredProjectsMinHeightRef.current) {
-        featuredProjectsMinHeightRef.current = nextHeight;
-        layoutNode.style.minHeight = `${nextHeight}px`;
-      }
-    }
-
-    syncStableFeaturedHeight();
-    window.addEventListener("resize", syncStableFeaturedHeight);
-
-    return () => {
-      window.removeEventListener("resize", syncStableFeaturedHeight);
-    };
-  }, [activeProjectId]);
-
   function handleFeaturedProjectSelect(projectId: Project["id"]) {
     if (projectId === activeProjectId) {
       return;
@@ -563,16 +567,14 @@ export function PortfolioExperience({
             intro={content.sections.projects.intro}
           />
 
-          <div
-            ref={featuredProjectsLayoutRef}
-            className="featured-project-layout mt-8 grid gap-6 xl:grid-cols-[0.92fr_1.08fr] xl:items-stretch"
-          >
+          <div className="featured-project-layout mt-8 grid gap-6 xl:grid-cols-[0.92fr_1.08fr] xl:items-stretch">
             <div className="featured-project-list -mx-3 flex snap-x snap-mandatory gap-3 overflow-x-auto px-3 pb-3 xl:mx-0 xl:grid xl:h-full xl:grid-rows-3 xl:overflow-visible xl:px-0 xl:pb-0 xl:self-stretch">
               {featuredProjects.map((project, index) => (
                 <ProjectCard
                   key={project.id}
                   project={project}
                   index={index}
+                  locale={locale}
                   isActive={activeProject.id === project.id}
                   onSelect={() => handleFeaturedProjectSelect(project.id)}
                 />
@@ -600,7 +602,7 @@ export function PortfolioExperience({
 
           <div className="skill-groups-grid mt-8 grid gap-4 md:grid-cols-2 md:gap-5">
             {content.skillGroups.map((group, index) => {
-              const Icon = stackIcons[index] ?? Code2;
+              const Icon = skillGroupIcons[index] ?? Braces;
 
               return (
                 <article key={group.title} className="skill-group-card card p-6">
@@ -660,7 +662,7 @@ export function PortfolioExperience({
 
             <aside className="work-style-card dark-card p-6 text-white">
               <div className="flex items-center gap-3">
-                <Sparkles className="h-5 w-5 text-violet-on-dark" />
+                <ClipboardCheck className="h-5 w-5 text-violet-on-dark" />
                 <h3 className="text-xl font-bold">
                   {locale === "pl" ? "Jak pracuję" : "How I work"}
                 </h3>
@@ -699,7 +701,7 @@ function Hero({
   otherLocale: Locale;
 }) {
   return (
-    <section className="relative min-h-[82svh] overflow-hidden bg-[#0c0a14] text-white md:min-h-[86svh]">
+    <section className="relative min-h-[70svh] overflow-hidden bg-[#0c0a14] text-white md:min-h-[74svh]">
       <div className="hero-grid absolute inset-0" />
 
       <header className="relative z-10 pt-5">
@@ -768,12 +770,12 @@ function Hero({
       </header>
 
       <div id="top" className="relative z-10">
-        <div className="hero-shell page-shell grid min-h-[calc(82svh-88px)] items-center gap-10 py-12 md:min-h-[calc(86svh-88px)] md:py-16 lg:grid-cols-[1.08fr_0.92fr]">
+        <div className="hero-shell page-shell grid min-h-[calc(70svh-88px)] items-center py-12 md:min-h-[calc(74svh-88px)] md:py-16">
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="max-w-3xl"
+            className="max-w-4xl"
           >
             <p className="section-kicker text-violet-on-dark">{content.hero.eyebrow}</p>
             <h1 className="mt-4 max-w-none whitespace-nowrap text-[clamp(2.45rem,10.4vw,4.25rem)] font-black leading-[0.96] text-white md:text-[clamp(3.75rem,5.35vw,5.65rem)]">
@@ -856,49 +858,6 @@ function Hero({
             </div>
 
           </motion.div>
-
-          <motion.aside
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-            className="hero-scope-panel dark-card hidden p-0 lg:block"
-          >
-            <div className="hero-scope-header flex items-center justify-between gap-4 border-b border-white/10 px-5 py-4">
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-bold text-white/86">
-                  {content.heroPanel.title}
-                </p>
-              </div>
-            </div>
-
-            <div className="hero-scope-list">
-              {content.heroPanel.items.map((item, index) => (
-                <div key={item.label} className="hero-scope-item">
-                  <div className="flex items-start gap-4">
-                    <span className="hero-scope-icon">
-                      {(() => {
-                        const Icon = stackIcons[index] ?? Code2;
-
-                        return <Icon className="h-4 w-4" />;
-                      })()}
-                    </span>
-                    <div className="min-w-0">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <p className="text-sm font-bold text-white">{item.label}</p>
-                        <span className="hero-scope-dot" aria-hidden="true" />
-                      </div>
-                      <p className="mt-1 text-sm font-semibold text-violet-faint">
-                        {item.value}
-                      </p>
-                      <p className="mt-2 text-sm leading-6 text-white/60">
-                        {item.detail}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.aside>
         </div>
       </div>
     </section>
@@ -906,14 +865,18 @@ function Hero({
 }
 
 function RecruiterStrip({ content }: { content: PortfolioContent }) {
-  const stripIcons = [GraduationCap, Boxes, Workflow];
+  const stripIcons = [Braces, BadgeCheck, AppWindowMac];
 
   return (
-    <section className="relative z-20 -mt-7 pb-8 md:-mt-8 md:pb-10">
+    <section
+      className="relative z-20 -mt-7 pb-8 md:-mt-8 md:pb-10"
+      aria-label={content.recruiterStrip.title}
+    >
+      <h2 className="sr-only">{content.recruiterStrip.title}</h2>
       <div className="page-shell">
         <div className="profile-summary-bar -mx-3 flex snap-x gap-3 overflow-x-auto px-3 pb-2 md:mx-0 md:grid md:grid-cols-3 md:gap-0 md:overflow-hidden md:px-0 md:pb-0">
           {content.recruiterStrip.items.map((item, index) => {
-            const Icon = stripIcons[index] ?? Sparkles;
+            const Icon = stripIcons[index] ?? BadgeCheck;
 
             return (
               <article key={item.label} className="profile-summary-item min-w-[82%] snap-start md:min-w-0">
@@ -1009,11 +972,13 @@ function SectionHeading({
 function ProjectCard({
   project,
   index,
+  locale,
   isActive,
   onSelect
 }: {
   project: Project;
   index: number;
+  locale: Locale;
   isActive: boolean;
   onSelect: () => void;
 }) {
@@ -1141,7 +1106,7 @@ function ProjectCard({
                 isActive ? "text-white/48" : "text-muted"
               )}
             >
-              Case study
+              {locale === "pl" ? "Opis projektu" : "Project overview"}
             </p>
             <div className="project-card-stack flex flex-wrap gap-2">
               {project.stack.slice(0, 4).map((tech) => (
@@ -1178,7 +1143,9 @@ function ProjectDetail({ project, locale }: { project: Project; locale: Locale }
   );
   const selectedScreenshot = screenshots[selectedScreenshotIndex] ?? project.image;
   const galleryTitle = locale === "pl" ? "Galeria projektu" : "Project gallery";
-  const factIcons = [Workflow, Code2, Database, Sparkles];
+  const factIcons =
+    projectFactIcons[project.id as keyof typeof projectFactIcons] ??
+    ([Target, Code2, Workflow, PackageCheck] as const);
 
   return (
     <motion.article className="featured-project-detail card h-full p-4 md:p-6">
@@ -1210,7 +1177,7 @@ function ProjectDetail({ project, locale }: { project: Project; locale: Locale }
                   className="interactive-lift focus-ring inline-flex shrink-0 items-center justify-center gap-2 rounded-md border border-violet bg-violet px-3 py-2 text-sm font-bold text-white"
                 >
                   <ExternalLink className={iconClass} />
-                  Live demo
+                  {locale === "pl" ? "Demo" : "Live demo"}
                 </a>
               ) : null}
               <a
@@ -1236,7 +1203,7 @@ function ProjectDetail({ project, locale }: { project: Project; locale: Locale }
 
           <div className="project-facts-grid mt-4 grid gap-2 sm:grid-cols-2">
             {project.facts.map((fact, factIndex) => {
-              const FactIcon = factIcons[factIndex] ?? Sparkles;
+              const FactIcon = factIcons[factIndex] ?? Target;
 
               return (
                 <span
@@ -1260,7 +1227,7 @@ function ProjectDetail({ project, locale }: { project: Project; locale: Locale }
           <div className="project-detail-layout mt-5 grid gap-4 xl:grid-cols-2">
             <section className="project-detail-panel rounded-lg border border-soft bg-white/65 p-4">
               <h4 className="flex items-center gap-2 text-sm font-black text-ink">
-                <Workflow className={iconClass} />
+                <Target className={iconClass} />
                 {locale === "pl" ? "Problem / Cel" : "Problem / Goal"}
               </h4>
               <p className="mt-2 text-sm leading-6 text-muted">
@@ -1271,8 +1238,8 @@ function ProjectDetail({ project, locale }: { project: Project; locale: Locale }
               <h4 className="flex items-center gap-2 text-sm font-black text-ink">
                 <Star className={iconClass} />
                 {locale === "pl"
-                  ? "Dlaczego ten projekt jest ważny"
-                  : "Why this project matters"}
+                  ? "Najważniejsze decyzje techniczne"
+                  : "Key technical decisions"}
               </h4>
               <p className="mt-2 text-sm leading-6 text-muted">
                 {project.importance}
@@ -1283,8 +1250,8 @@ function ProjectDetail({ project, locale }: { project: Project; locale: Locale }
           <div className="project-detail-workflow mt-4 grid gap-4 xl:grid-cols-[1.05fr_0.95fr]">
             <section className="project-detail-panel rounded-lg border border-soft bg-white/65 p-4">
               <h4 className="flex items-center gap-2 text-sm font-black text-ink">
-                <Boxes className={iconClass} />
-                {locale === "pl" ? "Co jest zaimplementowane" : "Implemented scope"}
+                <ListChecks className={iconClass} />
+                {locale === "pl" ? "Najważniejsze funkcje" : "Key features"}
               </h4>
               <ul className="mt-3 grid gap-2">
                 {implementedProof.map((item) => (
@@ -1297,8 +1264,8 @@ function ProjectDetail({ project, locale }: { project: Project; locale: Locale }
             </section>
             <section className="project-detail-panel rounded-lg border border-soft bg-white/65 p-4">
               <h4 className="flex items-center gap-2 text-sm font-black text-ink">
-                <Code2 className={iconClass} />
-                {locale === "pl" ? "Zakres pracy" : "Scope of work"}
+                <Wrench className={iconClass} />
+                {locale === "pl" ? "Mój wkład" : "My contribution"}
               </h4>
               <ul className="mt-3 grid gap-2">
                 {project.contributionPoints.map((item) => (
@@ -1315,7 +1282,7 @@ function ProjectDetail({ project, locale }: { project: Project; locale: Locale }
             <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
               <div className="min-w-0">
                 <h4 className="flex items-center gap-2 text-sm font-black text-ink">
-                  <Zap className={iconClass} />
+                  <Braces className={iconClass} />
                   {locale === "pl" ? "Zakres techniczny" : "Technical scope"}
                 </h4>
                 <div className="mt-3 flex flex-wrap gap-2">
@@ -1585,8 +1552,7 @@ function LiveGithubRepositories({
           >
           {filteredRepositories.map((repository, index) => {
             const updatedAt = formatRepositoryDate(repository.updatedAt, locale);
-            const openLabel =
-              locale === "pl" ? "Otwórz repozytorium" : "Open repository";
+            const openLabel = locale === "pl" ? "Repozytorium" : "Repository";
             const archivedLabel =
               locale === "pl" ? "archiwalne" : "archived";
             const forkLabel = locale === "pl" ? "fork" : "fork";
@@ -1693,8 +1659,8 @@ function LiveGithubRepositories({
               <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">
                 {hasRepositories
                   ? locale === "pl"
-                    ? "Wybierz inny filtr albo pokaż wszystkie repozytoria."
-                    : "Choose another filter or show all repositories."
+                    ? "Wybierz inny filtr albo pokaż wszystkie pozostałe projekty."
+                    : "Choose another filter or show all remaining projects."
                   : content.sections.projects.githubEmptyText}
               </p>
             </div>

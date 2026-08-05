@@ -22,9 +22,9 @@ const baseLinks = {
 export const content = {
   pl: {
     meta: {
-      title: "Robert Tworek - Junior C#/.NET Developer",
+      title: "Robert Tworek | Junior C#/.NET Developer",
       description:
-        "Portfolio Roberta Tworka: projekty C#/.NET, ASP.NET Core, React, PostgreSQL, aplikacje desktopowe, testy i dokumentacja techniczna."
+        "Portfolio Roberta Tworka: projekty C#/.NET, ASP.NET Core, PostgreSQL, React i Avalonia UI, testy automatyczne, Docker oraz dokumentacja techniczna."
     },
     links: {
       ...baseLinks,
@@ -37,62 +37,34 @@ export const content = {
       { href: "#contact", label: "Kontakt" }
     ],
     hero: {
-      eyebrow: "Student Informatyki Technicznej / Junior C#/.NET Developer",
+      eyebrow: "Junior C#/.NET Developer | Student Informatyki Technicznej",
       title: "Robert Tworek",
       body:
-        "Tworzę aplikacje w C#/.NET - od REST API w ASP.NET Core i relacyjnych baz PostgreSQL po interfejsy React oraz desktop w Avalonia UI. Studiuję Informatykę Techniczną na Politechnice Wrocławskiej i szukam pierwszej roli jako Junior\u00a0.NET Developer, w której będę mógł rozwijać backend, testy i pracę nad realnym produktem.",
+        "Tworzę aplikacje biznesowe w C# i .NET, koncentrując się na backendzie ASP.NET Core, relacyjnych bazach PostgreSQL i czytelnych przepływach użytkownika. W projektach łączę logikę domenową, autoryzację, testy automatyczne, Docker oraz interfejsy React lub Avalonia UI. Szukam pierwszej roli, w której będę rozwijać się przy produkcyjnym kodzie i pracy zespołowej.",
       primaryCta: "Zobacz projekty",
       secondaryCta: "Pobierz CV",
       tertiaryCta: "GitHub",
       linkedinCta: "LinkedIn"
     },
     recruiterStrip: {
-      title: "Profil w skrócie",
+      title: "W skrócie",
       items: [
         {
-          value: "Full-stack .NET",
-          label: "ASP.NET Core, React, PostgreSQL",
+          value: "Backend .NET",
+          label: "ASP.NET Core, EF Core, PostgreSQL",
           detail:
-            "REST API, JWT, role użytkowników i workflow zgłoszeń"
+            "REST API, JWT, role, transakcje i procesy biznesowe"
         },
         {
           value: "Testy i delivery",
           label: "xUnit, Testcontainers, Playwright",
           detail:
-            "Docker Compose, GitHub Actions i lokalne uruchamianie środowiska"
+            "testy jednostkowe, integracyjne i E2E, Docker Compose oraz GitHub Actions"
         },
         {
-          value: "C# desktop + SQL",
-          label: "Avalonia UI, MVVM, PostgreSQL",
-          detail: "role, audyt, raporty i dystrybucja Windows/macOS"
-        }
-      ]
-    },
-    heroPanel: {
-      title: "Kierunek rozwoju",
-      items: [
-        {
-          label: "Backend .NET",
-          value: "ASP.NET Core, C#, EF Core, PostgreSQL",
-          detail:
-            "REST API, logika biznesowa, autoryzacja JWT, role i relacyjny model danych"
-        },
-        {
-          label: "Frontend i desktop",
-          value: "React, TypeScript, Avalonia UI, MVVM",
-          detail: "panele operacyjne, formularze, przepływy pracy i czytelne interfejsy"
-        },
-        {
-          label: "Jakość i delivery",
-          value: "xUnit, Testcontainers, Playwright, Docker",
-          detail:
-            "testy domenowe, API i E2E, środowisko demo oraz dokumentacja uruchomienia"
-        },
-        {
-          label: "Zaplecze inżynierskie",
-          value: "C++, Python, Java, Linux, Git",
-          detail:
-            "benchmarki, komunikacja TCP, praca z repozytoriami i raportowanie wyników"
+          value: "Frontend i desktop",
+          label: "React, TypeScript, Avalonia UI",
+          detail: "panele operacyjne, formularze i aplikacje wieloplatformowe"
         }
       ]
     },
@@ -101,14 +73,14 @@ export const content = {
         kicker: "Projekty",
         title: "Wyróżnione projekty",
         intro:
-          "Wybrane projekty pokazują trzy uzupełniające obszary mojego warsztatu: pełną aplikację webową w .NET, desktopowy system C# z rozbudowaną bazą PostgreSQL oraz eksperymentalny benchmark algorytmów C++.",
-        githubTitle: "Wszystkie repozytoria",
+          "Najwięcej miejsca poświęcam trzem projektom opartym na C#/.NET i PostgreSQL. Każdy opisuje problem, najważniejsze decyzje techniczne, działający zakres systemu oraz mój konkretny wkład w implementację.",
+        githubTitle: "Pozostałe projekty na GitHubie",
         githubIntro:
-          "Przegląd publicznych repozytoriów z GitHuba w formie szybkich odnośników. Karty prowadzą do konkretnych projektów i pokazują krótki opis, główną technologię oraz tematy repozytorium.",
-        githubEmptyTitle: "Brak repozytoriów do wyświetlenia",
+          "Wybrane repozytoria uzupełniające główny kierunek .NET: projekty webowe, algorytmiczne i akademickie. Każda karta prowadzi bezpośrednio do kodu i dokumentacji projektu.",
+        githubEmptyTitle: "Brak dodatkowych repozytoriów do wyświetlenia",
         githubEmptyText:
-          "Gdy na profilu pojawi się kolejny projekt, zostanie pokazany w tej sekcji.",
-        githubNoDescription: "Repozytorium nie ma jeszcze krótkiego opisu na GitHubie.",
+          "Nowe publiczne projekty pojawią się w tej sekcji po opublikowaniu ich na GitHubie.",
+        githubNoDescription: "Repozytorium nie ma jeszcze krótkiego opisu.",
         githubUpdatedLabel: "Aktualizacja",
         githubLanguageFallback: "Projekt"
       },
@@ -116,19 +88,19 @@ export const content = {
         kicker: "Technologie",
         title: "Technologie i narzędzia",
         intro:
-          "Technologie porządkuję według siły dowodu w projektach: główny stack .NET, praktyka frontendowa i desktopowa, testy oraz narzędzia delivery, a niżej szersze zaplecze akademickie."
+          "Poniższe technologie wykorzystywałem w projektach własnych i zespołowych. Główny kierunek stanowią C#, ASP.NET Core, Entity Framework Core i PostgreSQL; pozostałe narzędzia wspierają interfejsy, testowanie, uruchamianie środowisk i dokumentację."
       },
       education: {
         kicker: "Edukacja",
         title: "Wykształcenie i specjalizacja",
         intro:
-          "Moja ścieżka edukacyjna łączy przygotowanie techniczne z pracą nad oprogramowaniem, bazami danych i systemami informatycznymi. Specjalność związana z medycyną dodatkowo wzmacnia nacisk na poprawność danych, procesów i dokumentacji."
+          "Wykształcenie techniczne i studia inżynierskie dały mi szerokie podstawy z programowania, baz danych, systemów komputerowych, sieci, testowania i dokumentacji. W projektach rozwijam te podstawy w kierunku aplikacji biznesowych w .NET."
       },
       contact: {
         kicker: "Kontakt",
         title: "Skontaktuj się ze mną",
         intro:
-          "Szukam stażu lub pierwszej roli jako Junior C#/.NET Developer, szczególnie przy backendzie ASP.NET Core, aplikacjach full-stack i systemach wykorzystujących relacyjne bazy danych. Jestem otwarty na pracę we Wrocławiu, hybrydowo lub zdalnie."
+          "Szukam pierwszej roli jako Junior C#/.NET Developer lub stażu z możliwością dalszego rozwoju. Interesuje mnie backend ASP.NET Core, aplikacje full-stack i systemy oparte na relacyjnych bazach danych. Jestem otwarty na pracę we Wrocławiu, hybrydowo lub zdalnie."
       }
     },
     filters: [
@@ -141,25 +113,25 @@ export const content = {
     projects: [
       {
         id: "pharmacy",
-        title: "Pharmacy management system",
-        shortTitle: "Pharmacy management system",
-        label: "C# desktop + PostgreSQL",
+        title: "Pharmacy Management System",
+        shortTitle: "Pharmacy Management System",
+        label: "Aplikacja desktopowa C# + PostgreSQL",
         repo: "https://github.com/roposropos/pharmacy-management-system",
         readme: "https://github.com/roposropos/pharmacy-management-system#readme",
         demo: null as string | null,
         image: {
           src: "/assets/pharmacy-dashboard.png",
-          alt: "Panel systemu Pharmacy management system z widokiem modułów aplikacji"
+          alt: "Panel systemu Pharmacy Management System z widokiem modułów aplikacji"
         },
         gallery: [
           {
             src: "/assets/pharmacy-dashboard.png",
-            alt: "Panel główny systemu Pharmacy management system",
+            alt: "Panel główny systemu Pharmacy Management System",
             caption: "Panel główny"
           },
           {
             src: "/assets/pharmacy-products.png",
-            alt: "Widok kartoteki produktów w systemie Pharmacy management system",
+            alt: "Widok kartoteki produktów w systemie Pharmacy Management System",
             caption: "Kartoteka produktów"
           }
         ],
@@ -167,69 +139,68 @@ export const content = {
         context:
           "Projekt zespołowy rozwijany jako lokalny system desktopowy dla apteki, z mocnym naciskiem na relacyjny model danych, spójność operacji i realny przepływ pracy użytkownika.",
         teaser:
-          "C# desktop + SQL: lokalny system apteczny z realnymi relacjami, rolami, audytem i procesami magazynowo-sprzedażowymi.",
-        signals: ["aplikacja desktopowa", "relacyjny model danych", "procesy apteczne"],
+          "Zespołowy system desktopowy dla apteki obejmujący sprzedaż, recepty, magazyn partii, dostawy, raporty, audyt i role użytkowników oparte na relacyjnej bazie PostgreSQL.",
+        signals: ["relacyjny model danych", "procesy apteczne", "aplikacja wieloplatformowa"],
         facts: [
           { label: "obszar", value: "system apteczny" },
-          { label: "rdzeń", value: "Avalonia + PostgreSQL" },
-          { label: "dane", value: "relacje, widoki, walidacja" },
-          { label: "dystrybucja", value: "paczki macOS i Windows" }
+          { label: "rdzeń", value: "Avalonia UI + PostgreSQL" },
+          { label: "dane", value: "relacje, widoki, ograniczenia" },
+          { label: "dystrybucja", value: "Windows i macOS" }
         ],
         stack: ["C#", ".NET", "Avalonia UI", "PostgreSQL", "ODBC", "SQL", "MVVM", "CSV"],
         summary:
-          "Rozbudowany projekt zespołowy lokalnego systemu desktopowego dla apteki. Aplikacja obejmuje kartoteki klientów i leków, sprzedaż, recepty i receptury, magazyn partii, dostawy, zamówienia, raporty, audyt operacji, backup/restore oraz role kierownika i farmaceuty.",
+          "Zespołowy projekt lokalnego systemu desktopowego dla apteki. Aplikacja obejmuje kartoteki klientów i leków, sprzedaż, recepty i receptury, magazyn partii, dostawy, zamówienia, raporty, audyt operacji, backup/restore oraz role kierownika i farmaceuty.",
         challenge:
-          "Celem projektu było przygotowanie lokalnego systemu aptecznego, który łączy kartoteki, sprzedaż, recepty, magazyn, raporty i audyt w jednym spójnym przepływie pracy opartym na relacyjnej bazie danych.",
+          "Celem projektu było połączenie kartotek leków i klientów, sprzedaży, recept, magazynu, dostaw, raportów i audytu w jednym lokalnym systemie. Kluczowe znaczenie miała poprawność relacji oraz spójność operacji wykonywanych na partiach leków, stanach magazynowych i danych wrażliwych.",
         importance:
-          "Ten projekt najlepiej pokazuje pracę z relacyjnym modelem danych, poprawnością operacji i aplikacją desktopową pod realny scenariusz domenowy. Ważną częścią jest nie tylko interfejs, ale też baza: schematy, role, ograniczenia, widoki, audyt, seed i test SQL.",
+          "Baza danych wykorzystuje relacje, ograniczenia integralności, widoki, role, audyt i dane demonstracyjne. Operacje magazynowe są oparte na partiach i terminach ważności, a dostęp do funkcji jest rozdzielony pomiędzy role kierownika i farmaceuty. Projekt obejmuje również skrypty przygotowania bazy, test SQL oraz procedury backupu i odtwarzania.",
         contribution:
-          "Projekt realizowałem w trzyosobowym zespole. Mój zakres obejmował pracę nad modelem danych i ograniczeniami PostgreSQL, współtworzenie widoków i przepływów sprzedaży, magazynu oraz raportów, walidację danych, dokumentację uruchomienia i przygotowanie paczek aplikacji dla Windows oraz macOS.",
+          "Projekt realizowałem w trzyosobowym zespole. Odpowiadałem głównie za bazę danych i dokumentację techniczną: model relacyjny, ograniczenia, widoki, role, skrypty przygotowania środowiska, dane demonstracyjne i testy SQL. Wspierałem również integrację z aplikacją, walidację danych oraz prace nad pozostałymi modułami.",
         contributionPoints: [
-          "przygotowanie modeli danych, relacji i ograniczeń integralności w PostgreSQL",
-          "współtworzenie widoków oraz przepływów pracy dla sprzedaży, recept, magazynu i raportów",
-          "walidacja formularzy i pilnowanie spójności operacji z logiką domenową",
-          "dokumentacja uruchomienia oraz przygotowanie paczek dla macOS i Windows"
+          "odpowiadałem głównie za model danych, relacje, ograniczenia integralności, widoki i role w PostgreSQL",
+          "przygotowywałem skrypty bazy, dane demonstracyjne, testy SQL i dokumentację techniczną projektu",
+          "wspierałem integrację warstwy danych z aplikacją oraz walidację operacji wykonywanych w interfejsie",
+          "pomagałem zespołowi w pozostałych modułach, uruchomieniu i weryfikacji działania aplikacji"
         ],
         proof: [
-          "moduły dla klientów, leków, dostawców, magazynu, sprzedaży, recept, receptur, zamówień, raportów i użytkowników",
+          "moduły klientów, leków, dostawców, magazynu, sprzedaży, recept, receptur, zamówień, raportów i użytkowników",
           "PostgreSQL z migracjami, seedem demonstracyjnym, rolami bazodanowymi, ograniczeniami integralności i smoke testem SQL",
-          "ochrona danych wrażliwych: szyfrowanie PESEL jako enc:v1, hash do unikalności oraz maskowanie danych w interfejsie",
-          "magazyn partii leków i surowców, terminy ważności, korekty stanów, alerty niskich stanów oraz zużycie przy sprzedaży i recepturach",
-          "audyt operacji, eksport raportów do CSV, ręczny backup/restore z potwierdzeniem oraz rozdzielenie ról kierownika i farmaceuty",
-          "self-contained paczki dla macOS Apple Silicon i Windows x64 z launcherami oraz skryptami przygotowania bazy"
+          "ochrona danych wrażliwych przez szyfrowanie, hash do kontroli unikalności i maskowanie wartości w interfejsie",
+          "magazyn partii leków i surowców, terminy ważności, korekty stanów oraz alerty niskich stanów",
+          "audyt operacji, eksport raportów do CSV, backup/restore i podział uprawnień kierownika oraz farmaceuty"
         ],
         metrics: [
           { label: "moduły", value: "10+" },
           { label: "model danych", value: "relacje + role" },
-          { label: "dystrybucja", value: "macOS/Windows" }
+          { label: "dystrybucja", value: "Windows / macOS" }
         ]
       },
       {
         id: "helpdesk",
-        title: "Helpdesk management system",
-        shortTitle: "Helpdesk management system",
+        title: "Helpdesk Management System",
+        shortTitle: "Helpdesk Management System",
         label: "ASP.NET Core + React",
         repo: "https://github.com/roposropos/helpdesk-management-system",
         readme: "https://github.com/roposropos/helpdesk-management-system#readme",
         demo: null as string | null,
         image: {
           src: "/assets/helpdesk-dashboard.png",
-          alt: "Dashboard systemu Helpdesk management system z metrykami zgłoszeń"
+          alt: "Dashboard systemu Helpdesk Management System z metrykami zgłoszeń"
         },
         gallery: [
           {
             src: "/assets/helpdesk-dashboard.png",
-            alt: "Dashboard systemu Helpdesk management system",
+            alt: "Dashboard systemu Helpdesk Management System",
             caption: "Dashboard"
           },
           {
             src: "/assets/helpdesk-tickets.png",
-            alt: "Lista zgłoszeń w systemie Helpdesk management system",
+            alt: "Lista zgłoszeń w systemie Helpdesk Management System",
             caption: "Zgłoszenia"
           },
           {
             src: "/assets/helpdesk-assets.png",
-            alt: "Ewidencja sprzętu w systemie Helpdesk management system",
+            alt: "Ewidencja sprzętu w systemie Helpdesk Management System",
             caption: "Asset inventory"
           }
         ],
@@ -237,111 +208,109 @@ export const content = {
         context:
           "Projekt własny pełnego systemu helpdeskowego, który łączy obsługę zgłoszeń, ewidencję sprzętu, role użytkowników, audyt i raportowanie w jednej aplikacji webowej.",
         teaser:
-          "Główny projekt .NET: pełny wewnętrzny helpdesk z rolami, ticketami, assetami, API, testami i dokumentacją.",
-        signals: ["workflow zgłoszeń", "role i uprawnienia", "testy + Docker"],
+          "Wewnętrzny system wsparcia IT łączący obsługę zgłoszeń, ewidencję sprzętu, role użytkowników, SLA, audyt i raportowanie w jednej aplikacji webowej.",
+        signals: ["obsługa zgłoszeń i SLA", "role oraz uprawnienia", "testy i Docker Compose"],
         facts: [
-          { label: "obszar", value: "helpdesk IT" },
+          { label: "obszar", value: "wewnętrzny helpdesk IT" },
           { label: "rdzeń", value: "ASP.NET Core + React" },
-          { label: "workflow", value: "ticketing, assety, audyt" },
+          { label: "proces", value: "zgłoszenia, sprzęt, audyt" },
           { label: "uruchomienie", value: "Docker Compose" }
         ],
         stack: ["ASP.NET Core", "C#", "React", "TypeScript", "PostgreSQL", "EF Core", "Docker", "Playwright"],
         summary:
           "Full-stackowy system wewnętrznego wsparcia IT z backendem ASP.NET Core Web API, panelem React i bazą PostgreSQL. Obejmuje role Employee, Technician i Admin, cykl życia zgłoszeń, SLA, komentarze publiczne i wewnętrzne, ewidencję sprzętu, audyt, raporty oraz testy jednostkowe, integracyjne i E2E.",
         challenge:
-          "Problemem, który rozwiązuje projekt, są rozproszone zgłoszenia IT oraz brak kontroli nad odpowiedzialnością, terminami SLA i sprzętem firmowym. System porządkuje ticket od utworzenia do zamknięcia i łączy go z użytkownikami, technikami oraz assetami.",
+          "Projekt porządkuje rozproszone zgłoszenia IT oraz informacje o sprzęcie firmowym. Każde zgłoszenie przechodzi kontrolowany cykl od utworzenia i przypisania technika do rozwiązania lub zamknięcia, z zachowaniem historii zmian, priorytetu, komentarzy i terminów SLA.",
         importance:
-          "To najmocniejszy projekt pod rekrutację .NET, ponieważ pokazuje nie tylko CRUD, lecz kompletny biznesowy workflow, podział warstw, bezpieczeństwo, testy na kilku poziomach i uruchomienie całego środowiska.",
+          "Reguły uprawnień są egzekwowane w API, a nie wyłącznie ukrywane w interfejsie. Zgłoszenia, komentarze, załączniki, przypisania i zmiany statusu tworzą audytowalną historię. Testy jednostkowe, integracyjne i E2E obejmują zarówno logikę backendu, jak i najważniejsze ścieżki użytkownika w React.",
         contribution:
-          "Największym wyzwaniem było utrzymanie spójnych reguł uprawnień i przejść statusów między API, bazą oraz interfejsem. Rozdzieliłem odpowiedzialności pomiędzy warstwy rozwiązania, zastosowałem role i polityki autoryzacji w ASP.NET Core, a kluczowe scenariusze zweryfikowałem testami domenowymi, API i Playwright E2E.",
+          "Największym wyzwaniem było utrzymanie spójnych reguł uprawnień i przejść statusów pomiędzy API, bazą danych i interfejsem. Rozdzieliłem odpowiedzialności pomiędzy warstwy rozwiązania, zastosowałem role i polityki autoryzacji w ASP.NET Core, a kluczowe scenariusze zweryfikowałem testami backendu, API i Playwright E2E.",
         contributionPoints: [
-          "projekt modelu domenowego, relacji i migracji EF Core dla PostgreSQL",
-          "endpointy API z JWT, rolami i workflow obsługi zgłoszeń",
-          "konsola React + TypeScript z filtrami, formularzami i stanami pracy",
-          "testy jednostkowe, integracyjne i E2E oraz uruchamianie przez Docker Compose"
+          "zaprojektowałem model danych, relacje i migracje EF Core dla PostgreSQL",
+          "zaimplementowałem endpointy API z JWT, rolami i obsługą cyklu życia zgłoszeń",
+          "przygotowałem panel React + TypeScript z filtrami, formularzami i stanami pracy",
+          "dodałem testy jednostkowe, integracyjne i E2E oraz uruchamianie środowiska przez Docker Compose"
         ],
         proof: [
-          "role Employee, Technician i Admin z oddzielnymi uprawnieniami oraz widocznością funkcji w UI",
-          "workflow zgłoszeń: tworzenie, przypisanie technika, zmiana statusu, priorytet, komentarze, załączniki i historia",
-          "moduł asset inventory z przypisaniem sprzętu, historią zmian, importem/eksportem CSV i powiązaniem assetów ze zgłoszeniami",
-          "PostgreSQL z Entity Framework Core, migracjami, seedem demo, relacjami i ograniczeniami modelu",
-          "dashboard, SLA, eksporty CSV/PDF, globalny audyt operacji i koncepcja powiadomień email",
-          "Docker Compose, launchery dla macOS/Windows, GitHub Actions oraz testy unit, integration i Playwright E2E"
+          "role Employee, Technician i Admin z oddzielnymi uprawnieniami oraz widocznością funkcji w interfejsie",
+          "obsługa zgłoszeń: tworzenie, przypisanie technika, status, priorytet, komentarze, załączniki i historia zmian",
+          "ewidencja sprzętu z przypisaniami, historią, importem i eksportem CSV oraz powiązaniem ze zgłoszeniami",
+          "PostgreSQL z Entity Framework Core, migracjami, danymi demonstracyjnymi, relacjami i ograniczeniami modelu",
+          "dashboard, SLA, eksporty CSV/PDF, globalny audyt i testy Playwright E2E"
         ],
         metrics: [
           { label: "testy", value: "14 unit / 9 E2E" },
           { label: "autoryzacja", value: "JWT + role" },
-          { label: "delivery", value: "Docker + CI" }
+          { label: "uruchomienie", value: "Docker + CI" }
         ]
       },
       {
-        id: "tsp",
-        title: "TSP algorithms benchmark",
-        shortTitle: "TSP algorithms benchmark",
-        label: "C++ algorithms + benchmarks",
-        repo: "https://github.com/roposropos/tsp-algorithms-benchmark",
-        readme: "https://github.com/roposropos/tsp-algorithms-benchmark#readme",
+        id: "orderflow",
+        title: "Order Flow Management System",
+        shortTitle: "Order Flow Management System",
+        label: "ASP.NET Core + PostgreSQL",
+        repo: "https://github.com/roposropos/order-flow-management-system",
+        readme: "https://github.com/roposropos/order-flow-management-system#readme",
         demo: null as string | null,
         image: {
-          src: "/assets/tsp-benchmark.png",
-          alt: "Wykres porównujący wyniki benchmarku algorytmów TSP"
+          src: "/assets/orderflow-window-management.jpg",
+          alt: "Interfejs systemu Order Flow z panelami obsługi zamówień i magazynu"
         },
         gallery: [
           {
-            src: "/assets/tsp-benchmark.png",
-            alt: "Wykres jakości rozwiązań w benchmarku TSP",
-            caption: "Porównanie jakości"
+            src: "/assets/orderflow-window-management.jpg",
+            alt: "Pulpit systemu Order Flow z oknami aplikacji i zwiniętym panelem",
+            caption: "Pulpit operacyjny"
           },
           {
-            src: "/assets/tsp-stage2-bnb-time.png",
-            alt: "Wykres czasu działania Branch and Bound",
-            caption: "Branch and Bound"
+            src: "/assets/orderflow-warehouse-operations.jpg",
+            alt: "Kolejka operacji magazynowych w systemie Order Flow",
+            caption: "Operacje magazynowe"
           },
           {
-            src: "/assets/tsp-stage3-sa-error.png",
-            alt: "Wykres błędu względnego dla Simulated Annealing",
-            caption: "Simulated Annealing"
+            src: "/assets/orderflow-customer-workflow.jpg",
+            alt: "Historia zamówienia i oś zmian statusu w systemie Order Flow",
+            caption: "Przepływ klienta"
           }
         ],
-        categories: ["algorithms"] as ProjectCategory[],
+        categories: ["dotnet", "web"] as ProjectCategory[],
         context:
-          "Projekt akademicki skupiony na porównaniu algorytmów dla TSP i ATSP przez powtarzalne eksperymenty, pomiary czasu, eksport wyników i analizę jakości rozwiązań.",
+          "Projekt własny systemu realizacji zamówień e-commerce, łączący API, płatności, magazyn, wysyłkę i raportowanie w jednym kontrolowanym procesie biznesowym.",
         teaser:
-          "Projekt algorytmiczny: porównanie metod dla TSP/ATSP z pomiarami, wynikami CSV, wykresami i dokumentacją.",
-        signals: ["algorytmy", "benchmarki", "powtarzalne wyniki"],
+          "System obsługi zamówień, płatności, stanów magazynowych i wysyłki z kontrolowanym cyklem statusów, rolami użytkowników oraz obsługą operacji równoległych.",
+        signals: ["cykl realizacji zamówienia", "spójność stanów magazynowych", "Outbox i testy integracyjne"],
         facts: [
-          { label: "obszar", value: "algorytmy TSP/ATSP" },
-          { label: "rdzeń", value: "C++ + benchmarki" },
-          { label: "eksperymenty", value: "pomiary, konfiguracje" },
-          { label: "wyniki", value: "CSV, wykresy, raporty" }
+          { label: "obszar", value: "zamówienia i realizacja" },
+          { label: "rdzeń", value: ".NET 8 + PostgreSQL" },
+          { label: "proces", value: "płatność, magazyn, wysyłka" },
+          { label: "jakość", value: "45 testów + Docker" }
         ],
-        stack: ["C++17/C++20", "Makefile", "TSPLIB", "CSV", "benchmarking", "plots"],
+        stack: ["ASP.NET Core 8", "C#", "EF Core 8", "PostgreSQL 16", "MediatR", "JWT", "Docker", "xUnit", "Testcontainers"],
         summary:
-          "Projekt benchmarkowy porównujący algorytmy dokładne, heurystyki i metaheurystyki dla symetrycznych oraz asymetrycznych instancji problemu komiwojażera. Repozytorium obejmuje cztery etapy: brute force i heurystyki konstrukcyjne, Branch and Bound, Simulated Annealing oraz Genetic Algorithm z lokalnym ulepszaniem.",
+          "Autorski system zarządzania zamówieniami, zapasami, płatnościami i operacjami magazynowymi dla procesu realizacji e-commerce. Backend ASP.NET Core 8 łączy model domenowy, autoryzację JWT, transakcyjny magazyn, Outbox Worker, raporty i audyt z responsywnym interfejsem demonstracyjnym.",
         challenge:
-          "Kluczowym wyzwaniem było porównanie metod o zupełnie innej charakterystyce: dokładnych, heurystycznych i metaheurystycznych. Ujednoliciłem konfigurację eksperymentów oraz raportowanie czasu, długości trasy, błędu względnego i statystyk wyszukiwania, dzięki czemu wyniki można odtworzyć i porównać.",
+          "Najważniejszym problemem była spójność całego procesu: status zamówienia, rezerwacja towaru, płatność i wysyłka muszą pozostać zgodne również przy błędach oraz równoległych żądaniach. Reguły przejść są kontrolowane przez model domenowy, a operacje magazynowe wykorzystują transakcje i optymistyczną współbieżność PostgreSQL.",
         importance:
-          "Ten projekt uzupełnia portfolio o część stricte algorytmiczną. Pokazuje nie tylko implementację w C++, ale też podejście do eksperymentów: konfiguracje, stałe seedy, CSV, wykresy, raporty i prostą weryfikację przez smoke testy.",
+          "Cykl życia zamówienia jest zamknięty w modelu domenowym zamiast rozproszony po kontrolerach. Rezerwacja zapasu korzysta z transakcji i mechanizmu xmin, a zdarzenia wymagające przetwarzania w tle są zapisywane w Outboxie w tej samej transakcji co zmiana biznesowa. Osobny Worker obsługuje ponowienia oraz przeniesienie komunikatu do dead-letter po pięciu nieudanych próbach.",
         contribution:
-          "Pracowałem nad implementacją i porządkowaniem etapów benchmarku, konfiguracjami eksperymentów, loaderami danych, zapisem wyników do CSV oraz dokumentacją techniczną. Projekt pozwolił mi przećwiczyć analizę algorytmów nie tylko od strony kodu, ale też przez powtarzalne pomiary, porównanie jakości wyników i przygotowanie repozytorium w formie czytelnej dla odbiorcy technicznego.",
+          "Samodzielnie zaprojektowałem model domenowy, podział rozwiązania, API i bazę PostgreSQL. Zaimplementowałem cykl życia zamówienia, autoryzację, transakcyjną rezerwację zapasu, płatności, wysyłkę, Outbox Worker, raporty i audyt, a kluczowe reguły zabezpieczyłem testami jednostkowymi, integracyjnymi i testami zachowania interfejsu.",
         contributionPoints: [
-          "implementacja i uporządkowanie czterech etapów algorytmicznych",
-          "loadery danych dla macierzy, TSPLIB TSP, TSPLIB ATSP i zbiorów VLSI",
-          "eksport wyników do CSV, wykresy i porównanie jakości rozwiązań",
-          "Makefile, smoke testy i dokumentacja techniczna repozytorium"
+          "zaprojektowałem model domenowy, relacje i kontrolowany cykl życia zamówienia",
+          "zaimplementowałem ASP.NET Core Web API z JWT, rolami, walidacją i błędami ProblemDetails",
+          "zabezpieczyłem rezerwację zapasu transakcjami i optymistyczną współbieżnością PostgreSQL",
+          "przygotowałem 45 testów automatycznych, środowisko Docker Compose i pipeline GitHub Actions"
         ],
         proof: [
-          "cztery etapy projektu obejmujące algorytmy dokładne, heurystyki, Branch and Bound, SA i GA",
-          "obsługa macierzy, instancji generowanych, TSPLIB TSP, TSPLIB ATSP oraz zbiorów VLSI",
-          "pomiary czasu, długości trasy, błędu względnego, statystyk drzewa przeszukiwania i podsumowań grup",
-          "konfiguracje tekstowe oraz stałe ziarna losowania wspierające powtarzalność eksperymentów",
-          "wyniki w CSV, wykresy PNG, raporty PDF i dokumentacja projektowa w języku polskim",
-          "Makefile z komendami do budowania etapów i uruchamiania smoke testów dla reprezentatywnych przypadków"
+          "cykl zamówienia od Draft i PendingPayment do Processing, Shipped i Completed, wraz ze ścieżkami anulowania i zwrotu",
+          "role Customer, WarehouseEmployee, Manager i Administrator z politykami dostępu do operacji i danych",
+          "transakcyjna rezerwacja magazynu z optymistyczną współbieżnością PostgreSQL, zapobiegająca sprzedaży ostatniej sztuki dwóm klientom",
+          "płatności, przesyłki, historia statusów, raporty sprzedażowe, niskie stany, audyt operacji i obsługa błędów ProblemDetails",
+          "Outbox Worker z ponowieniami, rejestrowaniem błędów i obsługą dead-letter"
         ],
         metrics: [
-          { label: "etapy", value: "4" },
-          { label: "dane", value: "TSP/ATSP" },
-          { label: "wyniki", value: "CSV + plots" }
+          { label: "testy", value: "45" },
+          { label: "role", value: "4" },
+          { label: "uruchomienie", value: "Docker + CI" }
         ]
       }
     ],
@@ -349,22 +318,22 @@ export const content = {
       {
         title: "Główny stack",
         items: ["C#", ".NET", "ASP.NET Core", "EF Core", "PostgreSQL", "REST API"],
-        note: "najmocniejszy kierunek portfolio, poparty Helpdeskiem i projektem desktopowym C#"
+        note: "API, logika biznesowa, autoryzacja, transakcje i dostęp do danych"
       },
       {
-        title: "Frontend / desktop",
+        title: "Frontend i desktop",
         items: ["React", "TypeScript", "Avalonia UI", "MVVM", "Next.js"],
-        note: "panele operacyjne, formularze, widoki desktopowe i kompletne przepływy użytkownika"
+        note: "panele operacyjne, formularze i aplikacje wieloplatformowe"
       },
       {
-        title: "Testing / DevOps",
+        title: "Testy i DevOps",
         items: ["xUnit", "Testcontainers", "Playwright", "Docker", "GitHub Actions"],
-        note: "testy jednostkowe, integracyjne i E2E, środowiska demo oraz automatyzacja uruchomienia"
+        note: "testy na kilku poziomach, konteneryzacja i automatyzacja CI"
       },
       {
-        title: "Pozostała praktyka",
-        items: ["Python/Django", "Java", "C++", "SQL", "Linux", "TCP/IP"],
-        note: "projekty akademickie, benchmarki, komunikacja sieciowa, dokumentacja i praca z repozytoriami"
+        title: "Zaplecze techniczne",
+        items: ["Python/Django", "Java", "C++", "SQL", "Linux", "TCP/IP", "Microsoft 365", "Excel"],
+        note: "projekty akademickie, systemy i sieci, analiza danych, dokumentacja i praca z repozytoriami"
       }
     ],
     timeline: [
@@ -373,21 +342,21 @@ export const content = {
         title: "Politechnika Wrocławska",
         subtitle: "Informatyka Techniczna - studia inżynierskie",
         body:
-          "Specjalność: Systemy informatyczne w medycynie. Program łączy programowanie, bazy danych, systemy informatyczne, sieci oraz zastosowania technologii w obszarach wymagających poprawności danych i dokumentacji."
+          "Specjalność: Systemy informatyczne w medycynie. Program obejmuje programowanie, bazy danych, systemy informatyczne, sieci, testowanie oraz pracę z dokumentacją techniczną i projektową."
       },
       {
         period: "2018 - 2022",
         title: "Zespół Szkół Elektronicznych w Bolesławcu",
         subtitle: "Technik informatyk",
         body:
-          "Technikum informatyczne zakończone uzyskaniem tytułu technika informatyka. Zakres obejmował systemy komputerowe, sieci, urządzenia peryferyjne, podstawy baz danych i tworzenie stron internetowych. Praktyki zawodowe odbyłem w Szpitalu św. Łukasza w Bolesławcu."
+          "Wykształcenie obejmowało systemy komputerowe, sieci, urządzenia peryferyjne, podstawy baz danych, tworzenie stron internetowych i pakiet Microsoft 365. Praktyki zawodowe odbyłem w Szpitalu św. Łukasza w Bolesławcu."
       }
     ],
     strengths: [
-      "zaczynam od zrozumienia procesu i modelu danych",
-      "rozdzielam odpowiedzialności aplikacji, zamiast mieszać logikę z interfejsem",
-      "implementuję najważniejszy workflow i weryfikuję go testami",
-      "dbam o uruchomienie projektu, dane demonstracyjne i dokumentację README"
+      "zaczynam od zrozumienia procesu, użytkowników i modelu danych",
+      "rozdzielam odpowiedzialności backendu, bazy danych i interfejsu",
+      "weryfikuję kluczowe scenariusze testami jednostkowymi, integracyjnymi lub E2E",
+      "dbam o czytelną dokumentację, dane demonstracyjne i powtarzalne uruchomienie projektu"
     ],
     contact: {
       emailLabel: "rtworek24@gmail.com",
@@ -405,14 +374,14 @@ export const content = {
       linkedinLabel: "linkedin.com/in/tworekrobert",
       cvLabel: "Pobierz CV PDF",
       cvDescription: "wersja polska",
-      location: "Nowogrodziec / Wrocław"
+      location: "Wrocław, Polska"
     }
   },
   en: {
     meta: {
-      title: "Robert Tworek - Junior C#/.NET Developer",
+      title: "Robert Tworek | Junior C#/.NET Developer",
       description:
-        "Robert Tworek's portfolio: C#/.NET, ASP.NET Core, React, PostgreSQL, desktop applications, tests and technical documentation."
+        "Robert Tworek's portfolio: C#/.NET, ASP.NET Core, PostgreSQL, React and Avalonia UI projects, automated tests, Docker and technical documentation."
     },
     links: {
       ...baseLinks,
@@ -425,62 +394,34 @@ export const content = {
       { href: "#contact", label: "Contact" }
     ],
     hero: {
-      eyebrow: "Technical Computer Science student / Junior C#/.NET Developer",
+      eyebrow: "Junior C#/.NET Developer | Computer Engineering Student",
       title: "Robert Tworek",
       body:
-        "I build C#/.NET applications - from REST APIs in ASP.NET Core and relational PostgreSQL databases to React interfaces and Avalonia UI desktop software. I study Technical Computer Science at Wrocław University of Science and Technology and I am looking for my first Junior\u00a0.NET Developer role where I can develop backend, testing and product-oriented engineering skills.",
+        "I build business applications in C# and .NET, focusing on ASP.NET Core backends, relational PostgreSQL databases and clear user workflows. My projects combine domain logic, authorization, automated tests, Docker and React or Avalonia UI interfaces. I am looking for my first role where I can grow through production code, code review and teamwork.",
       primaryCta: "View projects",
       secondaryCta: "Download CV",
       tertiaryCta: "GitHub",
       linkedinCta: "LinkedIn"
     },
     recruiterStrip: {
-      title: "Profile summary",
+      title: "At a glance",
       items: [
         {
-          value: "Full-stack .NET",
-          label: "ASP.NET Core, React, PostgreSQL",
+          value: ".NET backend",
+          label: "ASP.NET Core, EF Core, PostgreSQL",
           detail:
-            "REST API, JWT, user roles and ticket workflow"
+            "REST APIs, JWT, roles, transactions and business workflows"
         },
         {
           value: "Testing and delivery",
           label: "xUnit, Testcontainers, Playwright",
           detail:
-            "Docker Compose, GitHub Actions and local environment setup"
+            "unit, integration and E2E tests, Docker Compose and GitHub Actions"
         },
         {
-          value: "C# desktop + SQL",
-          label: "Avalonia UI, MVVM, PostgreSQL",
-          detail: "roles, audit, reports and Windows/macOS distribution"
-        }
-      ]
-    },
-    heroPanel: {
-      title: "Development direction",
-      items: [
-        {
-          label: ".NET backend",
-          value: "ASP.NET Core, C#, EF Core, PostgreSQL",
-          detail:
-            "REST APIs, business logic, JWT authorization, roles and relational data models"
-        },
-        {
-          label: "Frontend and desktop",
-          value: "React, TypeScript, Avalonia UI, MVVM",
-          detail: "operations panels, forms, workflows and readable user interfaces"
-        },
-        {
-          label: "Quality and delivery",
-          value: "xUnit, Testcontainers, Playwright, Docker",
-          detail:
-            "domain, API and E2E tests, demo environments and startup documentation"
-        },
-        {
-          label: "Engineering background",
-          value: "C++, Python, Java, Linux, Git",
-          detail:
-            "benchmarks, TCP communication, repository work and result reporting"
+          value: "Frontend and desktop",
+          label: "React, TypeScript, Avalonia UI",
+          detail: "operations panels, forms and cross-platform applications"
         }
       ]
     },
@@ -489,14 +430,14 @@ export const content = {
         kicker: "Projects",
         title: "Featured projects",
         intro:
-          "Selected projects show three complementary areas of my practice: a full .NET web application, a C# desktop system backed by PostgreSQL and an experimental C++ algorithms benchmark.",
-        githubTitle: "All repositories",
+          "I focus on three C#/.NET and PostgreSQL projects. Each case explains the problem, key technical decisions, implemented scope and my specific contribution to the system.",
+        githubTitle: "Other projects on GitHub",
         githubIntro:
-          "A compact overview of public GitHub repositories as quick project links. Each card points to a specific project and shows a short description, main language and repository topics.",
-        githubEmptyTitle: "No repositories to display",
+          "Selected repositories that complement my main .NET focus, including web, algorithmic and academic projects. Each card links directly to the code and project documentation.",
+        githubEmptyTitle: "No additional repositories to display",
         githubEmptyText:
-          "When another project appears on the profile, it will be shown in this section.",
-        githubNoDescription: "This repository does not have a short GitHub description yet.",
+          "New public projects will appear here after they are published on GitHub.",
+        githubNoDescription: "This repository does not have a short description yet.",
         githubUpdatedLabel: "Updated",
         githubLanguageFallback: "Project"
       },
@@ -504,19 +445,19 @@ export const content = {
         kicker: "Technologies",
         title: "Technologies and tools",
         intro:
-          "I group technologies by the strength of evidence in my projects: core .NET stack, frontend and desktop practice, testing and delivery tools, plus broader academic engineering experience."
+          "I have used the following technologies in personal and team projects. My core direction is C#, ASP.NET Core, Entity Framework Core and PostgreSQL; the remaining tools support interfaces, testing, repeatable environments and technical documentation."
       },
       education: {
         kicker: "Education",
         title: "Education and specialization",
         intro:
-          "My education combines technical IT foundations with work on software, databases and information systems. The medical information systems specialization adds a strong focus on data correctness, processes and documentation."
+          "My technical education and engineering studies gave me broad foundations in programming, databases, computer systems, networking, testing and documentation. I apply those foundations to business applications built with .NET."
       },
       contact: {
         kicker: "Contact",
         title: "Get in touch",
         intro:
-          "I am looking for an internship or first Junior C#/.NET Developer role, especially around ASP.NET Core backend, full-stack applications and systems using relational databases. I am open to work in Wrocław, hybrid or remote."
+          "I am looking for my first Junior C#/.NET Developer role or an internship with a path to further development. I am particularly interested in ASP.NET Core backends, full-stack applications and systems built on relational databases. I am open to opportunities in Wrocław, hybrid or remote."
       }
     },
     filters: [
@@ -529,25 +470,25 @@ export const content = {
     projects: [
       {
         id: "pharmacy",
-        title: "Pharmacy management system",
-        shortTitle: "Pharmacy management system",
-        label: "C# desktop + PostgreSQL",
+        title: "Pharmacy Management System",
+        shortTitle: "Pharmacy Management System",
+        label: "C# desktop application + PostgreSQL",
         repo: "https://github.com/roposropos/pharmacy-management-system",
         readme: "https://github.com/roposropos/pharmacy-management-system#readme",
         demo: null as string | null,
         image: {
           src: "/assets/pharmacy-dashboard.png",
-          alt: "Pharmacy management system dashboard with application modules"
+          alt: "Pharmacy Management System dashboard with application modules"
         },
         gallery: [
           {
             src: "/assets/pharmacy-dashboard.png",
-            alt: "Main dashboard of the Pharmacy management system",
+            alt: "Main dashboard of the Pharmacy Management System",
             caption: "Main dashboard"
           },
           {
             src: "/assets/pharmacy-products.png",
-            alt: "Product records view in the Pharmacy management system",
+            alt: "Product records view in the Pharmacy Management System",
             caption: "Product records"
           }
         ],
@@ -555,69 +496,68 @@ export const content = {
         context:
           "Team project developed as a local desktop pharmacy system, with a strong focus on the relational data model, operation consistency and realistic user workflows.",
         teaser:
-          "C# desktop + SQL: a local pharmacy system with real relations, roles, audit and inventory-sales workflows.",
-        signals: ["desktop app", "relational data model", "pharmacy processes"],
+          "A team-built desktop pharmacy system covering sales, prescriptions, batch inventory, deliveries, reports, audit history and user roles backed by a relational PostgreSQL database.",
+        signals: ["relational data model", "pharmacy workflows", "cross-platform desktop app"],
         facts: [
           { label: "area", value: "pharmacy system" },
-          { label: "core", value: "Avalonia + PostgreSQL" },
-          { label: "data", value: "relations, views, validation" },
-          { label: "delivery", value: "macOS and Windows packages" }
+          { label: "core", value: "Avalonia UI + PostgreSQL" },
+          { label: "data", value: "relations, views, constraints" },
+          { label: "distribution", value: "Windows and macOS" }
         ],
         stack: ["C#", ".NET", "Avalonia UI", "PostgreSQL", "ODBC", "SQL", "MVVM", "CSV"],
         summary:
-          "An extensive team project for a local desktop pharmacy management system. The application covers customers and medicines, sales, prescriptions and compounded medicines, batch-based inventory, deliveries, orders, reports, operation audit, backup/restore and manager/pharmacist roles.",
+          "A team project for a local desktop pharmacy management system. The application covers customer and medicine records, sales, prescriptions and compounded medicines, batch inventory, deliveries, orders, reports, operation audit, backup/restore and manager and pharmacist roles.",
         challenge:
-          "The goal was to prepare a local pharmacy system that connects records, sales, prescriptions, inventory, reports and audit into one coherent workflow backed by a relational database.",
+          "The goal was to connect medicine and customer records, sales, prescriptions, inventory, deliveries, reports and audit history in one local system. Correct relations and consistent operations on medicine batches, stock levels and sensitive data were central to the design.",
         importance:
-          "This project best shows work with a relational data model, operation correctness and a desktop application built around a realistic domain scenario. The database is a major part of it: schemas, roles, constraints, views, audit, seed data and an SQL smoke test.",
+          "The database uses relations, integrity constraints, views, roles, audit records and demo data. Inventory operations are based on batches and expiry dates, while access to features is separated between manager and pharmacist roles. The project also includes database setup scripts, an SQL smoke test and backup and restore procedures.",
         contribution:
-          "I worked on this project in a three-person team. My scope included the data model and PostgreSQL constraints, co-creating views and workflows for sales, inventory and reports, data validation, startup documentation and application packages for Windows and macOS.",
+          "I worked on the project in a three-person team. I was mainly responsible for the database and technical documentation: the relational model, constraints, views, roles, environment setup scripts, demo data and SQL tests. I also supported application integration, data validation and work on the remaining modules.",
         contributionPoints: [
-          "data models, relations and integrity constraints in PostgreSQL",
-          "views and workflows for sales, prescriptions, inventory and reports",
-          "form validation and consistency between UI operations and domain logic",
-          "startup documentation and packages prepared for macOS and Windows"
+          "was mainly responsible for the PostgreSQL data model, relations, integrity constraints, views and roles",
+          "prepared database scripts, demo data, SQL tests and the project technical documentation",
+          "supported integration between the data layer and the application and helped validate UI operations",
+          "assisted the team with other modules, application startup and end-to-end verification"
         ],
         proof: [
           "modules for customers, medicines, suppliers, inventory, sales, prescriptions, compounded medicines, orders, reports and users",
           "PostgreSQL with migrations, demo seed data, database roles, integrity constraints and an SQL smoke test",
-          "sensitive data protection: PESEL encrypted as enc:v1, uniqueness hash and UI masking",
-          "medicine and ingredient batches, expiry dates, stock corrections, low-stock alerts and consumption through sales and compounded medicines",
-          "operation audit, CSV report export, manual backup/restore with confirmation and separated manager/pharmacist responsibilities",
-          "self-contained packages for macOS Apple Silicon and Windows x64 with launchers and database setup scripts"
+          "sensitive data protection through encryption, a uniqueness hash and masked values in the interface",
+          "medicine and ingredient batches, expiry dates, stock corrections and low-stock alerts",
+          "operation audit, CSV report export, backup/restore and separated manager and pharmacist permissions"
         ],
         metrics: [
           { label: "modules", value: "10+" },
           { label: "data model", value: "relations + roles" },
-          { label: "delivery", value: "macOS/Windows" }
+          { label: "distribution", value: "Windows / macOS" }
         ]
       },
       {
         id: "helpdesk",
-        title: "Helpdesk management system",
-        shortTitle: "Helpdesk management system",
+        title: "Helpdesk Management System",
+        shortTitle: "Helpdesk Management System",
         label: "ASP.NET Core + React",
         repo: "https://github.com/roposropos/helpdesk-management-system",
         readme: "https://github.com/roposropos/helpdesk-management-system#readme",
         demo: null as string | null,
         image: {
           src: "/assets/helpdesk-dashboard.png",
-          alt: "Helpdesk management system dashboard with ticket metrics"
+          alt: "Helpdesk Management System dashboard with ticket metrics"
         },
         gallery: [
           {
             src: "/assets/helpdesk-dashboard.png",
-            alt: "Helpdesk management system dashboard",
+            alt: "Helpdesk Management System dashboard",
             caption: "Dashboard"
           },
           {
             src: "/assets/helpdesk-tickets.png",
-            alt: "Tickets list in the Helpdesk management system",
+            alt: "Tickets list in the Helpdesk Management System",
             caption: "Tickets"
           },
           {
             src: "/assets/helpdesk-assets.png",
-            alt: "Asset inventory in the Helpdesk management system",
+            alt: "Asset inventory in the Helpdesk Management System",
             caption: "Asset inventory"
           }
         ],
@@ -625,36 +565,35 @@ export const content = {
         context:
           "Personal full-stack helpdesk system combining ticket handling, asset inventory, user roles, audit history and reporting in one web application.",
         teaser:
-          "The most commercially oriented case: a full internal helpdesk with roles, tickets, assets, API, tests and documentation.",
-        signals: ["full-stack workflow", "roles and permissions", "tests + Docker"],
+          "An internal IT support system combining ticket handling, asset inventory, user roles, SLA tracking, audit history and reporting in one web application.",
+        signals: ["ticket lifecycle and SLA", "roles and permissions", "tests and Docker Compose"],
         facts: [
-          { label: "area", value: "IT helpdesk" },
+          { label: "area", value: "internal IT helpdesk" },
           { label: "core", value: "ASP.NET Core + React" },
-          { label: "workflow", value: "tickets, assets, audit" },
+          { label: "process", value: "tickets, assets, audit" },
           { label: "runtime", value: "Docker Compose" }
         ],
         stack: ["ASP.NET Core", "C#", "React", "TypeScript", "PostgreSQL", "EF Core", "Docker", "Playwright"],
         summary:
           "Full-stack internal IT support system with an ASP.NET Core Web API backend, React panel and PostgreSQL database. It covers Employee, Technician and Admin roles, ticket lifecycle, SLA, public and internal comments, asset inventory, audit logs, reports and unit, integration and E2E tests.",
         challenge:
-          "The project addresses scattered IT requests and lack of control over responsibility, SLA deadlines and company assets. It organizes a ticket from creation to closure and connects it with users, technicians and assets.",
+          "The project organizes scattered IT requests and company asset information. Each ticket follows a controlled lifecycle from creation and technician assignment to resolution or closure, while preserving status history, priority, comments, attachments and SLA deadlines.",
         importance:
-          "This is the strongest project for .NET recruitment because it shows more than CRUD: a complete business workflow, layered responsibilities, security, several levels of tests and local environment startup.",
+          "Authorization rules are enforced by the API rather than only hidden in the interface. Tickets, comments, attachments, assignments and status changes create an auditable history. Unit, integration and E2E tests cover both backend logic and the main React user journeys.",
         contribution:
           "The biggest challenge was keeping permission rules and status transitions consistent across the API, database and interface. I separated responsibilities between solution layers, used roles and authorization policies in ASP.NET Core, and verified key scenarios with domain, API and Playwright E2E tests.",
         contributionPoints: [
-          "domain model, relations and EF Core migrations for PostgreSQL",
-          "API endpoints with JWT, roles and ticket workflow handling",
-          "React + TypeScript console with filters, forms and work states",
-          "unit, integration and E2E tests plus Docker Compose startup"
+          "designed the data model, relations and EF Core migrations for PostgreSQL",
+          "implemented API endpoints with JWT, roles and ticket lifecycle handling",
+          "built the React + TypeScript panel with filters, forms and workflow states",
+          "added unit, integration and E2E tests plus Docker Compose startup"
         ],
         proof: [
           "Employee, Technician and Admin roles with separated permissions and UI access",
-          "ticket workflow covering creation, technician assignment, status changes, priority, comments, attachments and history",
-          "asset inventory with device assignment, assignment history, CSV import/export and ticket-asset linking",
-          "PostgreSQL with Entity Framework Core, migrations, demo seed data, relations and domain constraints",
-          "dashboard, SLA tracking, CSV/PDF exports, global audit log and email notification outbox concept",
-          "Docker Compose, macOS/Windows launchers, GitHub Actions and unit, integration and Playwright E2E tests"
+          "ticket handling covering creation, technician assignment, status, priority, comments, attachments and change history",
+          "asset inventory with assignments, history, CSV import/export and links between assets and tickets",
+          "PostgreSQL with Entity Framework Core, migrations, demo data, relations and model constraints",
+          "dashboard, SLA tracking, CSV/PDF exports, global audit history and Playwright E2E tests"
         ],
         metrics: [
           { label: "tests", value: "14 unit / 9 E2E" },
@@ -663,73 +602,72 @@ export const content = {
         ]
       },
       {
-        id: "tsp",
-        title: "TSP algorithms benchmark",
-        shortTitle: "TSP algorithms benchmark",
-        label: "C++ algorithms + benchmarks",
-        repo: "https://github.com/roposropos/tsp-algorithms-benchmark",
-        readme: "https://github.com/roposropos/tsp-algorithms-benchmark#readme",
+        id: "orderflow",
+        title: "Order Flow Management System",
+        shortTitle: "Order Flow Management System",
+        label: "ASP.NET Core + PostgreSQL",
+        repo: "https://github.com/roposropos/order-flow-management-system",
+        readme: "https://github.com/roposropos/order-flow-management-system#readme",
         demo: null as string | null,
         image: {
-          src: "/assets/tsp-benchmark.png",
-          alt: "Chart comparing TSP benchmark algorithm results"
+          src: "/assets/orderflow-window-management.jpg",
+          alt: "Order Flow interface with order and warehouse operation panels"
         },
         gallery: [
           {
-            src: "/assets/tsp-benchmark.png",
-            alt: "Solution-quality chart for the TSP benchmark",
-            caption: "Quality comparison"
+            src: "/assets/orderflow-window-management.jpg",
+            alt: "Order Flow workspace with application windows and a collapsed panel",
+            caption: "Operations workspace"
           },
           {
-            src: "/assets/tsp-stage2-bnb-time.png",
-            alt: "Branch and Bound runtime chart",
-            caption: "Branch and Bound"
+            src: "/assets/orderflow-warehouse-operations.jpg",
+            alt: "Warehouse operations queue in Order Flow",
+            caption: "Warehouse operations"
           },
           {
-            src: "/assets/tsp-stage3-sa-error.png",
-            alt: "Simulated Annealing relative error chart",
-            caption: "Simulated Annealing"
+            src: "/assets/orderflow-customer-workflow.jpg",
+            alt: "Order history and persisted status timeline in Order Flow",
+            caption: "Customer workflow"
           }
         ],
-        categories: ["algorithms"] as ProjectCategory[],
+        categories: ["dotnet", "web"] as ProjectCategory[],
         context:
-          "Academic project focused on comparing algorithms for TSP and ATSP through repeatable experiments, runtime measurements, result export and solution-quality analysis.",
+          "Personal e-commerce fulfilment system combining API, payments, inventory, shipment and reporting in one controlled business workflow.",
         teaser:
-          "Algorithmic project comparing methods for TSP/ATSP with measurements, CSV outputs, charts and documentation.",
-        signals: ["algorithms", "benchmarks", "reproducible results"],
+          "An order, payment, inventory and shipment management system with a controlled status lifecycle, user roles and safe handling of concurrent operations.",
+        signals: ["order fulfilment lifecycle", "inventory consistency", "Outbox and integration tests"],
         facts: [
-          { label: "area", value: "TSP/ATSP algorithms" },
-          { label: "core", value: "C++ + benchmarks" },
-          { label: "experiments", value: "measurements, configs" },
-          { label: "outputs", value: "CSV, charts, reports" }
+          { label: "area", value: "orders and fulfilment" },
+          { label: "core", value: ".NET 8 + PostgreSQL" },
+          { label: "process", value: "payment, inventory, shipment" },
+          { label: "quality", value: "45 tests + Docker" }
         ],
-        stack: ["C++17/C++20", "Makefile", "TSPLIB", "CSV", "benchmarking", "plots"],
+        stack: ["ASP.NET Core 8", "C#", "EF Core 8", "PostgreSQL 16", "MediatR", "JWT", "Docker", "xUnit", "Testcontainers"],
         summary:
-          "Benchmark project comparing exact algorithms, heuristics and metaheuristics for symmetric and asymmetric Travelling Salesman Problem instances. The repository covers four stages: brute force and constructive heuristics, Branch and Bound, Simulated Annealing and a Genetic Algorithm with local improvement.",
+          "A personal order, inventory, payment and warehouse management system for an e-commerce fulfilment process. The ASP.NET Core 8 backend combines a domain model, JWT authorization, transactional inventory, an Outbox Worker, reporting and audit with a responsive demonstration interface.",
         challenge:
-          "The key challenge was comparing methods with very different characteristics: exact, heuristic and metaheuristic. I standardized experiment configuration and reporting of runtime, tour length, relative error and search statistics, making the results reproducible and comparable.",
+          "The main challenge was keeping the complete process consistent: order status, stock reservation, payment and shipment must remain aligned even when failures or concurrent requests occur. Lifecycle rules are controlled by the domain model, while inventory operations use PostgreSQL transactions and optimistic concurrency.",
         importance:
-          "This project adds a strictly algorithmic part to the portfolio. It shows not only C++ implementation, but also experiment structure: configurations, fixed seeds, CSV outputs, charts, reports and lightweight smoke verification.",
+          "The order lifecycle is encapsulated in the domain model instead of being scattered across controllers. Stock reservation uses transactions and xmin-based concurrency, while events that require background processing are written to an Outbox in the same transaction as the business change. A separate Worker handles retries and moves a message to dead-letter after five failed attempts.",
         contribution:
-          "I worked on implementing and organizing benchmark stages, experiment configurations, data loaders, CSV result output and technical documentation. The project let me practice algorithm analysis not only as code, but also through repeatable measurements, result-quality comparison and preparing the repository for technical review.",
+          "I independently designed the domain model, solution structure, API and PostgreSQL database. I implemented the order lifecycle, authorization, transactional stock reservation, payments, shipments, the Outbox Worker, reporting and audit, then protected the main rules with unit, integration and frontend behaviour tests.",
         contributionPoints: [
-          "implementation and organization of four algorithmic benchmark stages",
-          "data loaders for matrices, TSPLIB TSP, TSPLIB ATSP and VLSI-style datasets",
-          "CSV result export, plots and comparison of solution quality",
-          "Makefile, smoke checks and technical repository documentation"
+          "designed the domain model, relations and controlled order lifecycle",
+          "implemented an ASP.NET Core Web API with JWT, roles, validation and ProblemDetails responses",
+          "protected stock reservation with transactions and PostgreSQL optimistic concurrency",
+          "created 45 automated tests, a Docker Compose environment and a GitHub Actions pipeline"
         ],
         proof: [
-          "four project stages covering exact algorithms, heuristics, Branch and Bound, SA and GA",
-          "support for matrices, generated instances, TSPLIB TSP, TSPLIB ATSP and VLSI-style datasets",
-          "measurements for runtime, tour length, relative error, search-tree statistics and grouped summaries",
-          "text configurations and fixed seeds supporting experiment reproducibility",
-          "CSV results, PNG plots, PDF reports and Polish project documentation",
-          "Makefile commands for building stages and running smoke checks on representative cases"
+          "order lifecycle from Draft and PendingPayment to Processing, Shipped and Completed, including cancellation and refund paths",
+          "Customer, WarehouseEmployee, Manager and Administrator roles with policies controlling operations and data access",
+          "transactional stock reservation with PostgreSQL optimistic concurrency preventing two customers from buying the last unit",
+          "payments, shipments, status history, sales reports, low-stock reporting, audit logs and centralized ProblemDetails errors",
+          "Outbox Worker with retry tracking, error logging and dead-letter handling"
         ],
         metrics: [
-          { label: "stages", value: "4" },
-          { label: "data", value: "TSP/ATSP" },
-          { label: "results", value: "CSV + plots" }
+          { label: "tests", value: "45" },
+          { label: "roles", value: "4" },
+          { label: "delivery", value: "Docker + CI" }
         ]
       }
     ],
@@ -737,45 +675,45 @@ export const content = {
       {
         title: "Core stack",
         items: ["C#", ".NET", "ASP.NET Core", "EF Core", "PostgreSQL", "REST API"],
-        note: "the main direction of the portfolio, supported by the Helpdesk system and the C# desktop project"
+        note: "APIs, business logic, authorization, transactions and data access"
       },
       {
-        title: "Frontend / desktop",
+        title: "Frontend and desktop",
         items: ["React", "TypeScript", "Avalonia UI", "MVVM", "Next.js"],
-        note: "operations panels, forms, desktop views and complete user workflows"
+        note: "operations panels, forms and cross-platform applications"
       },
       {
-        title: "Testing / DevOps",
+        title: "Testing and DevOps",
         items: ["xUnit", "Testcontainers", "Playwright", "Docker", "GitHub Actions"],
-        note: "unit, integration and E2E tests, demo environments and startup automation"
+        note: "multi-level testing, containerization and CI automation"
       },
       {
-        title: "Additional practice",
-        items: ["Python/Django", "Java", "C++", "SQL", "Linux", "TCP/IP"],
-        note: "academic projects, benchmarks, network communication, documentation and repository work"
+        title: "Technical background",
+        items: ["Python/Django", "Java", "C++", "SQL", "Linux", "TCP/IP", "Microsoft 365", "Excel"],
+        note: "academic projects, systems and networking, data analysis, documentation and repository work"
       }
     ],
     timeline: [
       {
         period: "2022 - present",
         title: "Wrocław University of Science and Technology",
-        subtitle: "Technical Computer Science - engineering studies",
+        subtitle: "B.Eng. in Computer Engineering - in progress",
         body:
-          "Specialization: Medical Information Systems. The program combines programming, databases, information systems, networking and technology use in areas that require data correctness and documentation."
+          "Specialization: Information Systems in Medicine. The program covers programming, databases, information systems, networking, testing and technical and project documentation."
       },
       {
         period: "2018 - 2022",
         title: "Electronic Schools Complex in Bolesławiec",
-        subtitle: "IT technician",
+        subtitle: "IT Technician",
         body:
-          "Technical secondary education completed with the IT technician title. The program covered computer systems, networks, peripheral devices, database basics and website creation. I completed my vocational work placement at St. Luke's Hospital in Bolesławiec."
+          "The program covered computer systems, networking, peripheral devices, database fundamentals, website development and Microsoft 365. I completed my vocational work placement at St. Luke's Hospital in Bolesławiec."
       }
     ],
     strengths: [
-      "I start by understanding the process and the data model",
-      "I separate application responsibilities instead of mixing logic with the interface",
-      "I implement the main workflow and verify it with tests",
-      "I care about project startup, demo data and clear README documentation"
+      "I start by understanding the process, users and data model",
+      "I separate backend, database and interface responsibilities",
+      "I verify key scenarios with unit, integration or E2E tests",
+      "I care about clear documentation, demo data and repeatable project startup"
     ],
     contact: {
       emailLabel: "rtworek24@gmail.com",
@@ -793,7 +731,7 @@ export const content = {
       linkedinLabel: "linkedin.com/in/tworekrobert",
       cvLabel: "Download CV PDF",
       cvDescription: "English version",
-      location: "Nowogrodziec / Wrocław"
+      location: "Wrocław, Poland"
     }
   }
 } as const;

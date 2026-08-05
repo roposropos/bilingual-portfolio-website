@@ -15,11 +15,11 @@ export const socialPreviewImage = {
 export const siteMetadata: Metadata = {
   metadataBase,
   title: {
-    default: "Robert Tworek - Junior C#/.NET Developer",
+    default: "Robert Tworek | Junior C#/.NET Developer",
     template: "%s | Robert Tworek"
   },
   description:
-    "Portfolio Roberta Tworka: C#/.NET, ASP.NET Core, React, PostgreSQL, aplikacje desktopowe, testy i dokumentacja techniczna.",
+    "Portfolio Roberta Tworka: projekty C#/.NET, ASP.NET Core, PostgreSQL, React i Avalonia UI, testy automatyczne, Docker oraz dokumentacja techniczna.",
   keywords: [
     "Robert Tworek",
     "Junior C# Developer",
@@ -37,17 +37,17 @@ export const siteMetadata: Metadata = {
   authors: [{ name: "Robert Tworek" }],
   creator: "Robert Tworek",
   openGraph: {
-    title: "Robert Tworek - Junior C#/.NET Developer",
+    title: "Robert Tworek | Junior C#/.NET Developer",
     description:
-      "Portfolio z projektami ASP.NET Core, React, PostgreSQL, C# desktop, testami i dokumentacją techniczną.",
+      "Portfolio z projektami C#/.NET, ASP.NET Core, PostgreSQL, React i Avalonia UI, testami automatycznymi oraz dokumentacją techniczną.",
     type: "website",
     images: [socialPreviewImage]
   },
   twitter: {
     card: "summary_large_image",
-    title: "Robert Tworek - Junior C#/.NET Developer",
+    title: "Robert Tworek | Junior C#/.NET Developer",
     description:
-      "Portfolio z projektami ASP.NET Core, React, PostgreSQL, C# desktop, testami i dokumentacją techniczną.",
+      "Portfolio z projektami C#/.NET, ASP.NET Core, PostgreSQL, React i Avalonia UI, testami automatycznymi oraz dokumentacją techniczną.",
     images: [socialPreviewImage.url]
   }
 };
