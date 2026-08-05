@@ -507,12 +507,11 @@ h4 {
 
 .interactive-lift {
   transition:
-    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 220ms ease,
-    background-color 220ms ease,
-    color 220ms ease,
-    box-shadow 220ms ease;
-  will-change: transform;
+    transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease;
 }
 
 .interactive-lift:hover {
@@ -547,20 +546,32 @@ h4 {
   border-left: 1px solid rgba(255, 255, 255, 0.62);
   min-height: 19rem;
   transform-origin: center;
+  background: rgba(252, 250, 255, 0.78);
   transition:
-    background 260ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 260ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 260ms cubic-bezier(0.22, 1, 0.36, 1),
-    color 220ms ease;
+    transform 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    color 180ms ease;
 }
 
 .featured-project-card.is-active {
-  background:
-    linear-gradient(180deg, rgba(30, 24, 45, 0.94), rgba(43, 31, 72, 0.92));
+  background-color: rgba(35, 27, 54, 0.96);
   border-color: rgba(216, 204, 255, 0.26);
   box-shadow:
     var(--material-shadow-strong),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.featured-project-card p,
+.featured-project-card h3,
+.featured-project-card span,
+.project-card-signals > div {
+  transition:
+    color 180ms ease,
+    background-color 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
 }
 
 .featured-project-card.is-active::before,
@@ -599,8 +610,34 @@ h4 {
 }
 
 .project-gallery-modal-image {
-  height: min(74vh, 44rem);
-  max-height: min(74vh, 44rem);
+  height: min(72dvh, 44rem);
+  max-height: min(72dvh, 44rem);
+}
+
+.project-gallery-backdrop {
+  background: rgba(12, 10, 20, 0.9);
+}
+
+.project-gallery-dialog {
+  isolation: isolate;
+}
+
+.gallery-control {
+  transition:
+    transform 160ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 160ms ease,
+    background-color 160ms ease,
+    color 160ms ease;
+}
+
+.gallery-control:hover {
+  transform: translateY(-1px);
+  border-color: rgba(216, 204, 255, 0.46);
+  background-color: rgba(123, 63, 242, 0.72);
+}
+
+.gallery-control:active {
+  transform: translateY(0);
 }
 
 .project-detail-panel {

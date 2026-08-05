@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -11,6 +11,7 @@ import {
   useRef,
   useState
 } from "react";
+import { createPortal } from "react-dom";
 import {
   ArrowDown,
   ArrowUpRight,
@@ -1134,30 +1135,81 @@ function ProjectDetail({ project, locale }: { project: Project; locale: Locale }
   const [selectedScreenshotSrc, setSelectedScreenshotSrc] = useState<string | null>(
     null
   );
-  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+  const closeGalleryButtonRef = useRef<HTMLButtonElement>(null);
+  const previouslyFocusedElementRef = useRef<HTMLElement | null>(null);
   const screenshots = project.gallery;
   const implementedProof = project.proof.slice(0, 5);
-  const selectedScreenshotIndex = Math.max(
-    screenshots.findIndex((screenshot) => screenshot.src === selectedScreenshotSrc),
-    0
+  const matchedScreenshotIndex = screenshots.findIndex(
+    (screenshot) => screenshot.src === selectedScreenshotSrc
   );
+  const selectedScreenshotIndex = Math.max(matchedScreenshotIndex, 0);
   const selectedScreenshot = screenshots[selectedScreenshotIndex] ?? project.image;
+  const isGalleryOpen = matchedScreenshotIndex >= 0;
   const galleryTitle = locale === "pl" ? "Galeria projektu" : "Project gallery";
   const factIcons =
     projectFactIcons[project.id as keyof typeof projectFactIcons] ??
     ([Target, Code2, Workflow, PackageCheck] as const);
 
+  useEffect(() => {
+    if (!isGalleryOpen) {
+      return;
+    }
+
+    previouslyFocusedElementRef.current = document.activeElement as HTMLElement | null;
+    const previousOverflow = document.body.style.overflow;
+    const focusFrame = window.requestAnimationFrame(() => {
+      closeGalleryButtonRef.current?.focus();
+    });
+
+    document.body.style.overflow = "hidden";
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setSelectedScreenshotSrc(null);
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.cancelAnimationFrame(focusFrame);
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = previousOverflow;
+      previouslyFocusedElementRef.current?.focus();
+    };
+  }, [isGalleryOpen]);
+
+  function openGallery(screenshotSrc = selectedScreenshot.src) {
+    setSelectedScreenshotSrc(screenshotSrc);
+  }
+
+  function closeGallery() {
+    setSelectedScreenshotSrc(null);
+  }
+
+  function showAdjacentScreenshot(direction: -1 | 1) {
+    if (screenshots.length < 2) {
+      return;
+    }
+
+    const nextIndex =
+      (selectedScreenshotIndex + direction + screenshots.length) % screenshots.length;
+    setSelectedScreenshotSrc(screenshots[nextIndex].src);
+  }
+
   return (
     <motion.article className="featured-project-detail card h-full p-4 md:p-6">
-      <motion.div
-        key={project.id}
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          opacity: { duration: 0.18, delay: 0.04 },
-          y: { duration: 0.28, ease: [0.22, 1, 0.36, 1] }
-        }}
-      >
+      <AnimatePresence mode="popLayout" initial={false}>
+        <motion.div
+          key={project.id}
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -4 }}
+          transition={{
+            opacity: { duration: 0.2, ease: "easeOut" },
+            y: { duration: 0.24, ease: [0.22, 1, 0.36, 1] }
+          }}
+        >
         <div>
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div>
@@ -1333,10 +1385,7 @@ function ProjectDetail({ project, locale }: { project: Project; locale: Locale }
                   <button
                     key={screenshot.src}
                     type="button"
-                    onClick={() => {
-                      setSelectedScreenshotSrc(screenshot.src);
-                      setIsGalleryOpen(true);
-                    }}
+                    onClick={() => openGallery(screenshot.src)}
                     aria-pressed={selectedScreenshotIndex === index}
                     className={cn(
                       "project-gallery-thumb focus-ring group relative h-[5.2rem] min-w-[7.5rem] w-full overflow-hidden rounded-md border bg-ink/5",
@@ -1362,7 +1411,7 @@ function ProjectDetail({ project, locale }: { project: Project; locale: Locale }
 
               <button
                 type="button"
-                onClick={() => setIsGalleryOpen(true)}
+                onClick={() => openGallery()}
                 className="interactive-lift focus-ring inline-flex min-h-16 w-fit items-center justify-center gap-2 rounded-md border border-soft-strong bg-white px-3 py-2 text-xs font-black text-ink lg:h-full lg:justify-self-end"
                 aria-label={
                   locale === "pl"
@@ -1376,39 +1425,113 @@ function ProjectDetail({ project, locale }: { project: Project; locale: Locale }
             </div>
           </section>
 
-          {isGalleryOpen ? (
-            <div
-              className="fixed inset-0 z-50 flex items-center justify-center bg-ink/88 p-4 backdrop-blur-md"
-              role="dialog"
-              aria-modal="true"
-              aria-label={galleryTitle}
-            >
-              <div className="relative w-full max-w-5xl rounded-lg border border-white/12 bg-[#0c0a14] p-3 shadow-[0_28px_80px_rgba(0,0,0,0.44)] md:p-4">
-                <button
-                  type="button"
-                  onClick={() => setIsGalleryOpen(false)}
-                  className="interactive-lift focus-ring absolute right-3 top-3 z-10 flex h-10 w-10 items-center justify-center rounded-md border border-white/15 bg-white/10 text-white"
-                  aria-label={locale === "pl" ? "Zamknij galerię" : "Close gallery"}
-                >
-                  <X className="h-5 w-5" />
-                </button>
-                <div className="project-gallery-modal-image relative overflow-hidden rounded-md bg-white">
-                  <Image
-                    src={selectedScreenshot.src}
-                    alt={selectedScreenshot.alt}
-                    fill
-                    sizes="92vw"
-                    className="object-contain"
-                  />
-                </div>
-                <p className="mt-3 pr-12 text-sm font-bold text-white">
-                  {selectedScreenshot.caption}
-                </p>
-              </div>
-            </div>
-          ) : null}
         </div>
-      </motion.div>
+        </motion.div>
+      </AnimatePresence>
+
+      {typeof document !== "undefined"
+        ? createPortal(
+            <AnimatePresence>
+              {isGalleryOpen ? (
+                <motion.div
+                  className="project-gallery-backdrop fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-5"
+                  role="dialog"
+                  aria-modal="true"
+                  aria-label={galleryTitle}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.18, ease: "easeOut" }}
+                  onClick={(event) => {
+                    if (event.target === event.currentTarget) {
+                      closeGallery();
+                    }
+                  }}
+                >
+                  <motion.div
+                    className="project-gallery-dialog relative flex max-h-[calc(100dvh-1.5rem)] w-full max-w-5xl flex-col overflow-hidden rounded-lg border border-white/12 bg-[#0c0a14] shadow-[0_28px_80px_rgba(0,0,0,0.44)] sm:max-h-[calc(100dvh-2.5rem)]"
+                    initial={{ opacity: 0, scale: 0.985, y: 10 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.99, y: 6 }}
+                    transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                    onClick={(event) => event.stopPropagation()}
+                  >
+                    <div className="flex min-h-14 items-center justify-between gap-3 border-b border-white/10 px-3 py-2 sm:px-4">
+                      <div className="min-w-0">
+                        <p className="truncate text-sm font-black text-white">
+                          {galleryTitle}
+                        </p>
+                        <p className="text-xs font-semibold text-white/55">
+                          {selectedScreenshotIndex + 1} / {screenshots.length}
+                        </p>
+                      </div>
+                      <button
+                        ref={closeGalleryButtonRef}
+                        type="button"
+                        onClick={closeGallery}
+                        className="gallery-control focus-ring inline-flex min-h-10 shrink-0 items-center justify-center gap-2 rounded-md border border-white/15 bg-white/10 px-3 text-sm font-bold text-white"
+                        aria-label={locale === "pl" ? "Zamknij galerię" : "Close gallery"}
+                      >
+                        <X className="h-4 w-4" />
+                        <span>{locale === "pl" ? "Zamknij" : "Close"}</span>
+                      </button>
+                    </div>
+
+                    <div className="relative min-h-0 flex-1 bg-black/20 p-2 sm:p-3">
+                      <div className="project-gallery-modal-image relative overflow-hidden rounded-md bg-white">
+                        <AnimatePresence initial={false}>
+                          <motion.div
+                            key={selectedScreenshot.src}
+                            className="absolute inset-0"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.16, ease: "easeOut" }}
+                          >
+                            <Image
+                              src={selectedScreenshot.src}
+                              alt={selectedScreenshot.alt}
+                              fill
+                              sizes="92vw"
+                              className="object-contain"
+                              priority
+                            />
+                          </motion.div>
+                        </AnimatePresence>
+                      </div>
+
+                      {screenshots.length > 1 ? (
+                        <>
+                          <button
+                            type="button"
+                            onClick={() => showAdjacentScreenshot(-1)}
+                            className="gallery-control focus-ring absolute left-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-md border border-white/20 bg-ink/78 text-white sm:left-6"
+                            aria-label={locale === "pl" ? "Poprzednie zdjęcie" : "Previous image"}
+                          >
+                            <ChevronLeft className="h-5 w-5" />
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => showAdjacentScreenshot(1)}
+                            className="gallery-control focus-ring absolute right-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-md border border-white/20 bg-ink/78 text-white sm:right-6"
+                            aria-label={locale === "pl" ? "Następne zdjęcie" : "Next image"}
+                          >
+                            <ChevronRight className="h-5 w-5" />
+                          </button>
+                        </>
+                      ) : null}
+                    </div>
+
+                    <p className="border-t border-white/10 px-4 py-3 text-sm font-bold text-white/82">
+                      {selectedScreenshot.caption}
+                    </p>
+                  </motion.div>
+                </motion.div>
+              ) : null}
+            </AnimatePresence>,
+            document.body
+          )
+        : null}
     </motion.article>
   );
 }
