@@ -7,7 +7,7 @@ export const metadata = siteMetadata;
 
 const fraunces = Fraunces({
   subsets: ["latin", "latin-ext"],
-  weight: ["400", "500", "600", "700", "900"],
+  weight: "variable",
   style: ["normal", "italic"],
   axes: ["opsz", "SOFT", "WONK"],
   variable: "--font-fraunces",
