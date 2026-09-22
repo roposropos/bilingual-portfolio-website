@@ -1,19 +1,9 @@
 import type { ReactNode } from "react";
-import { Fraunces } from "next/font/google";
 import "../globals.css";
 import { siteMetadata } from "../siteMetadata";
 import { isLocale } from "@/data/content";
 
 export const metadata = siteMetadata;
-
-const fraunces = Fraunces({
-  subsets: ["latin", "latin-ext"],
-  weight: "variable",
-  style: ["normal", "italic"],
-  axes: ["opsz", "SOFT", "WONK"],
-  variable: "--font-fraunces",
-  display: "swap"
-});
 
 type LocaleLayoutProps = Readonly<{
   children: ReactNode;
@@ -27,7 +17,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   const htmlLang = isLocale(locale) ? locale : "pl";
 
   return (
-    <html lang={htmlLang} className={fraunces.variable}>
+    <html lang={htmlLang}>
       <body>{children}</body>
     </html>
   );

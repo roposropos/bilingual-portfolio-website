@@ -15,6 +15,7 @@ import { createPortal } from "react-dom";
 import {
   ArrowDown,
   ArrowUpRight,
+  AppWindowMac,
   BadgeCheck,
   Braces,
   Check,
@@ -598,7 +599,7 @@ export function PortfolioExperience({
         </div>
       </section>
 
-      <section id="stack" className="section-block border-y border-soft bg-surface-strong">
+      <section id="stack" className="section-block border-y border-soft bg-white/50">
         <div className="page-shell">
           <SectionHeading
             kicker={content.sections.stack.kicker}
@@ -734,22 +735,27 @@ function Hero({
   otherLocale: Locale;
 }) {
   return (
-    <section className="relative overflow-hidden bg-[#221331] text-white">
+    <section className="relative min-h-[70svh] overflow-hidden bg-[#0c0a14] text-white md:min-h-[74svh]">
       <div className="hero-grid absolute inset-0" />
 
-      <header className="relative z-10">
-        <nav className="page-shell glass-nav site-nav flex min-h-16 items-center justify-between gap-3 py-3 text-white">
-          <a href="#top" aria-label="Robert Tworek" className="brand-link focus-ring flex items-center gap-2 p-1">
-            <span className="brand-mark flex h-8 w-8 items-center justify-center text-xs">RT</span>
-            <span className="hidden text-sm sm:inline">Robert Tworek</span>
+      <header className="relative z-10 pt-5">
+        <nav className="page-shell glass-nav site-nav flex min-h-14 items-center justify-between gap-3 rounded-lg px-3 py-2 text-white">
+          <a
+            href="#top"
+            aria-label="Robert Tworek"
+            className="brand-link focus-ring flex items-center rounded-md p-1.5"
+          >
+            <span className="brand-mark flex h-9 w-9 items-center justify-center rounded-lg bg-violet text-sm font-black text-white">
+              RT
+            </span>
           </a>
 
-          <div className="nav-center-group hidden items-center gap-1 md:flex">
+          <div className="nav-center-group hidden items-center gap-1 rounded-md px-1 py-1 md:flex">
             {content.nav.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                className="nav-link focus-ring rounded-sm px-3 py-2"
+                className="nav-link focus-ring rounded-md px-3 py-2 text-sm font-semibold"
               >
                 {item.label}
               </a>
@@ -760,14 +766,14 @@ function Hero({
             <a
               href={content.links.cv}
               download
-              className="nav-action nav-action-primary interactive-lift focus-ring hidden items-center gap-2 px-3 py-2 text-sm font-semibold text-white sm:inline-flex"
+              className="nav-action nav-action-primary interactive-lift focus-ring hidden items-center gap-2 rounded-md px-3 py-2 text-sm font-bold text-white sm:inline-flex"
             >
               <Download className={iconClass} />
               CV
             </a>
             <Link
               href={`/${otherLocale}`}
-              className="nav-action nav-action-secondary interactive-lift focus-ring inline-flex items-center gap-2 px-3 py-2 text-sm font-semibold text-white"
+              className="nav-action nav-action-secondary interactive-lift focus-ring inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-bold text-white"
               aria-label={locale === "pl" ? "Switch to English" : "Przełącz na polski"}
             >
               <Languages className={iconClass} />
@@ -779,7 +785,7 @@ function Hero({
               rel="noreferrer"
               title="GitHub"
               aria-label="GitHub"
-              className="nav-icon-action interactive-lift focus-ring hidden h-9 w-9 items-center justify-center text-white sm:flex"
+              className="nav-icon-action interactive-lift focus-ring hidden h-10 w-10 items-center justify-center rounded-md text-white sm:flex"
             >
               <GithubLogo className="h-5 w-5" />
             </a>
@@ -789,7 +795,7 @@ function Hero({
               rel="noreferrer"
               title="LinkedIn"
               aria-label="LinkedIn"
-              className="nav-icon-action interactive-lift focus-ring hidden h-9 w-9 items-center justify-center text-white sm:flex"
+              className="nav-icon-action interactive-lift focus-ring hidden h-10 w-10 items-center justify-center rounded-md text-white sm:flex"
             >
               <LinkedinLogo className="h-5 w-5" />
             </a>
@@ -798,71 +804,93 @@ function Hero({
       </header>
 
       <div id="top" className="relative z-10">
-        <div className="hero-shell page-shell grid gap-10 py-14 md:grid-cols-[1.15fr_0.85fr] md:py-20">
+        <div className="hero-shell page-shell grid min-h-[calc(70svh-88px)] place-items-center py-12 md:min-h-[calc(74svh-88px)] md:py-16">
           <motion.div
-            initial={{ opacity: 0, y: 14 }}
+            initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
+            className="mx-auto w-full max-w-4xl text-left md:text-center"
           >
-            <div className="flex items-center gap-3">
-              <span className="masthead-rule" aria-hidden="true" />
-              <p className="masthead-kicker text-violet-on-dark">{content.hero.eyebrow}</p>
-            </div>
-            <h1 className="mt-6 text-[clamp(2.6rem,8vw,4.4rem)] font-medium leading-[1.02] text-white">
+            <p className="section-kicker text-violet-on-dark">{content.hero.eyebrow}</p>
+            <h1 className="mt-4 max-w-none whitespace-nowrap text-[clamp(2.45rem,10.4vw,4.25rem)] font-black leading-[0.96] text-white md:text-[clamp(3.75rem,5.35vw,5.65rem)]">
               {content.hero.title}
             </h1>
-            <p className="mt-6 max-w-lg text-base leading-7 text-white/70 md:text-lg">
+            <p className="mx-auto mt-5 max-w-3xl text-base leading-7 text-white/75 md:text-lg">
               {content.hero.body}
             </p>
-          </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-            className="flex flex-col justify-end"
-          >
-            <p className="masthead-index mb-2">Robert Tworek — index</p>
-            <div className="editorial-link-row">
-              <a href="#projects" className="editorial-link group focus-ring">
-                <span className="flex items-baseline gap-3">
-                  <span className="editorial-link-index">01</span>
-                  <span className="text-sm font-semibold sm:text-base">{content.hero.primaryCta}</span>
+            <div className="hero-action-grid mx-auto mt-8 grid max-w-2xl gap-3 sm:grid-cols-2">
+              <a
+                href="#projects"
+                className="hero-action hero-action-primary interactive-lift focus-ring group flex items-center justify-between gap-4 rounded-lg border border-white/15 bg-white/10 p-4 text-left hover:bg-white/15"
+              >
+                <span className="flex min-w-0 items-center gap-3">
+                  <span className="hero-action-icon flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-violet-glass text-violet-on-dark">
+                    <ArrowDown className="h-5 w-5" />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block text-sm font-bold text-white/95">
+                      {content.hero.primaryCta}
+                    </span>
+                  </span>
                 </span>
-                <ArrowDown className="editorial-link-arrow h-4 w-4 shrink-0" />
+                <ArrowDown className="h-4 w-4 shrink-0 text-white/50 transition group-hover-text-violet-on-dark" />
               </a>
-              <a href={content.links.cv} download className="editorial-link group focus-ring">
-                <span className="flex items-baseline gap-3">
-                  <span className="editorial-link-index">02</span>
-                  <span className="text-sm font-semibold sm:text-base">{content.hero.secondaryCta}</span>
+              <a
+                href={content.links.cv}
+                download
+                className="hero-action interactive-lift focus-ring group flex items-center justify-between gap-4 rounded-lg border border-white/15 bg-white/10 p-4 text-left hover:bg-white/15"
+              >
+                <span className="flex min-w-0 items-center gap-3">
+                  <span className="hero-action-icon flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-violet-glass text-violet-on-dark">
+                    <Download className="h-5 w-5" />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block text-sm font-bold text-white/90">
+                      {content.hero.secondaryCta}
+                    </span>
+                  </span>
                 </span>
-                <ArrowUpRight className="editorial-link-arrow h-4 w-4 shrink-0" />
+                <ArrowUpRight className="h-4 w-4 shrink-0 text-white/50 transition group-hover-text-violet-on-dark" />
               </a>
               <a
                 href={content.links.github}
                 target="_blank"
                 rel="noreferrer"
-                className="editorial-link group focus-ring"
+                className="hero-action hero-action-compact interactive-lift focus-ring group flex items-center justify-between gap-4 rounded-lg border border-white/15 bg-white/10 p-4 text-left hover:bg-white/15"
               >
-                <span className="flex items-baseline gap-3">
-                  <span className="editorial-link-index">03</span>
-                  <span className="text-sm font-semibold sm:text-base">{content.hero.tertiaryCta}</span>
+                <span className="flex min-w-0 items-center gap-3">
+                  <span className="hero-action-icon flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-violet-glass text-violet-on-dark">
+                    <GithubLogo className="h-5 w-5" />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block text-sm font-bold text-white/90">
+                      {content.hero.tertiaryCta}
+                    </span>
+                  </span>
                 </span>
-                <ExternalLink className="editorial-link-arrow h-4 w-4 shrink-0" />
+                <ExternalLink className="h-4 w-4 shrink-0 text-white/50 transition group-hover-text-violet-on-dark" />
               </a>
               <a
                 href={content.links.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className="editorial-link group focus-ring"
+                className="hero-action hero-action-compact interactive-lift focus-ring group flex items-center justify-between gap-4 rounded-lg border border-white/15 bg-white/10 p-4 text-left hover:bg-white/15"
               >
-                <span className="flex items-baseline gap-3">
-                  <span className="editorial-link-index">04</span>
-                  <span className="text-sm font-semibold sm:text-base">{content.hero.linkedinCta}</span>
+                <span className="flex min-w-0 items-center gap-3">
+                  <span className="hero-action-icon flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-violet-glass text-violet-on-dark">
+                    <LinkedinLogo className="h-5 w-5" />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block text-sm font-bold text-white/90">
+                      {content.hero.linkedinCta}
+                    </span>
+                  </span>
                 </span>
-                <ExternalLink className="editorial-link-arrow h-4 w-4 shrink-0" />
+                <ExternalLink className="h-4 w-4 shrink-0 text-white/50 transition group-hover-text-violet-on-dark" />
               </a>
             </div>
+
           </motion.div>
         </div>
       </div>
@@ -871,32 +899,48 @@ function Hero({
 }
 
 function RecruiterStrip({ content }: { content: PortfolioContent }) {
+  const stripIcons = [Braces, BadgeCheck, AppWindowMac];
+
   return (
-    <section className="relative z-20 py-8 md:py-10" aria-label={content.recruiterStrip.title}>
+    <section
+      className="relative z-20 -mt-7 pb-8 md:-mt-8 md:pb-10"
+      aria-label={content.recruiterStrip.title}
+    >
       <h2 className="sr-only">{content.recruiterStrip.title}</h2>
       <div className="page-shell">
         <div className="profile-summary-bar -mx-3 flex snap-x gap-3 overflow-x-auto px-3 pb-2 md:mx-0 md:grid md:grid-cols-3 md:gap-0 md:overflow-hidden md:px-0 md:pb-0">
-          {content.recruiterStrip.items.map((item, index) => (
-            <motion.article
-              key={item.label}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-24px" }}
-              transition={{
-                ...revealTransition,
-                delay: Math.min(index * 0.05, 0.12)
-              }}
-              className="profile-summary-item min-w-[82%] snap-start md:min-w-0"
-            >
-              <div className="profile-summary-copy min-w-0">
-                <p className="profile-summary-value">{item.value}</p>
-                <p className="profile-summary-label mt-2">{item.label}</p>
-                <p className="profile-summary-detail mt-1 text-sm leading-5">
-                  {item.detail}
-                </p>
-              </div>
-            </motion.article>
-          ))}
+          {content.recruiterStrip.items.map((item, index) => {
+            const Icon = stripIcons[index] ?? BadgeCheck;
+
+            return (
+              <motion.article
+                key={item.label}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-24px" }}
+                transition={{
+                  ...revealTransition,
+                  delay: Math.min(index * 0.05, 0.12)
+                }}
+                className="profile-summary-item min-w-[82%] snap-start md:min-w-0"
+              >
+                <div className="profile-summary-icon" aria-hidden="true">
+                  <Icon className="h-4 w-4" />
+                </div>
+                <div className="profile-summary-copy min-w-0">
+                  <p className="profile-summary-value text-sm font-black">
+                    {item.value}
+                  </p>
+                  <p className="profile-summary-label mt-1 text-sm font-bold leading-5">
+                    {item.label}
+                  </p>
+                  <p className="profile-summary-detail mt-1 text-sm leading-5">
+                    {item.detail}
+                  </p>
+                </div>
+              </motion.article>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -909,7 +953,7 @@ function MobileSectionNav({
   items: PortfolioContent["nav"];
 }) {
   return (
-    <div className="mobile-section-nav sticky top-0 z-30 border-b border-soft py-2 md:hidden">
+    <div className="mobile-section-nav sticky top-0 z-30 border-b border-soft py-2 backdrop-blur-xl md:hidden">
       <nav
         className="page-shell -my-1 flex gap-2 overflow-x-auto py-1"
         aria-label="Mobile section navigation"
@@ -1086,7 +1130,7 @@ function ProjectCard({
                   className={cn(
                     "flex h-7 w-7 shrink-0 items-center justify-center rounded-md",
                     isActive
-                      ? "border border-white/25 bg-violet"
+                      ? "border border-white/25 bg-violet shadow-[0_0_18px_rgba(123,63,242,0.42)]"
                       : "border border-soft bg-violet-soft"
                   )}
                   aria-hidden="true"
@@ -1095,7 +1139,7 @@ function ProjectCard({
                     className={cn(
                       "h-2 w-2 rounded-full",
                       isActive
-                        ? "bg-white"
+                        ? "bg-white shadow-[0_0_14px_rgba(255,255,255,0.62)]"
                         : "bg-violet"
                     )}
                   />
@@ -1272,7 +1316,7 @@ function ProjectDetail({ project, locale }: { project: Project; locale: Locale }
                   key={fact.label}
                   className="flex min-h-14 items-center gap-3 rounded-md border border-soft bg-violet-soft/80 px-3 py-2 text-sm font-bold leading-5 text-ink"
                 >
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-[var(--violet-line)] bg-white text-violet-dark">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-white text-violet-dark shadow-[0_8px_22px_rgba(123,63,242,0.12)]">
                     <FactIcon className="h-4 w-4" />
                   </span>
                   <span className="min-w-0">
@@ -1942,60 +1986,70 @@ function Contact({ content }: { content: PortfolioContent }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={revealViewport}
               transition={{ ...revealTransition, delay: 0.06 }}
-              className="editorial-link-row mt-8"
+              className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-1"
             >
               <button
                 type="button"
                 onClick={() => {
                   void copyEmail();
                 }}
-                className="editorial-link group focus-ring w-full"
+                className="interactive-lift focus-ring group flex items-center justify-between gap-4 rounded-lg border border-white/15 bg-white/10 p-4 text-left hover:bg-white/15"
               >
-                <span className="flex min-w-0 items-baseline gap-3">
-                  <span className="editorial-link-index">
-                    {isEmailCopied ? <Check className="h-3.5 w-3.5" /> : "01"}
+                <span className="flex min-w-0 items-center gap-3">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-violet-glass text-violet-on-dark">
+                    {isEmailCopied ? (
+                      <Check className="h-5 w-5" />
+                    ) : (
+                      <Copy className="h-5 w-5" />
+                    )}
                   </span>
-                  <span className="min-w-0">
-                    <span className="block truncate text-sm font-semibold sm:text-base">
+                  <span aria-live="polite" className="min-w-0">
+                    <span className="block truncate text-sm font-bold text-white/90">
                       {isEmailCopied
                         ? content.contact.emailCopiedLabel
                         : content.contact.copyEmailLabel}
                     </span>
-                    <span className="mt-1 block truncate text-xs text-white/45">
+                    <span className="mt-1 block truncate text-xs font-semibold text-white/50">
                       {emailAddress}
                     </span>
                   </span>
                 </span>
-                <ArrowUpRight className="editorial-link-arrow h-4 w-4 shrink-0" />
+                <ArrowUpRight className="h-4 w-4 shrink-0 text-white/50 transition group-hover-text-violet-on-dark" />
               </button>
 
-              {actions.map((action, index) => (
-                <a
-                  key={action.label}
-                  href={action.href}
-                  target={action.external ? "_blank" : undefined}
-                  rel={action.external ? "noreferrer" : undefined}
-                  download={action.download}
-                  className="editorial-link group focus-ring"
-                >
-                  <span className="flex min-w-0 items-baseline gap-3">
-                    <span className="editorial-link-index">{String(index + 2).padStart(2, "0")}</span>
-                    <span className="min-w-0">
-                      <span className="block truncate text-sm font-semibold sm:text-base">
-                        {action.label}
+              {actions.map((action) => {
+                const Icon = action.icon;
+
+                return (
+                  <a
+                    key={action.label}
+                    href={action.href}
+                    target={action.external ? "_blank" : undefined}
+                    rel={action.external ? "noreferrer" : undefined}
+                    download={action.download}
+                    className="interactive-lift focus-ring group flex items-center justify-between gap-4 rounded-lg border border-white/15 bg-white/10 p-4 hover:bg-white/15"
+                  >
+                    <span className="flex min-w-0 items-center gap-3">
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-violet-glass text-violet-on-dark">
+                        <Icon className="h-5 w-5" />
                       </span>
-                      <span className="mt-1 block truncate text-xs text-white/45">
-                        {action.description}
+                      <span className="min-w-0">
+                        <span className="block truncate text-sm font-bold text-white/90">
+                          {action.label}
+                        </span>
+                        <span className="mt-1 block truncate text-xs font-semibold text-white/50">
+                          {action.description}
+                        </span>
                       </span>
                     </span>
-                  </span>
-                  {action.external ? (
-                    <ExternalLink className="editorial-link-arrow h-4 w-4 shrink-0" />
-                  ) : (
-                    <ArrowUpRight className="editorial-link-arrow h-4 w-4 shrink-0" />
-                  )}
-                </a>
-              ))}
+                    {action.external ? (
+                      <ExternalLink className="h-4 w-4 shrink-0 text-white/50 transition group-hover-text-violet-on-dark" />
+                    ) : (
+                      <ArrowUpRight className="h-4 w-4 shrink-0 text-white/50 transition group-hover-text-violet-on-dark" />
+                    )}
+                  </a>
+                );
+              })}
             </motion.div>
           </div>
 
@@ -2005,21 +2059,24 @@ function Contact({ content }: { content: PortfolioContent }) {
             viewport={revealViewport}
             transition={{ ...revealTransition, delay: 0.1 }}
             onSubmit={openEmailComposer}
-            className="flex h-full min-h-full flex-col border border-[var(--rule)] bg-[var(--surface)] p-5 text-ink md:p-6"
-            style={{ borderTop: "3px solid var(--violet)" }}
+            className="flex h-full min-h-full flex-col rounded-lg border border-white/15 bg-white p-5 text-ink shadow-2xl shadow-black/20 md:p-6"
           >
-            <div className="flex items-center gap-3 border-b border-[var(--rule)] pb-5">
-              <Mail className="h-5 w-5 shrink-0 text-violet-dark" />
+            <div className="flex items-center gap-3 border-b border-black/10 pb-5">
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-violet-soft text-violet">
+                <Mail className="h-5 w-5" />
+              </span>
               <div className="min-w-0">
-                <h3 className="text-xl font-medium text-ink" style={{ fontFamily: "var(--font-display)" }}>
+                <h3 className="text-xl font-black text-ink">
                   {content.contact.composeTitle}
                 </h3>
-                <p className="mt-1 truncate text-sm text-muted">{emailAddress}</p>
+                <p className="mt-1 truncate text-sm font-semibold text-muted">
+                  {emailAddress}
+                </p>
               </div>
             </div>
 
             <label className="mt-5 block">
-              <span className="text-xs font-semibold uppercase tracking-wide text-ink">
+              <span className="text-sm font-black text-ink">
                 {content.contact.subjectLabel}
               </span>
               <input
@@ -2027,12 +2084,12 @@ function Contact({ content }: { content: PortfolioContent }) {
                 value={emailSubject}
                 onChange={(event) => setEmailSubject(event.target.value)}
                 placeholder={content.contact.subjectPlaceholder}
-                className="focus-ring mt-2 min-h-12 w-full rounded-none border border-[var(--rule)] bg-transparent px-3 py-3 text-sm font-medium text-ink outline-none transition focus:border-violet"
+                className="focus-ring mt-2 min-h-12 w-full rounded-md border border-black/10 bg-surface px-4 py-3 text-sm font-semibold text-ink outline-none transition focus:border-violet"
               />
             </label>
 
             <label className="mt-5 block">
-              <span className="text-xs font-semibold uppercase tracking-wide text-ink">
+              <span className="text-sm font-black text-ink">
                 {content.contact.messageLabel}
               </span>
               <textarea
@@ -2040,13 +2097,13 @@ function Contact({ content }: { content: PortfolioContent }) {
                 onChange={(event) => setEmailMessage(event.target.value)}
                 placeholder={content.contact.messagePlaceholder}
                 rows={7}
-                className="focus-ring mt-2 min-h-44 w-full flex-1 resize-y rounded-none border border-[var(--rule)] bg-transparent px-3 py-3 text-sm leading-6 text-ink outline-none transition focus:border-violet"
+                className="focus-ring mt-2 min-h-44 w-full flex-1 resize-y rounded-md border border-black/10 bg-surface px-4 py-3 text-sm font-medium leading-6 text-ink outline-none transition focus:border-violet"
               />
             </label>
 
             <button
               type="submit"
-              className="interactive-lift focus-ring mt-5 inline-flex w-full items-center justify-center gap-2 border border-violet bg-violet px-4 py-3 text-sm font-semibold text-white"
+              className="interactive-lift focus-ring mt-5 inline-flex w-full items-center justify-center gap-2 rounded-md bg-violet px-4 py-3 text-sm font-black text-white"
             >
               <Send className={iconClass} />
               {content.contact.sendEmailLabel}
