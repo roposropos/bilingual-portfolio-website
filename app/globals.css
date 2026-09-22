@@ -1,0 +1,1225 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------
+   Type system
+   Fraunces  — display/headline serif, loaded via next/font/google
+               (see app/[locale]/layout.tsx), soft + wonk axes give it
+               a hand-set, editorial character rather than a geometric
+               "AI dashboard" grotesk.
+   Manrope   — body text. Warm, rounded, humanist — self-hosted below.
+   Mona Sans Mono — stack tags, kickers, numerals. Self-hosted below.
+   -------------------------------------------------------------------- */
+
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/manrope-400.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/manrope-500.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/manrope-600.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/manrope-700.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("/fonts/manrope-800.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Mona Sans Mono";
+  font-style: normal;
+  font-weight: 200 900;
+  font-stretch: 75% 125%;
+  font-display: swap;
+  src: url("/fonts/mona-sans-mono.woff2") format("woff2");
+}
+
+:root {
+  /* Warm editorial paper, not a cool SaaS grey */
+  --background: #f6f1e6;
+  --foreground: #241d16;
+  --muted: #6f6252;
+  --line: #ddceb2;
+  --surface: #fbf7ee;
+  --surface-strong: #fffdf8;
+  --ink: #211a13;
+
+  /* The purple stays — used deliberately, not as a background wash */
+  --violet: #7b3ff2;
+  --violet-dark: #5423c4;
+  --violet-ink: #4a1fae;
+  --violet-deep: #221331;
+  --violet-on-dark: #d7c2ff;
+  --violet-faint: #efe6ff;
+  --violet-line: rgba(123, 63, 242, 0.32);
+
+  --rule: rgba(36, 27, 15, 0.16);
+  --rule-strong: rgba(36, 27, 15, 0.26);
+  --rule-on-dark: rgba(255, 255, 255, 0.18);
+
+  --motion-fast: 140ms;
+  --motion-standard: 200ms;
+  --motion-section: 340ms;
+  --ease-out-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --font-display: var(--font-fraunces), "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-body: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  --font-code: "Mona Sans Mono", "SF Mono", "Cascadia Code", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+section[id] {
+  scroll-margin-top: 64px;
+}
+
+.section-block {
+  padding-block: clamp(2.75rem, 5vw, 4.75rem);
+  border-top: 1px solid var(--rule);
+}
+
+.section-block:first-of-type {
+  border-top: none;
+}
+
+.section-block + .section-block {
+  padding-top: clamp(2.75rem, 5vw, 4.75rem);
+}
+
+.section-block-contact {
+  padding-block: clamp(3rem, 5vw, 5.5rem);
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  font-feature-settings: "liga" 1, "kern" 1;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(123, 63, 242, 0.24);
+  color: var(--ink);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  display: block;
+}
+
+.lucide {
+  stroke-width: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.page-shell {
+  width: min(1180px, calc(100% - 32px));
+  margin-inline: auto;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+.focus-ring {
+  outline: none;
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid var(--violet);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------------------------------------------------------------------
+   Hero — a masthead, not a card. Flat warm-ink field, no stock photo,
+   no blur, no grid overlay. Violet shows up exactly twice: the rule
+   under the kicker, and the italic word in the headline.
+   -------------------------------------------------------------------- */
+
+.hero-grid {
+  background: var(--violet-deep);
+}
+
+.hero-grid::before,
+.hero-grid::after {
+  content: none;
+}
+
+.masthead-kicker {
+  font-family: var(--font-code);
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+}
+
+.masthead-rule {
+  height: 2px;
+  width: 2.75rem;
+  background: var(--violet);
+}
+
+.masthead-index {
+  font-family: var(--font-code);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.contact-photo-layer {
+  background: var(--violet-deep);
+}
+
+.contact-photo-layer::before,
+.contact-photo-layer::after {
+  content: none;
+}
+
+.contact-photo-frame {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  filter: sepia(0.18) saturate(0.82) contrast(1.02);
+}
+
+/* ---------------------------------------------------------------------
+   Nav — flat, one hairline rule, no glass pill, no blur.
+   -------------------------------------------------------------------- */
+
+.glass-nav {
+  position: relative;
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.glass-nav::after {
+  content: none;
+}
+
+.site-nav > * {
+  position: relative;
+  z-index: 1;
+}
+
+.brand-link,
+.nav-link,
+.nav-action,
+.nav-icon-action {
+  font-family: var(--font-body);
+  transition: color var(--motion-standard) ease, opacity var(--motion-standard) ease;
+}
+
+.nav-center-group,
+.nav-trailing-group {
+  position: relative;
+  z-index: 1;
+}
+
+.nav-center-group {
+  border: none;
+  background: none;
+  box-shadow: none;
+}
+
+.brand-link {
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-style: italic;
+}
+
+.brand-link:hover {
+  opacity: 0.72;
+}
+
+.brand-mark {
+  font-family: var(--font-code);
+  font-weight: 700;
+  background: transparent;
+  border: 1px solid var(--violet);
+  color: var(--violet-on-dark);
+  border-radius: 4px !important;
+  box-shadow: none;
+}
+
+.nav-link {
+  position: relative;
+  color: rgba(255, 255, 255, 0.62);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: 0.3rem;
+  height: 1px;
+  background: var(--violet);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--motion-standard) var(--ease-out-smooth);
+}
+
+.nav-link:hover {
+  background: none;
+  color: #fff;
+  transform: none;
+  box-shadow: none;
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+.nav-action,
+.nav-icon-action {
+  border-radius: 4px !important;
+}
+
+.nav-action:hover,
+.nav-icon-action:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.28) !important;
+  color: #fff;
+  box-shadow: none;
+}
+
+.nav-action-primary {
+  border: 1px solid var(--violet) !important;
+  background: var(--violet) !important;
+  box-shadow: none;
+}
+
+.nav-action-primary:hover {
+  background: var(--violet-ink) !important;
+  border-color: var(--violet-ink) !important;
+}
+
+.nav-action-secondary,
+.nav-icon-action {
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  background: transparent !important;
+  box-shadow: none;
+}
+
+/* ---------------------------------------------------------------------
+   Editorial link rows — replaces the old glass-button hero grid and
+   the matching contact CTA grid. A typeset list of actions, not tiles.
+   -------------------------------------------------------------------- */
+
+.editorial-link-row {
+  border-top: 1px solid var(--rule-on-dark);
+}
+
+.editorial-link {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 1.1rem;
+  border-bottom: 1px solid var(--rule-on-dark);
+  color: rgba(255, 255, 255, 0.86);
+  transition: padding-left var(--motion-standard) var(--ease-out-smooth), color var(--motion-standard) ease;
+}
+
+.editorial-link:hover {
+  padding-left: 0.6rem;
+  color: #fff;
+}
+
+.editorial-link-index {
+  font-family: var(--font-code);
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.4);
+  transition: color var(--motion-standard) ease;
+}
+
+.editorial-link:hover .editorial-link-index {
+  color: var(--violet-on-dark);
+}
+
+.editorial-link-arrow {
+  transition: transform var(--motion-standard) var(--ease-out-smooth);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.editorial-link:hover .editorial-link-arrow {
+  transform: translate(3px, -3px);
+  color: var(--violet-on-dark);
+}
+
+/* Legacy hooks kept only so nothing referencing them collapses. */
+.hero-action-grid,
+.hero-shell,
+.hero-action,
+.hero-action-compact,
+.hero-action-primary,
+.hero-action-icon {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+/* ---------------------------------------------------------------------
+   Recruiter strip — a typeset stat line with vertical hairline rules
+   instead of frosted stat cards.
+   -------------------------------------------------------------------- */
+
+.profile-summary-bar {
+  border: none;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.profile-summary-bar::before {
+  content: none;
+}
+
+.profile-summary-item {
+  border: 1px solid var(--rule);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.profile-summary-copy {
+  display: grid;
+  min-height: 6.45rem;
+  align-content: start;
+  grid-template-rows: auto auto 1fr;
+}
+
+.profile-summary-icon {
+  display: none;
+}
+
+.profile-summary-value {
+  font-family: var(--font-display);
+  color: var(--violet-ink);
+  font-size: 1.9rem;
+  font-weight: 600;
+}
+
+.profile-summary-label {
+  min-height: 2rem;
+  color: var(--ink);
+  font-family: var(--font-code);
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+}
+
+.profile-summary-detail {
+  color: var(--muted);
+}
+
+@media (min-width: 768px) {
+  .profile-summary-item {
+    align-items: flex-start;
+    border: 0;
+    border-left: 1px solid var(--rule);
+    padding: 0.4rem 1.5rem;
+  }
+
+  .profile-summary-item:first-child {
+    border-left: 0;
+    padding-left: 0;
+  }
+}
+
+.mobile-section-nav {
+  background: var(--surface);
+  border-bottom: 1px solid var(--rule);
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.mobile-section-chip {
+  border: 1px solid var(--rule) !important;
+  border-radius: 2px !important;
+  background: transparent !important;
+  box-shadow: none;
+}
+
+.mobile-section-chip:hover {
+  border-color: var(--violet) !important;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ---------------------------------------------------------------------
+   Cards, panels, tags — flat paper, hairline rule, no blur/gradient
+   glow. Hover reads as a color/rule change, not a lift-and-glow.
+   -------------------------------------------------------------------- */
+
+.card {
+  position: relative;
+  background: var(--surface) !important;
+  border: 1px solid var(--rule) !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+.card::before,
+.card::after {
+  content: none;
+}
+
+.interactive-lift {
+  transition: border-color var(--motion-standard) ease, background-color var(--motion-standard) ease, color var(--motion-standard) ease;
+}
+
+.interactive-lift:hover {
+  transform: none;
+  border-color: var(--violet) !important;
+  box-shadow: none;
+}
+
+.interactive-lift:active {
+  transform: none;
+}
+
+.interactive-lift.bg-violet:hover {
+  background-color: var(--violet-ink) !important;
+}
+
+.featured-project-list {
+  align-content: stretch;
+}
+
+.featured-project-card {
+  border-left: 3px solid var(--rule);
+  min-height: 19rem;
+  background: var(--surface) !important;
+  backdrop-filter: none;
+  transition: background-color var(--motion-standard) ease, border-color var(--motion-standard) ease, color var(--motion-fast) ease;
+}
+
+.featured-project-card:hover {
+  border-left-color: var(--violet);
+}
+
+.featured-project-card.is-active {
+  background-color: var(--violet-deep) !important;
+  border-left-color: var(--violet);
+  box-shadow: none;
+}
+
+.featured-project-card p,
+.featured-project-card h3,
+.featured-project-card span,
+.project-card-signals > div {
+  transition: color var(--motion-fast) ease, background-color var(--motion-standard) ease, border-color var(--motion-standard) ease;
+}
+
+.featured-project-detail {
+  border: 1px solid var(--rule) !important;
+  box-shadow: none;
+  background: var(--surface) !important;
+}
+
+.project-card-points {
+  min-height: 0;
+}
+
+.project-gallery {
+  background: var(--surface) !important;
+  border-color: var(--rule) !important;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.project-gallery-preview {
+  aspect-ratio: 16 / 8.6;
+  min-height: 9.5rem;
+  max-height: 14.5rem;
+  filter: saturate(0.94);
+}
+
+.project-gallery-thumb {
+  width: 100%;
+  min-width: 7.5rem;
+  height: 5.2rem;
+  filter: saturate(0.94);
+}
+
+.project-gallery-modal-image {
+  height: min(72dvh, 44rem);
+  max-height: min(72dvh, 44rem);
+}
+
+.project-gallery-backdrop {
+  background: rgba(34, 19, 49, 0.92);
+}
+
+.project-gallery-dialog {
+  isolation: isolate;
+}
+
+.gallery-control {
+  border-radius: 2px !important;
+  transition: border-color var(--motion-fast) ease, background-color var(--motion-fast) ease, color var(--motion-fast) ease;
+}
+
+.gallery-control:hover {
+  transform: none;
+  border-color: var(--violet-on-dark) !important;
+  background-color: var(--violet-ink) !important;
+}
+
+.gallery-control:active {
+  transform: none;
+}
+
+.project-detail-panel {
+  background: var(--surface) !important;
+  border-color: var(--rule) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  border-radius: 2px !important;
+}
+
+.skill-group-card,
+.education-card,
+.github-repository-card {
+  background: var(--surface) !important;
+  border-color: var(--rule) !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+}
+
+.skill-group-card,
+.education-card {
+  backdrop-filter: none;
+}
+
+.work-style-card {
+  background: var(--violet-deep) !important;
+  border-radius: 2px !important;
+}
+
+.dark-card {
+  position: relative;
+  background: var(--violet-deep) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+.dark-card::before {
+  content: none;
+}
+
+.dark-card.work-style-card {
+  backdrop-filter: none;
+}
+
+.hero-scope-panel {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  transition: border-color var(--motion-standard) ease;
+}
+
+.hero-scope-panel::before,
+.hero-scope-panel::after {
+  content: none;
+}
+
+.hero-scope-header,
+.hero-scope-item {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-scope-header {
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hero-scope-header::before {
+  content: none;
+}
+
+.hero-scope-list {
+  display: grid;
+  gap: 0.65rem;
+  padding: 0.8rem;
+}
+
+.hero-scope-item {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  background: transparent;
+  padding: 0.95rem 1rem;
+  box-shadow: none;
+  transition: border-color var(--motion-standard) ease;
+}
+
+.hero-scope-item:hover {
+  border-color: var(--violet);
+  background: rgba(255, 255, 255, 0.03);
+  transform: none;
+  box-shadow: none;
+}
+
+.hero-scope-icon {
+  display: inline-flex;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(216, 194, 255, 0.3);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--violet-on-dark);
+  box-shadow: none;
+}
+
+.hero-scope-dot {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: var(--violet-on-dark);
+  box-shadow: none;
+}
+
+.tag {
+  border-radius: 2px;
+  border: 1px solid var(--violet-line);
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-code);
+  font-size: 0.76rem;
+  box-shadow: none;
+}
+
+.text-ink {
+  color: var(--ink);
+}
+
+.text-muted {
+  color: var(--muted);
+}
+
+.text-foreground {
+  color: var(--foreground);
+}
+
+.text-violet {
+  color: var(--violet);
+}
+
+.text-violet-dark {
+  color: var(--violet-ink);
+}
+
+.text-violet-on-dark {
+  color: var(--violet-on-dark);
+}
+
+.text-violet-faint {
+  color: var(--violet-faint);
+}
+
+.text-on-dark {
+  color: #ffffff !important;
+}
+
+.bg-ink {
+  background-color: var(--violet-deep);
+}
+
+.bg-violet {
+  background-color: var(--violet);
+}
+
+.bg-violet-soft {
+  background-color: rgba(123, 63, 242, 0.1);
+}
+
+.bg-violet-glass {
+  background-color: transparent;
+  border: 1px solid var(--violet-line);
+}
+
+.bg-line-dark {
+  background-color: rgba(255, 255, 255, 0.14);
+}
+
+.bg-surface-strong {
+  background-color: var(--surface-strong);
+}
+
+.border-violet {
+  border-color: var(--violet);
+}
+
+.border-soft {
+  border-color: var(--rule);
+}
+
+.border-soft-strong {
+  border-color: var(--rule-strong);
+}
+
+.hover-border-violet:hover {
+  border-color: var(--violet);
+}
+
+.hover-border-violet-soft:hover {
+  border-color: rgba(216, 194, 255, 0.6);
+}
+
+.hover-text-ink:hover {
+  color: var(--ink);
+}
+
+.hover-text-violet-on-dark:hover {
+  color: var(--violet-on-dark);
+}
+
+.hover-bg-violet-dark:hover {
+  background-color: var(--violet-ink);
+}
+
+.hover-bg-violet-ghost:hover {
+  background-color: var(--violet-faint);
+}
+
+.group:hover .group-hover-text-violet-on-dark {
+  color: var(--violet-on-dark);
+}
+
+/* ---------------------------------------------------------------------
+   Section furniture — kicker + numbered heading in place of the old
+   pill badge, plus the running-number index used across the page.
+   -------------------------------------------------------------------- */
+
+.section-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: fit-content;
+  font-family: var(--font-code);
+  font-weight: 600;
+  font-size: 0.76rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.section-kicker::before {
+  content: "";
+  display: inline-block;
+  width: 1.4rem;
+  height: 1px;
+  background: var(--violet);
+}
+
+.section-kicker.text-violet-on-dark::before {
+  background: var(--violet-on-dark);
+}
+
+.section-kicker.text-violet-on-dark {
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+.section-heading-block {
+  position: relative;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  line-height: 1.05;
+  font-weight: 600;
+}
+
+.section-title em,
+.section-title i {
+  font-style: italic;
+  color: var(--violet-ink);
+}
+
+/* ---------------------------------------------------------------------
+   GitHub repository rail
+   -------------------------------------------------------------------- */
+
+.github-carousel-shell {
+  position: relative;
+}
+
+.github-carousel-shell::before,
+.github-carousel-shell::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  width: 2.25rem;
+  height: calc(100% - 1rem);
+  pointer-events: none;
+}
+
+.github-carousel-shell::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--background), rgba(246, 241, 230, 0));
+}
+
+.github-carousel-shell::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--background), rgba(246, 241, 230, 0));
+}
+
+.github-repository-carousel {
+  align-items: stretch;
+  scroll-padding-inline: 0.25rem;
+  scroll-behavior: smooth;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--violet) transparent;
+}
+
+.github-repository-carousel::-webkit-scrollbar {
+  height: 6px;
+}
+
+.github-repository-carousel::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.github-repository-carousel::-webkit-scrollbar-thumb {
+  background: var(--violet-line);
+  border-radius: 999px;
+}
+
+.github-repository-card {
+  flex-basis: min(86vw, 22.5rem);
+  min-height: 18.5rem;
+  isolation: isolate;
+  backdrop-filter: none;
+}
+
+.card.github-repository-card::before,
+.card.github-repository-card::after {
+  content: none;
+}
+
+.github-repository-content {
+  position: relative;
+  z-index: 1;
+}
+
+.github-repository-icon,
+.github-repository-title,
+.github-repository-description,
+.github-repository-tag,
+.github-repository-footer,
+.github-repository-link,
+.github-repository-link svg {
+  transition: color var(--motion-standard) ease, border-color var(--motion-standard) ease;
+}
+
+.repository-filter[aria-pressed="true"] {
+  transform: none;
+  border-color: var(--violet) !important;
+  box-shadow: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .github-repository-card:is(:hover, :focus-visible) {
+    border-color: var(--violet) !important;
+  }
+
+  .github-repository-card:is(:hover, :focus-visible) .github-repository-icon {
+    transform: none;
+    background-color: var(--violet);
+    box-shadow: none;
+  }
+
+  .github-repository-card:is(:hover, :focus-visible) .github-repository-title {
+    color: var(--violet-ink);
+  }
+
+  .github-repository-card:is(:hover, :focus-visible) .github-repository-description {
+    color: var(--foreground);
+  }
+
+  .github-repository-card:is(:hover, :focus-visible) .github-repository-tag {
+    border-color: var(--violet-line);
+    background-color: transparent;
+  }
+
+  .github-repository-card:is(:hover, :focus-visible) .github-repository-footer {
+    border-color: var(--violet-line);
+  }
+
+  .github-repository-card:is(:hover, :focus-visible) .github-repository-link {
+    color: var(--violet-ink);
+  }
+
+  .github-repository-card:is(:hover, :focus-visible) .github-repository-link svg {
+    transform: translate(2px, -2px);
+  }
+}
+
+@media (min-width: 768px) {
+  .github-repository-card {
+    flex-basis: min(46vw, 24rem);
+  }
+}
+
+@media (min-width: 1180px) {
+  .github-repository-card {
+    flex-basis: calc((100% - 2rem) / 3);
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Small screens
+   -------------------------------------------------------------------- */
+
+@media (max-width: 768px) {
+  .page-shell {
+    width: min(100% - 24px, 1180px);
+  }
+
+  section[id] {
+    scroll-margin-top: 52px;
+  }
+
+  .section-block {
+    padding-block: 2.25rem;
+  }
+
+  .section-block + .section-block {
+    padding-top: 2rem;
+  }
+
+  .section-block-contact {
+    padding-block: 2.5rem;
+  }
+
+  .hero-shell {
+    min-height: auto;
+    align-items: start;
+    gap: 2rem;
+    padding-block: 2.35rem 3.5rem;
+  }
+
+  .profile-summary-bar,
+  .featured-project-list,
+  .skill-groups-grid,
+  .education-timeline,
+  .project-facts-grid,
+  .project-detail-layout,
+  .project-detail-workflow,
+  .github-repository-carousel {
+    scrollbar-width: none;
+  }
+
+  .profile-summary-bar::-webkit-scrollbar,
+  .featured-project-list::-webkit-scrollbar,
+  .skill-groups-grid::-webkit-scrollbar,
+  .education-timeline::-webkit-scrollbar,
+  .project-facts-grid::-webkit-scrollbar,
+  .project-detail-layout::-webkit-scrollbar,
+  .project-detail-workflow::-webkit-scrollbar,
+  .github-repository-carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .featured-project-list,
+  .skill-groups-grid,
+  .education-timeline,
+  .project-facts-grid,
+  .project-detail-layout,
+  .project-detail-workflow {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 0.75rem;
+    margin-inline: -0.75rem;
+    padding-inline: 0.75rem;
+    padding-bottom: 0.85rem;
+  }
+
+  .featured-project-list {
+    margin-top: 0.25rem;
+  }
+
+  .featured-project-list > *,
+  .skill-group-card,
+  .education-card,
+  .project-facts-grid > *,
+  .project-detail-layout > .project-detail-panel,
+  .project-detail-workflow > .project-detail-panel {
+    scroll-snap-align: start;
+  }
+
+  .featured-project-list > * {
+    min-width: min(82vw, 20rem);
+  }
+
+  .featured-project-card {
+    min-height: 22.5rem;
+    padding: 0.95rem;
+  }
+
+  .project-card-signals {
+    gap: 0.45rem;
+  }
+
+  .project-card-signals > div {
+    padding-block: 0.42rem;
+  }
+
+  .project-card-stack .tag:nth-child(n + 4) {
+    display: none;
+  }
+
+  .featured-project-detail {
+    padding: 1rem;
+  }
+
+  .project-facts-grid > * {
+    flex: 0 0 min(84vw, 20.5rem);
+  }
+
+  .project-detail-layout > .project-detail-panel,
+  .project-detail-workflow > .project-detail-panel {
+    flex: 0 0 min(88vw, 22rem);
+  }
+
+  .project-detail-panel {
+    padding: 0.95rem;
+  }
+
+  .project-detail-technical {
+    padding: 0.95rem;
+  }
+
+  .project-detail-technical .tag {
+    padding: 0.34rem 0.62rem;
+    font-size: 0.78rem;
+  }
+
+  .project-detail-gallery {
+    padding: 0.85rem;
+  }
+
+  .project-detail-gallery > div {
+    gap: 0.85rem;
+  }
+
+  .project-gallery-thumb {
+    min-width: 8.25rem;
+    height: 4.85rem;
+  }
+
+  .skill-group-card,
+  .education-card {
+    flex: 0 0 min(86vw, 21rem);
+    padding: 1.1rem;
+  }
+
+  .skill-group-card {
+    min-height: 18.75rem;
+  }
+
+  .education-layout {
+    gap: 1rem;
+  }
+
+  .work-style-card {
+    padding: 1.15rem;
+  }
+
+  .work-style-card > div:nth-child(2) {
+    gap: 0.65rem;
+    margin-top: 1rem;
+  }
+
+  .section-title {
+    font-size: 1.9rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
