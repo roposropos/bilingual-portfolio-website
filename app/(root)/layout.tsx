@@ -1,8 +1,18 @@
 import type { ReactNode } from "react";
+import { Fraunces } from "next/font/google";
 import "../globals.css";
 import { siteMetadata } from "../siteMetadata";
 
 export const metadata = siteMetadata;
+
+const fraunces = Fraunces({
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "500", "600", "700", "900"],
+  style: ["normal", "italic"],
+  axes: ["opsz", "SOFT", "WONK"],
+  variable: "--font-fraunces",
+  display: "swap"
+});
 
 export default function RootRedirectLayout({
   children
@@ -10,7 +20,7 @@ export default function RootRedirectLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="pl">
+    <html lang="pl" className={fraunces.variable}>
       <body>{children}</body>
     </html>
   );
