@@ -1,0 +1,5 @@
+# Keep GitHub's language bar honest: these files are generated or embedded data.
+public/site.html linguist-generated=true
+source/data_raw.js linguist-generated=true
+source/fonts.json linguist-generated=true
+source/facts_raw.html linguist-generated=true
