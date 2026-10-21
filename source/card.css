@@ -40,16 +40,17 @@ a{color:inherit;}
 /* ---------- card ---------- */
 .card{position:absolute;inset:0;perspective:2600px;transition:transform .85s cubic-bezier(.22,.8,.2,1),opacity .5s;will-change:transform;}
 .card.past,.card.next{cursor:pointer;}
+.card.next{transition:transform .85s cubic-bezier(.22,.8,.2,1);}
 .inner{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .85s cubic-bezier(.3,.75,.25,1);}
 .card.flipped .inner{transform:rotateY(180deg);}
 .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:18px;background:var(--stock);color:var(--ink);overflow:hidden;display:flex;flex-direction:column;padding:20px 30px 18px;container:card/size;box-shadow:1px 1px 0 var(--edge),2px 2px 0 var(--edge),3px 3px 0 var(--edge),4px 4px 0 var(--edge),7px 8px 0 var(--shadow);}
 .face.back{transform:rotateY(180deg);background:var(--stock);}
 /* Firefox-based browsers (Zen) let masked pen lines of the hidden side bleed through backface-visibility, so the hidden side is switched off at the half-turn */
-.face{transition:visibility 0s linear .42s;}
+.face{transition:visibility 0s linear .16s;}
 .card:not(.flipped) .face.back{visibility:hidden;}
 .card.flipped .face.front{visibility:hidden;}
-.card.past .face::after,.card.next .face::after{content:"";position:absolute;inset:0;background:var(--table);opacity:.5;pointer-events:none;}
-.card.next .face::after{opacity:.0;}
+.face::after{content:"";position:absolute;inset:0;background:var(--table);opacity:0;pointer-events:none;transition:opacity .7s ease;}
+.card.past .face::after{opacity:.3;}
 .hd{display:flex;align-items:center;gap:14px;flex:none;height:30px;font:600 14px/1 var(--sans);letter-spacing:.1em;text-transform:none;color:var(--soft);}
 .hd .no{font-size:15px;color:var(--ink);letter-spacing:.04em;}
 .hd .ic{width:18px;height:18px;color:var(--ink);vertical-align:baseline;}

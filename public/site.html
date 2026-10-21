@@ -96,16 +96,17 @@ a{color:inherit;}
 /* ---------- card ---------- */
 .card{position:absolute;inset:0;perspective:2600px;transition:transform .85s cubic-bezier(.22,.8,.2,1),opacity .5s;will-change:transform;}
 .card.past,.card.next{cursor:pointer;}
+.card.next{transition:transform .85s cubic-bezier(.22,.8,.2,1);}
 .inner{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .85s cubic-bezier(.3,.75,.25,1);}
 .card.flipped .inner{transform:rotateY(180deg);}
 .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:18px;background:var(--stock);color:var(--ink);overflow:hidden;display:flex;flex-direction:column;padding:20px 30px 18px;container:card/size;box-shadow:1px 1px 0 var(--edge),2px 2px 0 var(--edge),3px 3px 0 var(--edge),4px 4px 0 var(--edge),7px 8px 0 var(--shadow);}
 .face.back{transform:rotateY(180deg);background:var(--stock);}
 /* Firefox-based browsers (Zen) let masked pen lines of the hidden side bleed through backface-visibility, so the hidden side is switched off at the half-turn */
-.face{transition:visibility 0s linear .42s;}
+.face{transition:visibility 0s linear .16s;}
 .card:not(.flipped) .face.back{visibility:hidden;}
 .card.flipped .face.front{visibility:hidden;}
-.card.past .face::after,.card.next .face::after{content:"";position:absolute;inset:0;background:var(--table);opacity:.5;pointer-events:none;}
-.card.next .face::after{opacity:.0;}
+.face::after{content:"";position:absolute;inset:0;background:var(--table);opacity:0;pointer-events:none;transition:opacity .7s ease;}
+.card.past .face::after{opacity:.3;}
 .hd{display:flex;align-items:center;gap:14px;flex:none;height:30px;font:600 14px/1 var(--sans);letter-spacing:.1em;text-transform:none;color:var(--soft);}
 .hd .no{font-size:15px;color:var(--ink);letter-spacing:.04em;}
 .hd .ic{width:18px;height:18px;color:var(--ink);vertical-align:baseline;}
@@ -998,7 +999,7 @@ const UI2={
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const store={get(k){try{return localStorage.getItem(k)}catch(_){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(_){}}};
 const PATHLANG=(location.pathname.match(/^\/(pl|en)(\/|$)/)||[])[1];
-let LANG=PATHLANG||(store.get('rt-lang')==='pl'?'pl':'en'), cur=0, intro=true;
+let LANG=PATHLANG||'en', cur=0, intro=true;
 const flip=new Set();
 const T=k=>(I18N[LANG][k]!=null?I18N[LANG][k]:k);
 const pad=n=>String(n);
@@ -1196,7 +1197,7 @@ function applyStatic(){
  $('#lang-btn').innerHTML=IC('globe')+'<span class="t">'+T('lang_btn')+'</span>';$('#lang-btn').title=$('#lang-btn').ariaLabel=T('lang_to');
  $('#facts-btn').innerHTML=IC('doc')+'<span class="t">'+T('text_view')+'</span>';
  $('#prev').setAttribute('aria-label',T('prev'));$('#next').setAttribute('aria-label',T('next'));
- applyTheme($('#theme-btn').dataset.t||store.get('rt-theme')||'orange');sndUI();$$('#top .key').forEach(e=>{e.dataset.h='';});hand(document.getElementById('top'));
+ applyTheme($('#theme-btn').dataset.t||'orange');sndUI();$$('#top .key').forEach(e=>{e.dataset.h='';});hand(document.getElementById('top'));
 }
 $('#lang-btn').onclick=()=>{paper('lang');LANG=LANG==='pl'?'en':'pl';store.set('rt-lang',LANG);applyStatic();render();};
 $('#theme-btn').onclick=()=>{const t=$('#theme-btn').dataset.t||'orange';const nx=nextTheme(t);paper(DARK.includes(nx)?'lightoff':'lighton');applyTheme(nx);};
@@ -1252,9 +1253,16 @@ function deal(){
  const c=els[0],f=$('.face.front',c);
  if(matchMedia('(prefers-reduced-motion:reduce)').matches||!c.animate){intro=false;layout();return;}
  const d=document.createElement('div');d.className='deal';d.innerHTML='';c.appendChild(d);f.style.visibility='hidden';
- const a=d.animate([{transform:'translateY(75vh) rotate(16deg) scale(.5)'},{transform:'none'}],{duration:760,easing:'cubic-bezier(.2,.8,.2,1)',fill:'forwards'});
- a.onfinish=()=>{const b=d.animate([{transform:'none'},{transform:'rotateY(90deg)'}],{duration:260,easing:'ease-in',fill:'forwards'});
-  b.onfinish=()=>{d.remove();f.style.visibility='';f.animate([{transform:'rotateY(-90deg)'},{transform:'none'}],{duration:340,easing:'ease-out'});intro=false;layout();};};
+ const P='perspective(2600px) ';
+ const a=d.animate([{opacity:0,transform:'translateY(70vh) rotate(14deg) scale(.55)'},{opacity:1,offset:.25,transform:'translateY(38vh) rotate(8deg) scale(.75)'},{opacity:1,transform:'none'}],{duration:900,easing:'cubic-bezier(.2,.75,.2,1)',fill:'forwards'});
+ a.onfinish=()=>{
+  const b=d.animate([{transform:P+'rotateY(0deg)'},{transform:P+'rotateY(90deg)'}],{duration:300,easing:'cubic-bezier(.5,0,.8,.6)',fill:'forwards'});
+  b.onfinish=()=>{
+   f.style.visibility='';
+   const e=f.animate([{transform:P+'rotateY(-90deg)'},{transform:P+'rotateY(0deg)'}],{duration:420,easing:'cubic-bezier(.2,.5,.3,1)'});
+   d.remove();e.onfinish=()=>{intro=false;layout();};
+  };
+ };
 }
 /* ---------- live GitHub repos ---------- */
 function syncMore(){const i=CARDS.findIndex(c=>c.id==='more');if(i<0||!els[i])return;const bd=$('.face.front .bd',els[i]);if(bd)bd.outerHTML=moreFront();}
