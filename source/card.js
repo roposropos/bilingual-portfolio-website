@@ -7,11 +7,11 @@ WORK.forEach(w=>{w.shots=SHOTS[w.id]||null;w.hard=HARD[w.id]||null;w.live=LIVE[w
 const UI={
  en:{nav_cover:'Hi!',nav_music:'Backstory',nav_exp:'Experience',nav_skills:'Skills',nav_contact:'Contact',turn:'Turn over',turnback:'Turn back',prev:'Previous card',next:'Next card',toc:'Contents',
   beat_play:'Play beat',beat_stop:'Stop',kick:'Kick',snare:'Snare',hat:'Hat',beat_p:'Click the squares. It is a step sequencer, the same idea as the one in FL Studio where all of this started.',
-  stamp:'Open to work',stamp_sub:'Internships and junior roles',hi1:'Hi! :)',hi2:"I'm Robert.",intro:"I'm a junior C#/.NET developer from Wrocław, Poland.",say_hi:'Say hi',copied:'Email copied',sent:'Opening your mail app',no_music:'Music files not found',exp_h:'Experience and education',now_h:'Right now',cv_l:'Resume',cv_s:'PDF',
+  stamp:'Open to work',deal_hint:'Click or tap to deal',stamp_sub:'Internships and junior roles',hi1:'Hi! :)',hi2:"I'm Robert.",intro:"I'm a junior C#/.NET developer from Wrocław, Poland.",say_hi:'Say hi',copied:'Email copied',sent:'Opening your mail app',no_music:'Music files not found',exp_h:'Experience and education',now_h:'Right now',cv_l:'Resume',cv_s:'PDF',
   text_view:'No nonsense switch',lang_btn:'Language switch',lights_off:'Light switch',lights_on:'Light switch',day:'Day',night:'Night',facts_back:'Back to the deck',music_play:'Play music',music_pause:'Pause music',role_k:'Junior C#/.NET Developer',how_h:'How I work',story:'The story',stack:'Stack',hi_p:'Open to work now, full-time.',lang_to:'Switch to Polish',theme_to:'Switch day / night'},
  pl:{nav_cover:'Cześć!',nav_music:'Historia',nav_exp:'Doświadczenie',nav_skills:'Umiejętności',nav_contact:'Kontakt',turn:'Odwróć',turnback:'Odwróć z powrotem',prev:'Poprzednia karta',next:'Następna karta',toc:'Spis',
   beat_play:'Odtwórz bit',beat_stop:'Stop',kick:'Stopa',snare:'Werbel',hat:'Hi-hat',beat_p:'Klikaj w kwadraty. To sekwencer krokowy, taki sam pomysł jak w FL Studio, od którego wszystko się zaczęło.',
-  stamp:'Szukam pracy',stamp_sub:'Staże i role juniorskie',hi1:'Cześć! :)',hi2:'Jestem Robert.',intro:'Jestem juniorem C#/.NET z Wrocławia.',say_hi:'Napisz do mnie',copied:'Skopiowano adres',sent:'Otwieram program pocztowy',no_music:'Nie znaleziono plików z muzyką',exp_h:'Doświadczenie i edukacja',now_h:'Teraz',cv_l:'CV',cv_s:'PDF',
+  stamp:'Szukam pracy',deal_hint:'Kliknij, aby rozdać',stamp_sub:'Staże i role juniorskie',hi1:'Cześć! :)',hi2:'Jestem Robert.',intro:'Jestem juniorem C#/.NET z Wrocławia.',say_hi:'Napisz do mnie',copied:'Skopiowano adres',sent:'Otwieram program pocztowy',no_music:'Nie znaleziono plików z muzyką',exp_h:'Doświadczenie i edukacja',now_h:'Teraz',cv_l:'CV',cv_s:'PDF',
   text_view:'Przełącznik bez ściemy',lang_btn:'Zmiana języka',lights_off:'Włącznik światła',lights_on:'Włącznik światła',day:'Dzień',night:'Noc',facts_back:'Wróć do kart',music_play:'Włącz muzykę',music_pause:'Zatrzymaj muzykę',role_k:'Junior C#/.NET Developer',how_h:'Jak pracuję',story:'Historia',stack:'Stack',hi_p:'Dostępny od zaraz, pełny etat.',lang_to:'Przełącz na angielski',theme_to:'Przełącz dzień / noc'}};
 ['en','pl'].forEach(l=>Object.assign(I18N[l],UI[l]));
 const CP={
@@ -372,30 +372,48 @@ function deal(){
  if(matchMedia('(prefers-reduced-motion:reduce)').matches||!c.animate){intro=false;layout();return;}
  const d=document.createElement('div');d.className='deal';d.innerHTML='';c.appendChild(d);f.style.visibility='hidden';
  const P='perspective(2600px) ';
- paper('deal');
- const a=d.animate([
-  {opacity:0,transform:'translateY(72vh) rotate(16deg) scale(.5)'},
-  {opacity:1,offset:.2,transform:'translateY(40vh) rotate(9deg) scale(.72)'},
-  {opacity:1,offset:.68,transform:'translateY(-1.8vh) rotate(-1.6deg) scale(1.015)'},
-  {opacity:1,offset:.84,transform:'translateY(.6vh) rotate(.4deg) scale(.998)'},
-  {opacity:1,transform:'none'}],{duration:1000,easing:'cubic-bezier(.25,.7,.3,1)',fill:'forwards'});
- setTimeout(()=>paper('land'),640);
- a.onfinish=()=>{
-  setTimeout(()=>{
-   paper('turn');
-   const b=d.animate([{transform:P+'rotateY(0deg)'},{transform:P+'rotateY(90deg)'}],{duration:300,easing:'cubic-bezier(.5,0,.8,.6)',fill:'forwards'});
-   b.onfinish=()=>{
-    f.style.visibility='';
-    const e=f.animate([{transform:P+'rotateY(-90deg)'},{transform:P+'rotateY(0deg)'}],{duration:420,easing:'cubic-bezier(.2,.5,.3,1)'});
-    d.remove();
-    e.onfinish=()=>{
-     els.forEach((el,i)=>{el.style.transitionDelay=(i*70)+'ms';});
-     intro=false;layout();paper('riffle');
-     setTimeout(()=>els.forEach(el=>{el.style.transitionDelay='';}),1400);
-    };
+ const turn=()=>{
+  paper('turn');
+  const b=d.animate([{transform:P+'rotateY(0deg)'},{transform:P+'rotateY(90deg)'}],{duration:300,easing:'cubic-bezier(.5,0,.8,.6)',fill:'forwards'});
+  b.onfinish=()=>{
+   f.style.visibility='';
+   const e=f.animate([{transform:P+'rotateY(-90deg)'},{transform:P+'rotateY(0deg)'}],{duration:420,easing:'cubic-bezier(.2,.5,.3,1)'});
+   d.remove();
+   e.onfinish=()=>{
+    els.forEach((el,i)=>{el.style.transitionDelay=(i*70)+'ms';});
+    intro=false;layout();paper('riffle');
+    setTimeout(()=>els.forEach(el=>{el.style.transitionDelay='';}),1400);
    };
-  },140);
+  };
  };
+ const flight=()=>{
+  paper('deal');
+  const a=d.animate([
+   {opacity:0,transform:'translateY(72vh) rotate(16deg) scale(.5)'},
+   {opacity:1,offset:.2,transform:'translateY(40vh) rotate(9deg) scale(.72)'},
+   {opacity:1,offset:.68,transform:'translateY(-1.8vh) rotate(-1.6deg) scale(1.015)'},
+   {opacity:1,offset:.84,transform:'translateY(.6vh) rotate(.4deg) scale(.998)'},
+   {opacity:1,transform:'none'}],{duration:1000,easing:'cubic-bezier(.25,.7,.3,1)',fill:'forwards'});
+  setTimeout(()=>paper('land'),640);
+  a.onfinish=()=>setTimeout(turn,140);
+ };
+ /* browsers keep sound locked until the first click, tap or key press: if it is locked, the card waits for that gesture so the deal can be heard */
+ const wait=()=>{
+  d.innerHTML='<span class="dh">'+T('deal_hint')+'</span>';
+  d.animate([{opacity:0,transform:'translateY(40px) rotate(-3deg)'},{opacity:1,transform:'rotate(-1deg)'}],{duration:520,easing:'cubic-bezier(.2,.7,.2,1)',fill:'forwards'});
+  let started=false,tm=null;const ev=['pointerdown','keydown','touchstart'];
+  const go=real=>{if(started)return;started=true;clearTimeout(tm);ev.forEach(n=>window.removeEventListener(n,onG,true));
+   const h=d.querySelector('.dh');if(h)h.remove();
+   d.animate([{transform:'rotate(-1deg)'},{transform:'rotate(0deg) translateY(5px)'},{transform:'none'}],{duration:220,fill:'forwards'});
+   if(real){paper('land');setTimeout(turn,200);}else setTimeout(turn,240);};
+  const onG=()=>go(true);
+  ev.forEach(n=>window.addEventListener(n,onG,true));
+  tm=setTimeout(()=>go(false),2200);
+ };
+ if(!snd){flight();return;}
+ let a=null;try{a=A();}catch(_){}
+ if(!a){flight();return;}
+ Promise.race([a.resume().then(()=>a.state==='running'),new Promise(r=>setTimeout(()=>r(a.state==='running'),160))]).catch(()=>false).then(ok=>{ok?flight():wait();});
 }
 /* ---------- live GitHub repos ---------- */
 function syncMore(){const i=CARDS.findIndex(c=>c.id==='more');if(i<0||!els[i])return;const bd=$('.face.front .bd',els[i]);if(bd)bd.outerHTML=moreFront();}
