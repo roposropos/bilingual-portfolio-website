@@ -1,0 +1,64 @@
+<div id="facts">
+  <div class="wrap">
+    <a class="back" id="facts-close" role="button" tabindex="0" data-k="facts_back">← Back to desktop</a>
+    <h1>Robert Tworek</h1>
+    <p data-k="facts_role">Junior C#/.NET Developer · B.Eng. Computer Engineering (in progress), Wrocław University of Science and Technology · Wrocław, Poland</p>
+
+    <h2 data-k="h_projects">Projects</h2>
+    <div class="item">
+      <b data-k="p1_title">Order Flow Management System</b>
+      <span class="stackline">ASP.NET Core 8 · EF Core 8 · PostgreSQL 16 · MediatR · JWT · Docker · xUnit · Testcontainers</span>
+      <p data-k="f_p1_desc">Order, payment, inventory and shipment system with a controlled status lifecycle. The hard part: keeping order status, stock, payment and shipment aligned under concurrent requests — solved with domain-driven lifecycle rules, PostgreSQL optimistic concurrency, and an Outbox worker with retry + dead-letter handling.</p>
+      <p class="stackline" data-k="f_p1_meta">45 automated tests · 4 roles (Customer/Warehouse/Manager/Admin) · Docker Compose + GitHub Actions CI</p>
+      <p><a href="https://github.com/roposropos/order-flow-management-system" target="_blank" data-k="repo_link">Repository →</a></p>
+    </div>
+    <div class="item">
+      <b data-k="p2_title">Helpdesk Management System</b>
+      <span class="stackline">ASP.NET Core · React · TypeScript · EF Core · PostgreSQL · Docker · Playwright</span>
+      <p data-k="f_p2_desc">Internal IT support system: ticket lifecycle, SLA tracking, asset inventory, audit history and reporting. Authorization is enforced at the API layer, not just hidden in the UI — every status change, comment and assignment is auditable.</p>
+      <p class="stackline" data-k="f_p2_meta">14 unit / 9 E2E tests · JWT + role-based auth · Employee / Technician / Admin roles</p>
+      <p><a href="https://github.com/roposropos/helpdesk-management-system" target="_blank" data-k="repo_link">Repository →</a></p>
+    </div>
+    <div class="item">
+      <b data-k="p3_title">Pharmacy Management System</b> <span class="stackline" data-k="f_p3_team">— team project, 3 people</span>
+      <span class="stackline">C# · Avalonia UI · PostgreSQL · MVVM · SQL</span>
+      <p data-k="f_p3_desc">Desktop pharmacy system: sales, prescriptions, batch inventory, deliveries, reports and audit. I was mainly responsible for the relational data model — constraints, views, roles, demo data, SQL smoke tests and technical documentation.</p>
+      <p class="stackline" data-k="f_p3_meta">10+ modules · sensitive-data encryption · Windows + macOS distribution</p>
+      <p><a href="https://github.com/roposropos/pharmacy-management-system" target="_blank" data-k="repo_link">Repository →</a></p>
+    </div>
+
+    <h2 data-k="h_stack">Stack</h2>
+    <div class="item"><b data-k="sg1_t">Core stack</b><p class="stackline" data-k="sg1_note">APIs, business logic, authorization, transactions and data access — C# · .NET · ASP.NET Core · EF Core · PostgreSQL · REST API</p></div>
+    <div class="item"><b data-k="sg2_t">Frontend &amp; desktop</b><p class="stackline" data-k="sg2_note">operations panels, forms and cross-platform apps — React · TypeScript · Avalonia UI · MVVM · Next.js</p></div>
+    <div class="item"><b data-k="sg3_t">Testing &amp; DevOps</b><p class="stackline" data-k="sg3_note">multi-level testing, containerization and CI — xUnit · Testcontainers · Playwright · Docker · GitHub Actions</p></div>
+    <div class="item"><b data-k="sg4_t">Technical background</b><p class="stackline" data-k="sg4_note">academic projects, systems &amp; networking, data analysis — Python/Django · Java · C++ · SQL · Linux · TCP/IP · Microsoft 365 · Excel</p></div>
+
+    <h2 data-k="h_how">How I work</h2>
+    <p data-k="how_body">I start by understanding the process, users and data model. I separate backend, database and interface responsibilities, verify key scenarios with unit, integration or E2E tests, and care about clear documentation, demo data and a repeatable project startup.</p>
+
+    <h2 data-k="h_edu">Education</h2>
+    <div class="item"><b>Wrocław University of Science and Technology</b><span class="stackline" data-k="f_edu1_sub">2022 — present · B.Eng. Computer Engineering (in progress)</span>
+      <p data-k="f_edu1_body">Specialization: Information Systems in Medicine. Programming, databases, information systems, networking, testing, technical and project documentation.</p></div>
+    <div class="item"><b>Electronic Schools Complex, Bolesławiec</b><span class="stackline" data-k="f_edu2_sub">2018 — 2022 · IT Technician</span>
+      <p data-k="f_edu2_body">Computer systems, networking, peripheral devices, database fundamentals, website development, Microsoft 365. Vocational placement at St. Luke's Hospital, Bolesławiec.</p></div>
+
+    <h2 data-k="h_contact">Contact</h2>
+    <p>
+      <a href="mailto:rtworek24@gmail.com">rtworek24@gmail.com</a> ·
+      <a href="https://github.com/roposropos" target="_blank">github.com/roposropos</a> ·
+      <a href="https://linkedin.com/in/tworekrobert" target="_blank">linkedin.com/in/tworekrobert</a>
+    </p>
+  </div>
+</div>
+
+<div id="ctxmenu" class="ctxmenu">
+  <div class="ctx-item" data-action="tidy"><span class="ci">&#129530;</span><span data-k="ctx_tidy">Tidy windows</span></div>
+  <div class="ctx-item" data-action="terminal"><span class="ci">&#9000;</span><span data-k="ctx_terminal">New Terminal</span></div>
+  <div class="ctx-sep"></div>
+  <div class="ctx-item" data-action="theme"><span class="ci">&#127769;</span><span data-k="ctx_theme">Toggle Light/Dark Aero</span></div>
+  <div class="ctx-item" data-action="lang"><span class="ci">&#127760;</span><span data-k="ctx_lang">Switch language</span></div>
+  <div class="ctx-sep"></div>
+  <div class="ctx-item" data-action="facts"><span class="ci">&#128196;</span><span data-k="ctx_facts">Plain text view</span></div>
+  <div class="ctx-item" data-action="about"><span class="ci">&#128172;</span><span data-k="ctx_about">About Robert</span></div>
+</div>
+
