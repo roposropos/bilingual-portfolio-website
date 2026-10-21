@@ -479,4 +479,6 @@ body .sticker,body .sticker span,body .sticker small{font-family:"Hand",cursive;
   .note p,.note.bd:not(.pb) p{font-size:19px;} .note.pb .col p{font-size:18px;}
 }
 
-.deal .dh{position:relative;font:400 36px/1.1 "Biro","Hand",cursive;color:var(--cream);opacity:.9;letter-spacing:.01em;text-align:center;padding:0 20px;}
+body.dealing{cursor:pointer;}
+.deal .dh{position:relative;font:400 clamp(60px,10vw,118px)/1 "Hand",sans-serif;-webkit-text-stroke:.5px currentColor;color:var(--cream);letter-spacing:0;text-align:center;padding:0 20px;white-space:nowrap;}
+.deal.wait{cursor:pointer;pointer-events:auto;}

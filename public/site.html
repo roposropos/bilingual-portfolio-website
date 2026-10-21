@@ -535,7 +535,9 @@ body .sticker,body .sticker span,body .sticker small{font-family:"Hand",cursive;
   .note p,.note.bd:not(.pb) p{font-size:19px;} .note.pb .col p{font-size:18px;}
 }
 
-.deal .dh{position:relative;font:400 36px/1.1 "Biro","Hand",cursive;color:var(--cream);opacity:.9;letter-spacing:.01em;text-align:center;padding:0 20px;}
+body.dealing{cursor:pointer;}
+.deal .dh{position:relative;font:400 clamp(60px,10vw,118px)/1 "Hand",sans-serif;-webkit-text-stroke:.5px currentColor;color:var(--cream);letter-spacing:0;text-align:center;padding:0 20px;white-space:nowrap;}
+.deal.wait{cursor:pointer;pointer-events:auto;}
 
 </style>
 </head>
@@ -1287,21 +1289,20 @@ function deal(){
  };
  /* browsers keep sound locked until the first click, tap or key press: if it is locked, the card waits for that gesture so the deal can be heard */
  const wait=()=>{
-  d.innerHTML='<span class="dh">'+T('deal_hint')+'</span>';
-  d.animate([{opacity:0,transform:'translateY(40px) rotate(-3deg)'},{opacity:1,transform:'rotate(-1deg)'}],{duration:520,easing:'cubic-bezier(.2,.7,.2,1)',fill:'forwards'});
-  let started=false,tm=null;const ev=['pointerdown','keydown','touchstart'];
+  let started=false,tm=null;
+  d.innerHTML='<span class="dh">'+T('hi1')+'</span>';d.classList.add('wait');
+  const en=d.animate([{opacity:0,transform:'translateY(40px) rotate(-3deg)'},{opacity:1,transform:'rotate(-1deg)'}],{duration:520,easing:'cubic-bezier(.2,.7,.2,1)',fill:'forwards'});
+  let idle=null;en.onfinish=()=>{if(!started)idle=d.animate([{transform:'rotate(-1deg) scale(1)'},{transform:'rotate(-.3deg) scale(1.006)'},{transform:'rotate(-1deg) scale(1)'}],{duration:3200,iterations:Infinity,easing:'ease-in-out'});};
+  const ev=['pointerdown','keydown','touchstart'];
   const go=real=>{if(started)return;started=true;clearTimeout(tm);ev.forEach(n=>window.removeEventListener(n,onG,true));
-   const h=d.querySelector('.dh');if(h)h.remove();
+   if(idle)idle.cancel();en.cancel();document.body.classList.remove('dealing');const h=d.querySelector('.dh');if(h)h.remove();
    d.animate([{transform:'rotate(-1deg)'},{transform:'rotate(0deg) translateY(5px)'},{transform:'none'}],{duration:220,fill:'forwards'});
    if(real){paper('land');setTimeout(turn,200);}else setTimeout(turn,240);};
   const onG=()=>go(true);
   ev.forEach(n=>window.addEventListener(n,onG,true));
-  tm=setTimeout(()=>go(false),2200);
+  tm=setTimeout(()=>go(false),8000);
  };
- if(!snd){flight();return;}
- let a=null;try{a=A();}catch(_){}
- if(!a){flight();return;}
- Promise.race([a.resume().then(()=>a.state==='running'),new Promise(r=>setTimeout(()=>r(a.state==='running'),160))]).catch(()=>false).then(ok=>{ok?flight():wait();});
+ wait();
 }
 /* ---------- live GitHub repos ---------- */
 function syncMore(){const i=CARDS.findIndex(c=>c.id==='more');if(i<0||!els[i])return;const bd=$('.face.front .bd',els[i]);if(bd)bd.outerHTML=moreFront();}
