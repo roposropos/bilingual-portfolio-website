@@ -461,3 +461,19 @@ body .sticker,body .sticker span,body .sticker small{font-family:"Hand",cursive;
   .note.pb .col p{font-size:22px;line-height:1.25;}
   .note .shl{font-size:24px;}
 }
+
+/* back notes: plain Simple Handmade for reading, Biro only for the short lead-in words */
+.note,.note p,.note.bd:not(.pb) p,.note.pb .col p{font-family:"Hand",var(--sans);}
+.note p,.note.bd:not(.pb) p{font-size:23px;line-height:1.42;}
+.note.pb .col p{font-size:21px;line-height:1.4;}
+.note b,.note .shl,.note .shl b{font-family:"Biro","Hand",cursive;font-weight:400;font-size:1.22em;line-height:1;}
+.note b{background:linear-gradient(transparent 74%,color-mix(in srgb,var(--spot) 55%,transparent) 74% 92%,transparent 92%);padding:0 3px;margin-right:2px;-webkit-box-decoration-break:clone;box-decoration-break:clone;}
+.note .shl{font-size:26px;} .note .shl b{font-size:1em;}
+@container card (max-width:660px){
+  .note p,.note.bd:not(.pb) p{font-size:20px;line-height:1.4;}
+  .note.pb .col p{font-size:19px;line-height:1.38;}
+  .note .shl{font-size:24px;}
+}
+@container card (max-height:560px){
+  .note p,.note.bd:not(.pb) p{font-size:19px;} .note.pb .col p{font-size:18px;}
+}
