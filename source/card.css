@@ -482,3 +482,10 @@ body .sticker,body .sticker span,body .sticker small{font-family:"Hand",cursive;
 body.dealing{cursor:pointer;}
 .deal .dh{position:relative;font:400 clamp(60px,10vw,118px)/1 "Hand",sans-serif;-webkit-text-stroke:.5px currentColor;color:var(--cream);letter-spacing:0;text-align:center;padding:0 20px;white-space:nowrap;}
 .deal.wait{cursor:pointer;pointer-events:auto;}
+
+/* sequencer: paint with the pointer */
+.seqs{touch-action:none;-webkit-user-select:none;user-select:none;}
+.seqrow button{cursor:cell;touch-action:none;-webkit-tap-highlight-color:transparent;transition:background .05s;}
+body.painting,body.painting *{cursor:cell !important;-webkit-user-select:none;user-select:none;}
+.seqrow button:active{transform:scale(.92);}
+.pt{display:none;} @media (hover:none){.ph{display:none;} .pt{display:inline;}}

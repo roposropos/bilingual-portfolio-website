@@ -539,6 +539,13 @@ body.dealing{cursor:pointer;}
 .deal .dh{position:relative;font:400 clamp(60px,10vw,118px)/1 "Hand",sans-serif;-webkit-text-stroke:.5px currentColor;color:var(--cream);letter-spacing:0;text-align:center;padding:0 20px;white-space:nowrap;}
 .deal.wait{cursor:pointer;pointer-events:auto;}
 
+/* sequencer: paint with the pointer */
+.seqs{touch-action:none;-webkit-user-select:none;user-select:none;}
+.seqrow button{cursor:cell;touch-action:none;-webkit-tap-highlight-color:transparent;transition:background .05s;}
+body.painting,body.painting *{cursor:cell !important;-webkit-user-select:none;user-select:none;}
+.seqrow button:active{transform:scale(.92);}
+.pt{display:none;} @media (hover:none){.ph{display:none;} .pt{display:inline;}}
+
 </style>
 </head>
 <body>
@@ -896,11 +903,11 @@ const LIVE={portfolio:'https://portfoliotworekrobert.vercel.app'};
 WORK.forEach(w=>{w.shots=SHOTS[w.id]||null;w.hard=HARD[w.id]||null;w.live=LIVE[w.id]||null;});
 const UI={
  en:{nav_cover:'Hi!',nav_music:'Backstory',nav_exp:'Experience',nav_skills:'Skills',nav_contact:'Contact',turn:'Turn over',turnback:'Turn back',prev:'Previous card',next:'Next card',toc:'Contents',
-  beat_play:'Play beat',beat_stop:'Stop',kick:'Kick',snare:'Snare',hat:'Hat',beat_p:'Click the squares. It is a step sequencer, the same idea as the one in FL Studio where all of this started.',
+  beat_play:'Play beat',beat_stop:'Stop',kick:'Kick',snare:'Snare',hat:'Hat',beat_p:'<span class="ph">Click or drag to add steps. Right-click or drag with the right button to erase.</span><span class="pt">Drag to add steps. Start on a filled square to erase.</span> It is a step sequencer, the same idea as in FL Studio where all of this started.',
   stamp:'Open to work',deal_hint:'Click or tap to deal',stamp_sub:'Internships and junior roles',hi1:'Hi! :)',hi2:"I'm Robert.",intro:"I'm a junior C#/.NET developer from Wrocław, Poland.",say_hi:'Say hi',copied:'Email copied',sent:'Opening your mail app',no_music:'Music files not found',exp_h:'Experience and education',now_h:'Right now',cv_l:'Resume',cv_s:'PDF',
   text_view:'No nonsense switch',lang_btn:'Language switch',lights_off:'Light switch',lights_on:'Light switch',day:'Day',night:'Night',facts_back:'Back to the deck',music_play:'Play music',music_pause:'Pause music',role_k:'Junior C#/.NET Developer',how_h:'How I work',story:'The story',stack:'Stack',hi_p:'Open to work now, full-time.',lang_to:'Switch to Polish',theme_to:'Switch day / night'},
  pl:{nav_cover:'Cześć!',nav_music:'Historia',nav_exp:'Doświadczenie',nav_skills:'Umiejętności',nav_contact:'Kontakt',turn:'Odwróć',turnback:'Odwróć z powrotem',prev:'Poprzednia karta',next:'Następna karta',toc:'Spis',
-  beat_play:'Odtwórz bit',beat_stop:'Stop',kick:'Stopa',snare:'Werbel',hat:'Hi-hat',beat_p:'Klikaj w kwadraty. To sekwencer krokowy, taki sam pomysł jak w FL Studio, od którego wszystko się zaczęło.',
+  beat_play:'Odtwórz bit',beat_stop:'Stop',kick:'Stopa',snare:'Werbel',hat:'Hi-hat',beat_p:'<span class="ph">Kliknij lub przeciągnij, aby dodać kroki. Prawy przycisk (też z przeciąganiem) usuwa.</span><span class="pt">Przeciągaj, aby dodać kroki. Zacznij od zapełnionego kwadratu, aby usuwać.</span> To sekwencer krokowy, ten sam pomysł co w FL Studio, od którego wszystko się zaczęło.',
   stamp:'Szukam pracy',deal_hint:'Kliknij, aby rozdać',stamp_sub:'Staże i role juniorskie',hi1:'Cześć! :)',hi2:'Jestem Robert.',intro:'Jestem juniorem C#/.NET z Wrocławia.',say_hi:'Napisz do mnie',copied:'Skopiowano adres',sent:'Otwieram program pocztowy',no_music:'Nie znaleziono plików z muzyką',exp_h:'Doświadczenie i edukacja',now_h:'Teraz',cv_l:'CV',cv_s:'PDF',
   text_view:'Przełącznik bez ściemy',lang_btn:'Zmiana języka',lights_off:'Włącznik światła',lights_on:'Włącznik światła',day:'Dzień',night:'Noc',facts_back:'Wróć do kart',music_play:'Włącz muzykę',music_pause:'Zatrzymaj muzykę',role_k:'Junior C#/.NET Developer',how_h:'Jak pracuję',story:'Historia',stack:'Stack',hi_p:'Dostępny od zaraz, pełny etat.',lang_to:'Przełącz na angielski',theme_to:'Przełącz dzień / noc'}};
 ['en','pl'].forEach(l=>Object.assign(I18N[l],UI[l]));
@@ -1127,7 +1134,7 @@ deck.addEventListener('click',e=>{
  const z=e.target.closest('[data-zoom]');if(z){const [p,n]=z.dataset.zoom.split(':');zoomOpen(p,+n);return;}
  if(e.target.closest('[data-beat]')){toggleBeat();return;}
  if(e.target.closest('[data-clear]')){Object.keys(pat).forEach(k=>pat[k].length=0);$$('.seqrow button').forEach(x=>{x.classList.remove('on');x.setAttribute('aria-pressed','false');});return;}
- const s=e.target.closest('.seqrow button');if(s){const k=s.parentNode.dataset.row,n=+s.dataset.s,a=pat[k],ix=a.indexOf(n);ix<0?a.push(n):a.splice(ix,1);s.classList.toggle('on');s.setAttribute('aria-pressed',ix<0);if(ix<0)hit(k);return;}
+ const s=e.target.closest('.seqrow button');if(s){if(e.detail>0)return;const k=s.parentNode.dataset.row,n=+s.dataset.s;setStep(s,!pat[k].includes(n));return;}
  const cd=e.target.closest('.card');if(cd&&(cd.classList.contains('past')||cd.classList.contains('next'))){go(els.indexOf(cd));}
  if(e.target.id==='c-send'||e.target.closest('#c-send')){const s=$('#c-sub').value||T('ph_subject'),b=$('#c-msg').value;location.href='mailto:rtworek24@gmail.com?subject='+encodeURIComponent(s)+'&body='+encodeURIComponent(b);toast(T('sent'));}
  if(e.target.id==='c-copy'){copy();}
@@ -1142,7 +1149,7 @@ addEventListener('keydown',e=>{
  else if(e.key==='Home')go(0);else if(e.key==='End')go(CARDS.length-1);
 });
 let tx0=null,ty0=0;
-deck.addEventListener('touchstart',e=>{tx0=e.touches[0].clientX;ty0=e.touches[0].clientY;},{passive:true});
+deck.addEventListener('touchstart',e=>{if(e.target.closest&&e.target.closest('.seqs')){tx0=null;return;}tx0=e.touches[0].clientX;ty0=e.touches[0].clientY;},{passive:true});
 deck.addEventListener('touchend',e=>{if(tx0==null)return;const dx=e.changedTouches[0].clientX-tx0,dy=e.changedTouches[0].clientY-ty0;tx0=null;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5)go(cur+(dx<0?1:-1));},{passive:true});
 addEventListener('resize',layout);
 addEventListener('hashchange',()=>{if(applyHash()){layout();}});
@@ -1238,6 +1245,25 @@ function paper(kind){
  }catch(_){}
 }
 $('#snd-btn').onclick=()=>{snd=!snd;store.set('rt-snd',snd?'on':'off');sndUI();if(snd)paper('on');};
+/* sequencer painting: hold the left button and drag to add steps, hold the right button and drag to erase (touch: the first square decides) */
+let paint=null,lastPv=0;
+function preview(k){const n=performance.now();if(n-lastPv<70)return;lastPv=n;try{hit(k);}catch(_){}}
+function setStep(b,on){const k=b.parentNode.dataset.row,n=+b.dataset.s,a=pat[k],ix=a.indexOf(n);
+ if(on&&ix<0)a.push(n);else if(!on&&ix>=0)a.splice(ix,1);else return false;
+ b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);
+ if(on&&!beating)preview(k);return true;}
+function stepAt(x,y){const e=document.elementFromPoint(x,y);return e&&e.closest?e.closest('.seqrow button'):null;}
+deck.addEventListener('pointerdown',e=>{const b=e.target.closest&&e.target.closest('.seqrow button');if(!b||(e.pointerType==='mouse'&&e.button!==0&&e.button!==2))return;
+ e.preventDefault();const k=b.parentNode.dataset.row,n=+b.dataset.s;
+ const mode=e.button===2?'del':(pat[k].includes(n)?'del':'add');
+ paint={mode,id:e.pointerId,x:e.clientX,y:e.clientY};setStep(b,mode==='add');document.body.classList.add('painting');});
+deck.addEventListener('contextmenu',e=>{if(e.target.closest&&e.target.closest('.seqs'))e.preventDefault();});
+addEventListener('pointermove',e=>{if(!paint||e.pointerId!==paint.id)return;
+ const dx=e.clientX-paint.x,dy=e.clientY-paint.y,L=Math.hypot(dx,dy),N=Math.max(1,Math.ceil(L/5));
+ for(let i=1;i<=N;i++){const b=stepAt(paint.x+dx*i/N,paint.y+dy*i/N);if(b)setStep(b,paint.mode==='add');}
+ paint.x=e.clientX;paint.y=e.clientY;});
+const endPaint=e=>{if(paint&&(!e||e.pointerId===paint.id)){paint=null;document.body.classList.remove('painting');}};
+addEventListener('pointerup',endPaint);addEventListener('pointercancel',endPaint);addEventListener('blur',()=>endPaint());
 function hit(k,t0){const a=A(),t=t0||a.currentTime;if(k==='kick'){const o=a.createOscillator(),g=a.createGain();o.frequency.setValueAtTime(150,t);o.frequency.exponentialRampToValueAtTime(42,t+.14);g.gain.setValueAtTime(1,t);g.gain.exponentialRampToValueAtTime(.001,t+.32);o.connect(g);g.connect(master);o.start(t);o.stop(t+.34);}else if(k==='snare'){noise(t,.2,1400,.7);const o=a.createOscillator(),g=a.createGain();o.type='triangle';o.frequency.setValueAtTime(190,t);g.gain.setValueAtTime(.5,t);g.gain.exponentialRampToValueAtTime(.001,t+.12);o.connect(g);g.connect(master);o.start(t);o.stop(t+.14);}else noise(t,.05,7000,.35);}
 function stopBeat(){if(beating)toggleBeat();}
 const BPM=92,SW=.045;let q=[],raf=0,nextT=0,lastHot=-1;
