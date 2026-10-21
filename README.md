@@ -1,16 +1,37 @@
+<div align="center">
+
 # Bilingual Portfolio Website
 
-A portfolio laid out as a deck of printed show cards on a table. Each section is a card: flip it to read the handwritten note on the back, and the cards you have already played pile up on the left. Polish and English, four light and dark colour variants, and a plain-text version for anyone who just wants the facts.
+**A portfolio laid out as a deck of printed show cards: flip them for handwritten notes, in Polish and English.**
 
-[Live, Polish](https://portfoliotworekrobert.vercel.app/pl) | [Live, English](https://portfoliotworekrobert.vercel.app/en)
+<p>
+  <img src="https://img.shields.io/badge/Next.js-16.2.9-3a1f0f?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js 16">
+  <img src="https://img.shields.io/badge/React-19.2.7-b4501f?style=for-the-badge&logo=react&logoColor=white" alt="React 19">
+  <img src="https://img.shields.io/badge/TypeScript-6.0-3a1f0f?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript 6">
+  <img src="https://img.shields.io/badge/HTML_CSS_JS-one_file-b4501f?style=for-the-badge&logo=html5&logoColor=white" alt="HTML, CSS and JavaScript">
+  <img src="https://img.shields.io/badge/Web_Audio-sequencer-3a1f0f?style=for-the-badge" alt="Web Audio">
+  <img src="https://img.shields.io/badge/Python-build_script-b4501f?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/PL_%2F_EN-portfolio-e6c9a0?style=for-the-badge" alt="Polish and English">
+</p>
+
+<p>
+  <a href="https://portfoliotworekrobert.vercel.app/pl">Live PL</a> |
+  <a href="https://portfoliotworekrobert.vercel.app/en">Live EN</a> |
+  <a href="#about">About</a> |
+  <a href="#whats-in-the-deck">The deck</a> |
+  <a href="#quick-start">Quick start</a> |
+  <a href="#tech">Tech</a>
+</p>
 
 ![The first card](docs/screenshots/cover.png)
+
+</div>
 
 ## About
 
 This is the portfolio of Robert Tworek, a Technical Computer Science student at Wroclaw University of Science and Technology and a junior C#/.NET developer looking for a first commercial role. The site has three main projects (OrderFlow, Helpdesk, Pharmacy), an "Other projects" card that fills itself from GitHub, experience, education, skills and a contact card.
 
-## What is in the deck
+## What's in the deck
 
 | Card | What it holds |
 | --- | --- |
@@ -98,9 +119,3 @@ The project deploys to Vercel as a normal Next.js app. Set `NEXT_PUBLIC_SITE_URL
 ## Font licences
 
 The two handwriting fonts are third-party. Simple Handmade is a demo version marked "personal use only", and the Biro Script licence does not allow redistributing converted fonts. They are embedded in the page, so check the licences before keeping the site public, or replace them with fonts under an open licence (for example from Google Fonts) by changing `source/fonts.json` and the two `@font-face` rules at the top of `source/card.css`.
-
-## Author
-
-Robert Tworek, Technical Computer Science student at Wroclaw University of Science and Technology.
-
-[GitHub](https://github.com/roposropos) | [LinkedIn](https://linkedin.com/in/tworekrobert)
