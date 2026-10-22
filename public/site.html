@@ -965,6 +965,9 @@ const CP={
            "Zespół trzyosobowy: Kacper Wajda, Michal Gladkojc i ja."]}}
 };
 const MORE=[
+ {id:'vaccination',name:{en:'Vaccination Programme Planner',pl:'Planer programu szczepień'},kind:'k_academic',stack:'C#, ASP.NET Core 10, PostgreSQL, Angular 20, HL7 FHIR, Docker',
+  link:'https://github.com/roposropos/vaccination-programme-planner',lk:'repo',
+  d:{en:"A vaccination planner for a primary care clinic: schedules, reminders, coverage reports and HL7 FHIR export. My solo semester project, 37 xUnit tests, runs with one docker compose up.",pl:"Planer szczepień dla przychodni POZ: kalendarze, przypomnienia, raporty wyszczepialności i eksport do HL7 FHIR. Mój samodzielny projekt semestralny, 37 testów xUnit, uruchamiany jednym docker compose up."}},
  {id:'portfolio',name:{en:'Bilingual Portfolio Website',pl:'Dwujęzyczna strona portfolio'},kind:'k_personal',stack:'Next.js, React, TypeScript, Tailwind CSS, Vercel',
   link:'https://portfoliotworekrobert.vercel.app',lk:'live',
   d:{en:"The site you may have seen before this one. Next.js, with Polish and English versions, a live list of my GitHub repos and downloadable CVs.",pl:"Strona, którą mogłeś widzieć przed tą. Next.js, wersje po polsku i angielsku, lista moich repozytoriów z GitHuba na żywo i CV do pobrania."}},
@@ -1066,7 +1069,7 @@ function projBack(w){
  return `<div class="bd pb scroll note"><div class="col"><p><b>${K.why}</b> ${w.whyT[LANG]}</p><p><b>${K.inside}</b> ${w.pts[LANG].slice(0,3).join(' ')}</p><p>${w.pts[LANG].slice(3).join(' ')}</p></div><div class="col">${w.hard?`<p><b>${K.hard}</b> ${w.hard[LANG]}</p>`:''}${gal}</div></div>`;
 }
 let GH=[];try{GH=JSON.parse(store.get('rt-gh')||'[]')||[];}catch(_){GH=[];}
-const KNOWNRE=/order.?flow|helpdesk|pharmac|tsp|vocab|restaurant|portfolio/i;const KNOWN=['order-flow-management-system','helpdesk-management-system','pharmacy-management-system','tsp-algorithms-benchmark','vocabulary-learning-app','restaurant-process-simulation','roposropos'];
+const KNOWNRE=/order.?flow|helpdesk|pharmac|tsp|vocab|restaurant|portfolio|vaccin/i;const KNOWN=['order-flow-management-system','helpdesk-management-system','pharmacy-management-system','tsp-algorithms-benchmark','vocabulary-learning-app','restaurant-process-simulation','vaccination-programme-planner','roposropos'];
 function ghEntries(){return GH.filter(r=>!KNOWN.includes(r.name)&&!KNOWNRE.test(r.name)).map(r=>({id:'gh-'+r.name,name:{en:r.name.replace(/[-_]+/g,' ').replace(/\b\w/g,c=>c.toUpperCase()),pl:r.name.replace(/[-_]+/g,' ').replace(/\b\w/g,c=>c.toUpperCase())},kind:'gh_repo',stack:[r.lang].concat(r.topics||[]).filter(Boolean).join(', '),link:r.url,lk:'repo',d:{en:r.desc||T('no_desc'),pl:r.desc||T('no_desc')}}));}
 function moreFront(){
  const L=I18N[LANG];
@@ -1123,7 +1126,7 @@ function go(i,noHash){i=Math.max(0,Math.min(CARDS.length-1,i));if(i===cur)return
 function toggleFlip(){const id=CARDS[cur].id;if(!CARDS[cur].back)return;stopBeat();flip.has(id)?flip.delete(id):flip.add(id);layout();paper('flip');}
 function applyHash(){
  const m=location.hash.match(/^#(project|notes|card)\/([\w-]+)/);if(!m)return false;
- let id=m[2],f=false;if(m[1]==='project'&&['portfolio','tsp','vocab','restaurant'].includes(id))id='more';
+ let id=m[2],f=false;if(m[1]==='project'&&['portfolio','tsp','vocab','restaurant','vaccination'].includes(id))id='more';
  if(m[1]==='notes'){if(id==='edu'){f=true;}else if(['koda','hospital'].includes(id)){id='exp';f=true;}else if(id==='music')f=true;else if(id==='now'){id='skills';f=true;}}
  const i=CARDS.findIndex(c=>c.id===id);if(i<0)return false;cur=i;if(f)flip.add(id);return true;
 }
